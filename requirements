@@ -1,0 +1,38 @@
+Requirements
+Graph ANY polynomial rational expression (5)
+Clearly highlight removable discontinuities (5)
+Graph ANY polynomial function (5)
+Graph the first derivative (10)
+Graph the second derivative (10)
+Use various colored lines and markers to find points of relative max/min (5)
+Use various colored lines and markers to find points of inflection (4)
+Graph logarithmic (ln, log) trigonometric (sin, cos, tan) or exponential functions (10)
+Graph the first derivative (5)
+Graph the second derivative (5)
+Use various colored lines and markers to find points of relative max/min (4)
+Use various colored lines and markers to find points of inflection (4)
+Given any f’(x) accurately show the fundamental theorem of calculus for any two values on the given domain (10)
+Software block diagram and print out of your code with COMMENTS
+The derivative algorithm (2)
+The integration algorithm (3)
+The fundamental theorem of calculus algorithm (3)
+Professional Powerpoint / Google Presentation (10)
+
+Important Dates
+DROP DATE: October 12th, 2018
+DEADLINE: December 17th, 2018
+
+Goals
+Framework Decided: End of August
+Working Prototype: Mid-October
+Bug Fixes Done: Early November
+Presentation Done: Late November
+Everything Done: Early December
+
+Framework
+Language: Java
+Graphing: graphapp 
+Parser: From Mr. Duran
+Version Control: Github.
+
+
