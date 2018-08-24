@@ -7,18 +7,22 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import java.awt.event.KeyListener;
 
 public class GUI {
 	// TODO a class to model a graphing calculator
 	public GUI() {
-		KeyListener key = null;
 		JFrame frame = new JFrame();
 		final JTextField equation = new JTextField("Enter an equation.");
-		equation.addKeyListener(key);
 		JButton calculate = new JButton("Calculate");
-		calculate.setMnemonic(KeyEvent.VK_ENTER);
+		String [] columnNames = {"x", "y"};
+		Object[][] xValues = {{-1, -1}, {0, 0}, {1, 1}};
+		final JTable table = new JTable(xValues, columnNames);
+		frame.setLayout(new BorderLayout());
+		frame.add(table.getTableHeader(), BorderLayout.PAGE_START);
+		frame.add(table, BorderLayout.NORTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(calculate, BorderLayout.CENTER);
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
