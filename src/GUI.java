@@ -10,35 +10,34 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.event.KeyListener;
 
-public class Calculator implements ActionListener{
+public class GUI {
 	// TODO a class to model a graphing calculator
-	public Calculator() {
+	public GUI() {
 		KeyListener key = null;
 		JFrame frame = new JFrame();
-		JTextField equation = new JTextField("Enter an equation.");
+		final JTextField equation = new JTextField("Enter an equation.");
 		equation.addKeyListener(key);
 		JButton calculate = new JButton("Calculate");
 		calculate.setMnemonic(KeyEvent.VK_ENTER);
-		calculate.addActionListener(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(calculate, BorderLayout.CENTER);
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
-	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Calculator calculator = new Calculator();
-		
-	   	MathEvaluator m = new MathEvaluator("x^2");		
+		MathEvaluator m = new MathEvaluator("x^2");		
 	   	m.addVariable("x", ((2.0)));
 	   	System.out.println(m.getValue());
-	   	//double value_test = m.getValue();
-	   	//System.out.println("is equation null?   " + value_test);
+	   	calculate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("Equation: " + equation.getText());
+				m.setExpression(equation.getText());
+				System.out.println("Equation value = " + m.getValue());
+			}
+	   	});
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("Click!");
+	
+	public static void main(String [] args) {
+		GUI gui = new GUI();
 	}
 }
