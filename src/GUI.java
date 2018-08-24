@@ -28,10 +28,11 @@ public class GUI {
 	   	m.addVariable("x", ((2.0)));
 	   	System.out.println(m.getValue());
 	   	calculate.addActionListener(new ActionListener() {
-	   		@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(equation.getText());
+				System.out.println("Equation: " + equation.getText());
+				m.setExpression(equation.getText());
+				System.out.println("Equation value = " + m.getValue());
 			}
 	   	});
 	}
