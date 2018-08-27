@@ -1,15 +1,10 @@
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import java.awt.event.KeyListener;
 
 public class GUI {
 	// TODO a class to model a graphing calculator
@@ -30,7 +25,6 @@ public class GUI {
 		frame.setVisible(true);
 		MathEvaluator m = new MathEvaluator("x^2");		
 	   	m.addVariable("x", ((2.0)));
-	   	System.out.println(m.getValue());
 	   	calculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
