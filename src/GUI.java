@@ -3,11 +3,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+import java.awt.*;
 public class GUI {
 	// TODO a class to model a graphing calculator
 	int indexTracker = 0;
+	double [] xValues = new double [11];
 	double [] yValues = new double [11];
 	public GUI() {
 		JFrame frame = new JFrame();
@@ -27,16 +29,26 @@ public class GUI {
 				for(int i = -5; i <= 5; i++) {
 					m.addVariable("x", (i));
 					System.out.println(m.getValue());
+					xValues[indexTracker] = i;
 					yValues[indexTracker++] = m.getValue();
 				}
-				for(int i = 0; i <= 10; i++) {
-					System.out.println((i-5) + "," + yValues[i]);
-				}
+				
 			}
 	   	});
 	}
+	public int [] getXValues() {
+		int [] integerXValues = new int[xValues.length];
+		for(int i = 0; i < xValues.length; i++) {
+			integerXValues[i] = (int) xValues[i];
+		}
+		return integerXValues;
+	}
 	
-	public static void main(String [] args) {
-		GUI gui = new GUI();
+	public int [] getYValues() {
+		int [] integerYValues = new int[yValues.length];
+		for(int i = 0; i < yValues.length; i++) {
+			integerYValues[i] = (int) yValues[i];
+		}
+		return integerYValues;
 	}
 }
