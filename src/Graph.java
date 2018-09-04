@@ -6,10 +6,6 @@ import javax.swing.JPanel;
 public class Graph extends JPanel {
 	Path2D.Double path = new Path2D.Double();
 	
-	
-	
-	
-	
 	public static void main(String[] args) {
 		GUI gui = new GUI();
 		Graph graph = new Graph();
@@ -21,6 +17,9 @@ public class Graph extends JPanel {
 		f.setVisible(true);
 		/* There might be a synchronization issue here so I'm trying this. 
 		 * We won't know for sure until we fix the NullPointerException in drawGraphics()*/
+	}
 	
+	public static String firstDerivative(String exp) {
+		
 	}
 }
