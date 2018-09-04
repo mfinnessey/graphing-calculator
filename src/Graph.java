@@ -18,8 +18,4 @@ public class Graph extends JPanel {
 		/* There might be a synchronization issue here so I'm trying this. 
 		 * We won't know for sure until we fix the NullPointerException in drawGraphics()*/
 	}
-	
-	public static String firstDerivative(String exp) {
-		
-	}
 }
