@@ -7,14 +7,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.*;
 public class GUI {
-	// TODO a class to model a graphing calculator
+	// M TODO a class to model a graphing calculator
 	int indexTracker = 0;
 	double [] xValues = new double [11];
 	double [] yValues = new double [11];
 	public GUI() {
-		JFrame frame = new JFrame();
+		
 		final JTextField equation = new JTextField("Enter an equation.");
 		JButton calculate = new JButton("Calculate");
+		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(calculate, BorderLayout.CENTER);
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
