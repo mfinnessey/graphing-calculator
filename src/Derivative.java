@@ -73,7 +73,7 @@ public class Derivative {
 				exponentDouble--;
 				//M Turning the newly calculated values back into strings.
 				constant = String.valueOf(constantDouble);
-				exponent = String.valueOf(constantDouble);
+				exponent = String.valueOf(exponentDouble);
 				//M Setting the term to the combined newly calculated term.
 				terms[i] = (constant + "x^" + exponent);
 				System.out.println("Term: " + terms[i]);
