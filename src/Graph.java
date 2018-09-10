@@ -1,10 +1,21 @@
+import java.awt.BorderLayout;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 //M Added these things to hopefully get some drawings gong.
 public class Graph {
 	//M Adding a new JPanel on which to hold the things.
 	JPanel graphWindow = new JPanel();
+	public Graph() {
+		JFrame frame = new JFrame();
+		frame.setSize(500, 500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().add(graphWindow, BorderLayout.CENTER);
+		frame.pack();
+		frame.setVisible(true);
+	}
 	 public void draw(double [] xValues, double [] yValues) {
 		 //TODO A method to draw the graph.
 	        //Get the Graphics2D object of a JPanel, to draw on
