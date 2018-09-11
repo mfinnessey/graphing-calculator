@@ -10,6 +10,7 @@ public class Graph {
 	JPanel graphWindow = new JPanel();
 	public Graph() {
 		JFrame frame = new JFrame();
+		graphWindow.setSize(500, 500);
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(graphWindow, BorderLayout.CENTER);
@@ -20,21 +21,23 @@ public class Graph {
 		 //TODO A method to draw the graph.
 	        //Get the Graphics2D object of a JPanel, to draw on
 	        g = (Graphics2D) graphWindow.getGraphics();
-
 	        //Draw some axes
-	        g.drawLine(0, 0, 0, 100); //The Y axis
-	        g.drawLine(0, 100, 100, 100);  //The X axis
+	        g.drawLine(250, 500, 250, 0); // The Y axis
+	        g.drawLine(0, 250, 500, 250);  //The X axis
 
 
 	        //You can also draw scales and labels here 
 	        //drawString draws a string onto the screen
 
-	        //Plot thr data points, using our method
-	        for (int i=0; i < xValues.length; i++)
+	        //Plot the data points, using our method
+	        System.out.println("Beginning to draw a point");
+	        g.draw(new Line2D.Double(xValues[0], yValues[0], xValues[0], yValues[0]));
+	        for (int i=1; i < xValues.length; i++)
 	            drawPoint(xValues[i], yValues[i]);  //Your data gets read here
 	        }
 
 	        private void drawPoint(double x, double y) {
+	        	System.out.println("Drawing the point (" + x + ", " + y + ").");
 	        	//TODO A method to draw the various lines that make up the graph.
 	            g.draw(new Line2D.Double(x, -y, x, -y)); //Use negative Y to simulate a standard Cartesian behaivor
 	        }

@@ -21,15 +21,19 @@ public class GUI {
 	private boolean pointsReady = false;
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	private void fillXValues() {
-		//M Resetting xIndexTracker.
-		xIndexTracker = 0;
-		for(int i = -10; i > 10; i+=step) {
+		//M Currently the compiler isn't entering this for loop for some reason.
+		for(double i = -10D; i > 10D; i += step) {
+			System.out.println(i);
 			xValues[xIndexTracker] = i;
+			System.out.println(xValues[xIndexTracker]);
 			xIndexTracker++;
 		}
 		System.out.println("XValues filled.");
 	}
 	
+	private void setXIndexTracker(int x) {
+		xIndexTracker = x;
+	}
 	public GUI() {
 		//M Creating the various swing components.
 		JFrame frame = new JFrame();
@@ -52,6 +56,7 @@ public class GUI {
 				yIndexTracker = 0;
 				//M Setting the MathEvaluator to the entered equation.
 				m.setExpression(equation.getText());
+				//M This isn't working out either.
 				for(int i = 0; i > xIndexTracker; i++) {
 					m.addVariable("x", xValues[i]);
 					yValues[yIndexTracker++] = m.getValue();
@@ -78,6 +83,7 @@ public class GUI {
 	}
 	public static void main(String [] args) {
 		GUI gui = new GUI();
+		gui.setXIndexTracker(0);
 		gui.fillXValues();
 		Graph graph = new Graph();
 		while(true) {
@@ -85,10 +91,11 @@ public class GUI {
 				System.out.println("Drawing Graph!");
 				graph.draw(gui.getXValues(), gui.getYValues());
 				//M Preventing the method from repeatedly executing.
+				System.out.println("Finished drawing!");
 				gui.setPointsReady(false);
 			}
 			else {
-				System.out.println("Test failed.");
+				System.out.println("Test failed");
 			}
 		}
 	}
