@@ -1,0 +1,5 @@
+mike can you separate the polyderivative function so that it's two different functions:
+one that splits the derivative and returns terms, exponentDouble, constantDouble, and splitIndex
+and one that finds the derivatives
+the first one can be used for other classes
+i tried to do it today but it triggered a bunch of errors
