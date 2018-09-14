@@ -55,6 +55,8 @@ public class Derivative {
 					splitIndex = j;
 				}
 			}
+			
+			
 			//M If the term isn't a constant, do the power rule.
 			if(splitIndex != 0) {
 				//M Splitting the term into the constant and exponent parts.
@@ -75,7 +77,13 @@ public class Derivative {
 				constant = String.valueOf(constantDouble);
 				exponent = String.valueOf(exponentDouble);
 				//M Setting the term to the combined newly calculated term.
-				terms[i] = (constant + "x^" + exponent);
+				if (exponentDouble != 1 && exponentDouble != 0) {
+					terms[i] = (constant + "x^" + exponent);
+				}else if (exponentDouble == 1) {
+					terms[i] = (constant + "x");
+				}else{
+					terms[i] = (constant);
+				}
 				System.out.println("Term: " + terms[i]);
 			}
 			// If the term is a constant then, its derivative is 0.

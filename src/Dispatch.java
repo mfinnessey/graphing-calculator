@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 public class Dispatch {
 	GUI gui = new GUI();
 	Graph graph = new Graph();
+	
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		// M This is static to be consistent with the method call as we're only creating one graph at a time.
