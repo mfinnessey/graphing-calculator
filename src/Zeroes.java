@@ -26,6 +26,15 @@ public class Zeroes {
 	
 	public static double plugIn(String s, double xval) {
 		double rV = 0;
+		//K This next bit of code turns any coefficient into a multiplication function so we can plug it into MathEvaluator
+		//K For example, 128x turns into 128*x and 64x^2 turns into 64*x^2
+		//K This current code is very janky and inefficient. I'm gonna try to find a better solution later
+		for (int i = 0; i < s.length(); i++) {
+			if ((s.substring(i,i+2)).compareTo("0x" || "1x" || "2x" || "3x" || "4x" || "5x" || "6x" || "7x" || "8x" || "9x") == 0){
+				String num = s.substring(i,i+1);
+				s = s.substring(0,i) + num + "*x" + s.substring(i+2);
+			}
+		}
 		return rV;
 	}
 }
