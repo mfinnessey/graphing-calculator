@@ -5,10 +5,9 @@ public class Zeroes {
 	 * K: Problem: if a function touches the x axis but doesn't cross
 	 * K: No solution yet
 	 */
-	MathEvaluator ME = new MathEvaluator();
 	
 	public static void main(String[] args) {
-		System.out.println(plugIn("5x^3 + 9x^2 + 6x + 10", 2));
+		zeroFinder("7x^5 - 11x^2 - x + 4");
 	}
 	
 	public static int splitter(String s) {
@@ -56,11 +55,52 @@ public class Zeroes {
 				s = s.substring(0,i) + "9*x" + s.substring(i+2);
 			}
 		}
-		for (int i = 0; i < s.length(); i++) {
-			if ((s.substring(i,i+1)).compareTo("x") == 0){
-				s = s.substring(0,i) + "(" + xval + ")" + s.substring(i+1);
+		MathEvaluator ME = new MathEvaluator(s);
+		ME.addVariable("x", xval);
+		rV = ME.getValue();
+		return rV;
+	}
+	
+	public static double[] zeroFinder(String s) {
+		int zeros = 0;
+		for (int i = -20; i < 20; i++) {
+			double value = plugIn(s, i);
+			if (value < 0 && (value + 1) > 0) {
+				zeros++;
+			}else if (value > 0 && (value + 1) < 0) {
+				zeros++;
+			}else if (value == 0) {
+				zeros++;
 			}
+		}
+		double[] rV = new double[zeros];
+		zeros = 0;
+		for (int i = -20; i < 20; i++) {
+			double value = plugIn(s, i);
+			if (value < 0 && (value + 1) > 0) {
+				rV[zeros] = i;
+				zeros++;
+			}else if (value > 0 && (value + 1) < 0) {
+				rV[zeros] = i;
+				zeros++;
+			}else if (value == 0) {
+				rV[zeros] = i;
+				zeros++;
+			}
+		}
+		for (int i = 0; i < zeros; i++) {
+			System.out.println(rV[i]);
 		}
 		return rV;
 	}
+	
+	public static String prettyPrint(double[] a) { // Returns a nice looking string such as "{1,2,3}"
+		String rV = "(";
+	    for (int i = 0; i < a.length - 1; i++) {
+	    	rV += a[i] + ",";
+	    }
+	    rV += a[a.length - 1] + ")";
+	    return rV;
+	}
+
 }
