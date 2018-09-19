@@ -28,7 +28,7 @@ public class Zeroes {
 		return splitIndex;
 	}
 	
-	public static String plugIn(String s, double xval) {
+	public static double plugIn(String s, double xval) {
 		double rV = 0;
 		//K This next bit of code turns any coefficient into a multiplication function so we can plug it into MathEvaluator
 		//K For example, 128x turns into 128*x and 64x^2 turns into 64*x^2
@@ -61,6 +61,6 @@ public class Zeroes {
 				s = s.substring(0,i) + "(" + xval + ")" + s.substring(i+1);
 			}
 		}
-		return s;
+		return rV;
 	}
 }
