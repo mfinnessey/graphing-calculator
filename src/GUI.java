@@ -16,17 +16,15 @@ public class GUI {
 	private int yIndexTracker;
 	//M Store the x and y values respectively.
 	//M We're trying this. IDK if it works. YOLO.
-	private double [] xValues = new double [Integer.MAX_VALUE/10];
-	private double [] yValues = new double [Integer.MAX_VALUE/10];
+	private double [] xValues = new double[200000001];
+	private double [] yValues = new double [200000001];
 	private boolean pointsReady = false;
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
+	
 	private void fillXValues() {
 		//M Currently the compiler isn't entering this for loop for some reason.
-		for(double i = -10D; i > 10D; i += step) {
-			System.out.println(i);
-			xValues[xIndexTracker] = i;
-			System.out.println(xValues[xIndexTracker]);
-			xIndexTracker++;
+		for(int i = (int) (-1 * Math.pow(10,8)); i <= (int) Math.pow(10, 8); i++) {
+			xValues[xIndexTracker++] = (double) (i * step);
 		}
 		System.out.println("XValues filled.");
 	}
@@ -63,6 +61,9 @@ public class GUI {
 				}
 				pointsReady = true;
 				System.out.println("YValues filled.");
+				for(int j = 0; j < yValues.length; j++) {
+					System.out.println(yValues[j]);
+				}
 				yIndexTracker = 0;
 			}
 	   	});
