@@ -7,7 +7,10 @@ public class Zeroes {
 	 */
 	
 	public static void main(String[] args) {
-		zeroFinder("7x^5 - 11x^2 - x + 4");
+		double[] zeros = zeroFinder("7x^5 - 11x^2 - x + 4");
+		for (int i = 0; i < zeros.length; i++) {
+			System.out.println(zeros[i]);
+		}
 	}
 	
 	public static int splitter(String s) {
@@ -93,14 +96,4 @@ public class Zeroes {
 		}
 		return rV;
 	}
-	
-	public static String prettyPrint(double[] a) { // Returns a nice looking string such as "{1,2,3}"
-		String rV = "(";
-	    for (int i = 0; i < a.length - 1; i++) {
-	    	rV += a[i] + ",";
-	    }
-	    rV += a[a.length - 1] + ")";
-	    return rV;
-	}
-
 }
