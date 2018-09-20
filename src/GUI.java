@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 public class GUI {
 	// TODO a class to model a graphing calculator
 	//M minimum positive value of the double used to increase by.
-	public final static double step = Math.pow(10, -8);
+	public final static double step = Math.pow(10, -7);
 	//M Tracks where points have been filled in the array.
 	private int xIndexTracker;
 	private int yIndexTracker;
@@ -54,9 +54,12 @@ public class GUI {
 				yIndexTracker = 0;
 				//M Setting the MathEvaluator to the entered equation.
 				m.setExpression(equation.getText());
+				System.out.println("Equation: " + m.expression);
 				//M This isn't working out either.
-				for(int i = 0; i > xIndexTracker; i++) {
+				for(int i = 0; i <= xValues.length; i++) {
 					m.addVariable("x", xValues[i]);
+					System.out.println("x: " + m.getVariable("x"));
+					System.out.println("Value: " + m.getValue());
 					yValues[yIndexTracker++] = m.getValue();
 				}
 				pointsReady = true;
@@ -94,9 +97,6 @@ public class GUI {
 				//M Preventing the method from repeatedly executing.
 				System.out.println("Finished drawing!");
 				gui.setPointsReady(false);
-			}
-			else {
-				System.out.println("Test failed");
 			}
 		}
 	}
