@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -10,20 +12,20 @@ import javax.swing.JTextField;
 public class GUI {
 	// TODO a class to model a graphing calculator
 	//M minimum positive value of the double used to increase by.
-	public final static double step = Math.pow(10, -7);
+	public final static double step = Math.pow(10, -2);
 	//M Tracks where points have been filled in the array.
 	private int xIndexTracker;
 	private int yIndexTracker;
 	//M Store the x and y values respectively.
 	//M We're trying this. IDK if it works. YOLO.
-	private double [] xValues = new double[200000001];
-	private double [] yValues = new double [200000001];
+	private double [] xValues = new double[2001];
+	private double [] yValues = new double [2001];
 	private boolean pointsReady = false;
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	
 	private void fillXValues() {
 		//M Currently the compiler isn't entering this for loop for some reason.
-		for(int i = (int) (-1 * Math.pow(10,8)); i <= (int) Math.pow(10, 8); i++) {
+		for(int i = (int) (-1 * Math.pow(10,3)); i <= (int) Math.pow(10, 3); i++) {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
 		System.out.println("XValues filled.");
@@ -56,7 +58,7 @@ public class GUI {
 				m.setExpression(equation.getText());
 				System.out.println("Equation: " + m.expression);
 				//M This isn't working out either.
-				for(int i = 0; i <= xValues.length; i++) {
+				for(int i = 0; i <= (xValues.length - 1); i++) {
 					m.addVariable("x", xValues[i]);
 					System.out.println("x: " + m.getVariable("x"));
 					System.out.println("Value: " + m.getValue());
@@ -64,9 +66,6 @@ public class GUI {
 				}
 				pointsReady = true;
 				System.out.println("YValues filled.");
-				for(int j = 0; j < yValues.length; j++) {
-					System.out.println(yValues[j]);
-				}
 				yIndexTracker = 0;
 			}
 	   	});
@@ -97,6 +96,14 @@ public class GUI {
 				//M Preventing the method from repeatedly executing.
 				System.out.println("Finished drawing!");
 				gui.setPointsReady(false);
+			}
+			else {
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
