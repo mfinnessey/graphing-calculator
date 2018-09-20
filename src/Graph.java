@@ -37,9 +37,10 @@ public class Graph {
 	        }
 
 	        private void drawPoint(double x, double y) {
-	        	System.out.println("Drawing the point (" + x + ", " + y + ").");
 	        	//TODO A method to draw the various lines that make up the graph.
-	            g.draw(new Line2D.Double(x, -y, x, -y)); //Use negative Y to simulate a standard Cartesian behaivor
+	        	System.out.println("Drawing the point (" + x + ", " + y + ").");
+	        	//M Implementing behavior to scale with the axes, more can be added with more time.
+	            g.draw(new Line2D.Double((x + 250), (-y + 250), (x + 250), (-y + 250))); //Use negative Y to simulate a standard Cartesian behaivor
 	        }
 	Graphics2D g;
 }
