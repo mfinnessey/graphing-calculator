@@ -10,11 +10,12 @@ public class Graph {
 	JPanel graphWindow = new JPanel();
 	public Graph() {
 		JFrame frame = new JFrame();
-		graphWindow.setSize(500, 500);
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(graphWindow, BorderLayout.CENTER);
 		frame.pack();
+		frame.setSize(500, 500);
+		graphWindow.setSize(500, 500);
 		frame.setVisible(true);
 	}
 	 public void draw(double [] xValues, double [] yValues) {
@@ -40,7 +41,7 @@ public class Graph {
 	        	//TODO A method to draw the various lines that make up the graph.
 	        	System.out.println("Drawing the point (" + x + ", " + y + ").");
 	        	//M Implementing behavior to scale with the axes, more can be added with more time.
-	            g.draw(new Line2D.Double((x + 250), (-y + 250), (x + 250), (-y + 250))); //Use negative Y to simulate a standard Cartesian behaivor
+	            g.draw(new Line2D.Double(((25 * x) + 250), ((25 * -y) + 250), ((25 * x) + 250), ((25 * -y) + 250))); //Use negative Y to simulate a standard Cartesian behaivor
 	        }
 	Graphics2D g;
 }
