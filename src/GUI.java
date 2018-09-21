@@ -81,12 +81,18 @@ public class GUI {
 		//A method to set pointsReady.
 		pointsReady = status;
 	}
+	private void printValues(double [] xValues, double [] yValues) {
+		for(int i = 0; i < xValues.length; i++) {
+			System.out.println("( " + xValues[i] + " , " + yValues[i]+ " )");
+		}
+	}
 	public static void main(String [] args) {
 		GUI gui = new GUI();
 		gui.fillXValues();
 		Graph graph = new Graph();
 		while(true) {
 			if(gui.getPointsReady() == true) {
+				gui.printValues(gui.getXValues(), Derivative.findDerivative(gui.getXValues(), gui.getYValues()));
 				graph.draw(gui.getXValues(), gui.getYValues());
 				//M Preventing the method from repeatedly executing.
 				gui.setPointsReady(false);
