@@ -7,7 +7,10 @@ public class Zeroes {
 	 */
 	
 	public static void main(String[] args) {
-		double[] zeros = zeroFinder("7x^5 - 11x^2 - x + 4");
+		double[] zeros = zeroFinder("3x^3 - 5x^2 + 4x- 3");
+		if (zeros.length == 0) {
+			System.out.println("no zeros");
+		}
 		for (int i = 0; i < zeros.length; i++) {
 			System.out.println(zeros[i]);
 		}
@@ -67,32 +70,31 @@ public class Zeroes {
 	public static double[] zeroFinder(String s) {
 		int zeros = 0;
 		for (int i = -20; i < 20; i++) {
-			double value = plugIn(s, i);
-			if (value < 0 && (value + 1) > 0) {
+			double firstValue = plugIn(s, i);
+			double secondValue = plugIn(s, i+1);
+			if (firstValue < 0 && (secondValue) > 0) {
 				zeros++;
-			}else if (value > 0 && (value + 1) < 0) {
+			}else if (firstValue > 0 && (secondValue + 1) < 0) {
 				zeros++;
-			}else if (value == 0) {
+			}else if (firstValue == 0) {
 				zeros++;
 			}
 		}
 		double[] rV = new double[zeros];
 		zeros = 0;
-		for (int i = -20; i < 20; i++) {
-			double value = plugIn(s, i);
-			if (value < 0 && (value + 1) > 0) {
+		for (int i = -20; i <= 20; i++) {
+			double firstValue = plugIn(s, i);
+			double secondValue = plugIn(s, i+0.01);
+			if (firstValue < 0 && (secondValue) > 0) {
 				rV[zeros] = i;
 				zeros++;
-			}else if (value > 0 && (value + 1) < 0) {
+			}else if (firstValue > 0 && (secondValue + 1) < 0) {
 				rV[zeros] = i;
 				zeros++;
-			}else if (value == 0) {
+			}else if (firstValue == 0) {
 				rV[zeros] = i;
 				zeros++;
 			}
-		}
-		for (int i = 0; i < zeros; i++) {
-			System.out.println(rV[i]);
 		}
 		return rV;
 	}
