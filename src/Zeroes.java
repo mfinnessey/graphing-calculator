@@ -7,7 +7,20 @@ public class Zeroes {
 	 */
 	
 	public static void main(String[] args) {
-		zeroFinder("7x^5 - 11x^2 - x + 4");
+		double[] zeros1 = zeroFinder("x^2 +x -30");
+		double[] zeros2 = zeroFinder("3x^3 - 5x^2 + 4x- 3");
+		if (zeros1.length == 0) {
+			System.out.println("no zeros zeros1");
+		}
+		if (zeros2.length == 0) {
+			System.out.println("no zeros zeros2");
+		}
+		for (int i = 0; i < zeros1.length; i++) {
+			System.out.println(zeros1[i]);
+		}
+		for (int i = 0; i < zeros2.length; i++) {
+			System.out.println(zeros2[i]);
+		}
 	}
 	
 	public static int splitter(String s) {
@@ -64,43 +77,32 @@ public class Zeroes {
 	public static double[] zeroFinder(String s) {
 		int zeros = 0;
 		for (int i = -20; i < 20; i++) {
-			double value = plugIn(s, i);
-			if (value < 0 && (value + 1) > 0) {
+			double firstValue = plugIn(s, i);
+			double secondValue = plugIn(s, i+1);
+			if (firstValue < 0 && (secondValue) > 0) {
 				zeros++;
-			}else if (value > 0 && (value + 1) < 0) {
+			}else if (firstValue > 0 && (secondValue + 1) < 0) {
 				zeros++;
-			}else if (value == 0) {
+			}else if (firstValue == 0) {
 				zeros++;
 			}
 		}
 		double[] rV = new double[zeros];
 		zeros = 0;
-		for (int i = -20; i < 20; i++) {
-			double value = plugIn(s, i);
-			if (value < 0 && (value + 1) > 0) {
+		for (int i = -20; i <= 20; i++) {
+			double firstValue = plugIn(s, i);
+			double secondValue = plugIn(s, i + 0.01);
+			if (firstValue < 0 && (secondValue) > 0) {
 				rV[zeros] = i;
 				zeros++;
-			}else if (value > 0 && (value + 1) < 0) {
+			}else if (firstValue > 0 && (secondValue + 1) < 0) {
 				rV[zeros] = i;
 				zeros++;
-			}else if (value == 0) {
+			}else if (firstValue == 0) {
 				rV[zeros] = i;
 				zeros++;
 			}
 		}
-		for (int i = 0; i < zeros; i++) {
-			System.out.println(rV[i]);
-		}
 		return rV;
 	}
-	
-	public static String prettyPrint(double[] a) { // Returns a nice looking string such as "{1,2,3}"
-		String rV = "(";
-	    for (int i = 0; i < a.length - 1; i++) {
-	    	rV += a[i] + ",";
-	    }
-	    rV += a[a.length - 1] + ")";
-	    return rV;
-	}
-
 }
