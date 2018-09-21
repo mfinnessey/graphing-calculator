@@ -7,12 +7,19 @@ public class Zeroes {
 	 */
 	
 	public static void main(String[] args) {
-		double[] zeros = zeroFinder("3x^3 - 5x^2 + 4x- 3");
-		if (zeros.length == 0) {
-			System.out.println("no zeros");
+		double[] zeros1 = zeroFinder("x^2 +x -30");
+		double[] zeros2 = zeroFinder("3x^3 - 5x^2 + 4x- 3");
+		if (zeros1.length == 0) {
+			System.out.println("no zeros zeros1");
 		}
-		for (int i = 0; i < zeros.length; i++) {
-			System.out.println(zeros[i]);
+		if (zeros2.length == 0) {
+			System.out.println("no zeros zeros2");
+		}
+		for (int i = 0; i < zeros1.length; i++) {
+			System.out.println(zeros1[i]);
+		}
+		for (int i = 0; i < zeros2.length; i++) {
+			System.out.println(zeros2[i]);
 		}
 	}
 	
@@ -84,7 +91,7 @@ public class Zeroes {
 		zeros = 0;
 		for (int i = -20; i <= 20; i++) {
 			double firstValue = plugIn(s, i);
-			double secondValue = plugIn(s, i+0.01);
+			double secondValue = plugIn(s, i + 0.01);
 			if (firstValue < 0 && (secondValue) > 0) {
 				rV[zeros] = i;
 				zeros++;
