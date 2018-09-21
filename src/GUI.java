@@ -58,6 +58,8 @@ public class GUI {
 	
 	private void fillXValues() {
 		//M A method to fill xValues with consecutive numbers.
+		/*M The index of xValues is tracked separately from the loop to allow arithmetic to be done 
+		 * with the loop counter.*/
 		xIndexTracker = 0;
 		for(int i = (int) (-1 * Math.pow(10,4)); i <= (int) Math.pow(10, 4); i++) {
 			xValues[xIndexTracker++] = (double) (i * step);
@@ -82,19 +84,25 @@ public class GUI {
 		pointsReady = status;
 	}
 	private void printValues(double [] xValues, double [] yValues) {
+		//M A method to print (x,y) pairs.
 		for(int i = 0; i < xValues.length; i++) {
 			System.out.println("( " + xValues[i] + " , " + yValues[i]+ " )");
 		}
 	}
 	public static void main(String [] args) {
 		GUI gui = new GUI();
+		//M Filling xValues with consecutive x-values.
 		gui.fillXValues();
 		Graph graph = new Graph();
+		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.
 		while(true) {
+			//M If the points are ready, then they are graphed.
 			if(gui.getPointsReady() == true) {
+				//M Statement to print out and check derivative values.
 				gui.printValues(gui.getXValues(), Derivative.findDerivative(gui.getXValues(), gui.getYValues()));
+				//M Sending the points to be graphed.
 				graph.draw(gui.getXValues(), gui.getYValues());
-				//M Preventing the method from repeatedly executing.
+				//M Preventing the method from executing again until the yValues are recalculated.
 				gui.setPointsReady(false);
 			}
 			//M This seems to do something for synchronization, so I'm just going to leave it for now.
