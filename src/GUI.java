@@ -21,6 +21,7 @@ public class GUI {
 	private double [] xValues = new double[20001];
 	private double [] yValues = new double [20001];
 	private boolean pointsReady = false;
+	private boolean clearDesired = false;
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	
 	public GUI() {
@@ -30,10 +31,12 @@ public class GUI {
 		JButton calculate = new JButton("Calculate");
 		JButton firstDerivative = new JButton("First Derivative");
 		JButton secondDerivative = new JButton("Second Derivative");
+		JButton clear = new JButton("Clear");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(calculate, BorderLayout.CENTER);
 		frame.getContentPane().add(firstDerivative, BorderLayout.NORTH);
 		frame.getContentPane().add(secondDerivative, BorderLayout.WEST);
+		frame.getContentPane().add(clear, BorderLayout.EAST);
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
@@ -90,8 +93,12 @@ public class GUI {
 				yIndexTracker = 0;
 			}
 	   	});
+		clear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clearDesired = true;
+			}
+	   	});
 	}
-	
 	private void fillXValues() {
 		//M A method to fill xValues with consecutive numbers.
 		/*M The index of xValues is tracked separately from the loop to allow arithmetic to be done 
@@ -115,9 +122,17 @@ public class GUI {
 		//M A method to get pointsReady.
 		return pointsReady;
 	}
+	private boolean getClearDesired() {
+		//M A method to get clearDesired.
+		return clearDesired;
+	}
 	private void setPointsReady(boolean status) {
-		//A method to set pointsReady.
+		//M A method to set pointsReady.
 		pointsReady = status;
+	}
+	private void setClearDesired(boolean status) {
+		//M A method to set clearDesired.
+		clearDesired = status;
 	}
 	private void printValues(double [] xValues, double [] yValues) {
 		//M A method to print (x,y) pairs. Used for debugging.
@@ -138,6 +153,10 @@ public class GUI {
 				graph.draw(gui.getXValues(), gui.getYValues());
 				//M Preventing the method from executing again until the yValues are recalculated.
 				gui.setPointsReady(false);
+			}
+			else if(gui.getClearDesired() == true) {
+				graph.clear();
+				gui.setClearDesired(false);
 			}
 			//M This seems to do something for synchronization, so I'm just going to leave it for now.
 			else {
