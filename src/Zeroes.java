@@ -8,7 +8,12 @@ public class Zeroes {
 	
 	public static void main(String[] args) {
 		double[] zeros = zeroFinder("5x^3-9x^2-8x+5");
+		double value = plugIn("5x^3-9x^2-8x+5", -1);
+		//K: I figured out the problem: MathEvaluator is seriously broken
+		//K: The above value should be -1, not -193
+		System.out.println(value);
 		if (zeros.length == 0) {
+
 			System.out.println("no zeros");
 		}
 		for (int i = 0; i < zeros.length; i++) {
@@ -69,7 +74,7 @@ public class Zeroes {
 	
 	public static double[] zeroFinder(String s) {
 		int zeros = 0;
-		for (int i = -20; i < 20; i+=1) {
+		for (int i = -10; i < 10; i+=1) {
 			double firstValue = plugIn(s, i);
 			double secondValue = plugIn(s, i+1);
 			if (firstValue < 0 && (secondValue) > 0) {
@@ -82,13 +87,13 @@ public class Zeroes {
 		}
 		double[] rV = new double[zeros];
 		int index = 0;
-		for (int i = -20; i <= 20; i+=1) {
+		for (int i = -10; i <= 10; i+=1) {
 			double firstValue = plugIn(s, i);
 			double secondValue = plugIn(s, i + 1);
-			if (firstValue < 0 && (secondValue) > 0) {
+			if ((firstValue < 0) && (secondValue > 0)) {
 				rV[index] = i;
 				index++;
-			}else if (firstValue > 0 && (secondValue) < 0) {
+			}else if ((firstValue > 0) && (secondValue < 0)) {
 				rV[index] = i;
 				index++;
 			}else if (firstValue == 0) {
