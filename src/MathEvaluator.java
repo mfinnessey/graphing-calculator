@@ -155,11 +155,11 @@ public class MathEvaluator
         String op 	= o.getOperator();
         Double res 	= null;
 
-        if  	 ( "+".equals(op) ) 	res = new Double( f1.doubleValue() + f2.doubleValue() );
+        if  ( "^".equals(op) )  	res = new Double( Math.pow(f1.doubleValue(), f2.doubleValue()) );
+        else if  ( "+".equals(op) ) 	res = new Double( f1.doubleValue() + f2.doubleValue() );
         else if  ( "-".equals(op) ) 	res = new Double( f1.doubleValue() - f2.doubleValue() );
         else if  ( "*".equals(op) ) 	res = new Double( f1.doubleValue() * f2.doubleValue() );
         else if  ( "/".equals(op) )  	res = new Double( f1.doubleValue() / f2.doubleValue() );
-        else if  ( "^".equals(op) )  	res = new Double( Math.pow(f1.doubleValue(), f2.doubleValue()) );
         else if  ( "%".equals(op) )  	res = new Double( f1.doubleValue() % f2.doubleValue() );
         else if  ( "&".equals(op) )  	res = new Double( f1.doubleValue() + f2.doubleValue() ); // todo
         else if  ( "|".equals(op) )  	res = new Double( f1.doubleValue() + f2.doubleValue() ); // todo
