@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 
@@ -9,6 +10,9 @@ import javax.swing.JPanel;
 public class Graph {
 	//M Adding a new JPanel on which to hold the things.
 	JPanel graphWindow = new JPanel();
+	private String[] colors = {"#FF0000", "#FFFF00", "#008000", "#00FFFF", "#000080",
+			"#FF00FF", "#800080", "#C0C0C0"};
+	private int colorTracker = 0;
 	public Graph() {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,16 +30,16 @@ public class Graph {
 	        //Draw some axes
 	        g.drawLine(250, 500, 250, 0); // The Y axis
 	        g.drawLine(0, 250, 500, 250);  //The X axis
-
-
-	        //You can also draw scales and labels here 
-	        //drawString draws a string onto the screen
-
-	        //Plot the data points, using our method
-	        g.draw(new Line2D.Double(xValues[0], yValues[0], xValues[0], yValues[0]));
-	        for (int i=1; i < xValues.length; i++)
+        	//M Reusing the colors as necessary.
+	        if(colorTracker > 7) {
+        		colorTracker = 0;
+        	}
+        	//M Changing the colors of lines.
+        	g.setColor(Color.decode(colors[colorTracker++]));
+	        for (int i=1; i < xValues.length; i++) {
 	            drawPoint(xValues[i], yValues[i]);  //Your data gets read here
 	        }
+	 }
 
 	        private void drawPoint(double x, double y) {
 	        	//TODO A method to draw the various lines that make up the graph.
