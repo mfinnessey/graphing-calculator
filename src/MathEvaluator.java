@@ -156,13 +156,9 @@ public class MathEvaluator
         Double res 	= null;
 
         if  ( "^".equals(op) )  	res = new Double( Math.pow(f1.doubleValue(), f2.doubleValue()) );
-        else if  ( "+".equals(op) ) 	res = new Double( f1.doubleValue() + f2.doubleValue() );
-        else if  ( "-".equals(op) ) 	res = new Double( f1.doubleValue() - f2.doubleValue() );
         else if  ( "*".equals(op) ) 	res = new Double( f1.doubleValue() * f2.doubleValue() );
         else if  ( "/".equals(op) )  	res = new Double( f1.doubleValue() / f2.doubleValue() );
         else if  ( "%".equals(op) )  	res = new Double( f1.doubleValue() % f2.doubleValue() );
-        else if  ( "&".equals(op) )  	res = new Double( f1.doubleValue() + f2.doubleValue() ); // todo
-        else if  ( "|".equals(op) )  	res = new Double( f1.doubleValue() + f2.doubleValue() ); // todo
         else if  ( "cos".equals(op) )  	res = new Double( Math.cos(f1.doubleValue()) );
         else if  ( "sin".equals(op) )  	res = new Double( Math.sin(f1.doubleValue()) );
         else if  ( "tan".equals(op) )  	res = new Double( Math.tan(f1.doubleValue()) );
@@ -174,8 +170,9 @@ public class MathEvaluator
       
         else if  ( "log".equals(op) )  	res = new Double( Math.log10(f1.doubleValue()) );// returns base 10 log
         else if  ( "ln".equals(op) )  	res = new Double( Math.log(f1.doubleValue()) );// returns base e log -- natural log
+        else if  ( "+".equals(op) ) 	res = new Double( f1.doubleValue() + f2.doubleValue() );
+        else if  ( "-".equals(op) ) 	res = new Double( f1.doubleValue() - f2.doubleValue() );
        
-
         
         else if  ( "min".equals(op) )  	res = new Double( Math.min(f1.doubleValue(), f2.doubleValue()) );
         else if  ( "max".equals(op) )  	res = new Double( Math.max(f1.doubleValue(), f2.doubleValue()) );
