@@ -23,6 +23,11 @@ public class Graph {
 		frame.setLocation(500, 0);
 		frame.setVisible(true);
 	}
+	public void clear() {
+		//M A method to clear the graph.
+		g.clearRect(0, 0, 500, 500);
+		colorTracker = 0;
+	}
 	 public void draw(double [] xValues, double [] yValues) {
 		 //TODO A method to draw the graph.
 	        //Get the Graphics2D object of a JPanel, to draw on
