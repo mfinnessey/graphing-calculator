@@ -29,9 +29,11 @@ public class GUI {
 		JTextField equation = new JTextField("f(x)");
 		JButton calculate = new JButton("Calculate");
 		JButton firstDerivative = new JButton("First Derivative");
+		JButton secondDerivative = new JButton("Second Derivative");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(calculate, BorderLayout.CENTER);
 		frame.getContentPane().add(firstDerivative, BorderLayout.NORTH);
+		frame.getContentPane().add(secondDerivative, BorderLayout.WEST);
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
@@ -71,6 +73,23 @@ public class GUI {
 				yIndexTracker = 0;
 			}
 	   	});
+		secondDerivative.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//M Resetting yIndexTracker.
+				yIndexTracker = 0;
+				//M Setting the MathEvaluator to the entered equation.
+				m.setExpression(equation.getText());
+				for(int i = 0; i < (xValues.length - 1); i++) {
+					m.addVariable("x", xValues[i]);
+					yValues[yIndexTracker++] = m.getValue();
+				}
+				yValues = Derivative.findDerivative(xValues, yValues);
+				yValues = Derivative.findDerivative(xValues, yValues);
+				pointsReady = true;
+				//M Resetting yIndexTracker.
+				yIndexTracker = 0;
+			}
+	   	});
 	}
 	
 	private void fillXValues() {
@@ -101,7 +120,7 @@ public class GUI {
 		pointsReady = status;
 	}
 	private void printValues(double [] xValues, double [] yValues) {
-		//M A method to print (x,y) pairs.
+		//M A method to print (x,y) pairs. Used for debugging.
 		for(int i = 0; i < xValues.length; i++) {
 			System.out.println("( " + xValues[i] + " , " + yValues[i]+ " )");
 		}
@@ -115,8 +134,6 @@ public class GUI {
 		while(true) {
 			//M If the points are ready, then they are graphed.
 			if(gui.getPointsReady() == true) {
-				//M Statement to print out and check derivative values.
-				gui.printValues(gui.getXValues(), Derivative.findDerivative(gui.getXValues(), gui.getYValues()));
 				//M Sending the points to be graphed.
 				graph.draw(gui.getXValues(), gui.getYValues());
 				//M Preventing the method from executing again until the yValues are recalculated.
