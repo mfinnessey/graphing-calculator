@@ -28,8 +28,10 @@ public class GUI {
 		JFrame frame = new JFrame();
 		JTextField equation = new JTextField("f(x)");
 		JButton calculate = new JButton("Calculate");
+		JButton firstDerivative = new JButton("First Derivative");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(calculate, BorderLayout.CENTER);
+		frame.getContentPane().add(firstDerivative, BorderLayout.NORTH);
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
@@ -53,7 +55,22 @@ public class GUI {
 				yIndexTracker = 0;
 			}
 	   	});
-	   	
+	   	firstDerivative.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//M Resetting yIndexTracker.
+				yIndexTracker = 0;
+				//M Setting the MathEvaluator to the entered equation.
+				m.setExpression(equation.getText());
+				for(int i = 0; i < (xValues.length - 1); i++) {
+					m.addVariable("x", xValues[i]);
+					yValues[yIndexTracker++] = m.getValue();
+				}
+				yValues = Derivative.findDerivative(xValues, yValues);
+				pointsReady = true;
+				//M Resetting yIndexTracker.
+				yIndexTracker = 0;
+			}
+	   	});
 	}
 	
 	private void fillXValues() {
