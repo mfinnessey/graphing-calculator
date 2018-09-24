@@ -7,7 +7,7 @@ public class Zeroes {
 	 */
 	
 	public static void main(String[] args) {
-		double[] zeros = zeroFinder("x^3-5x^2+3x+4");
+		double[] zeros = zeroFinder("5x^3-9x^2-8x+5");
 		if (zeros.length == 0) {
 			System.out.println("no zeros");
 		}
