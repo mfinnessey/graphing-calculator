@@ -1,11 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import main.java.com.udojava.evalex.Expression;
 
 
 
@@ -51,10 +54,15 @@ public class GUI {
 				yIndexTracker = 0;
 				//M Setting the MathEvaluator to the entered equation.
 				m.setExpression(equation.getText());
+				Expression ex = new Expression(equation.getText());
+				
 				//M This isn't working out either.
 				for(int i = 0; i <= (xValues.length - 1); i++) {
+					ex.with("x", Double.toString(xValues[i]));
 					m.addVariable("x", xValues[i]);
 					yValues[yIndexTracker++] = m.getValue();
+					//M FIX
+					yValues[yIndexTracker++] = BigDecimal.(ex.eval());
 				}
 				pointsReady = true;
 				yIndexTracker = 0;
