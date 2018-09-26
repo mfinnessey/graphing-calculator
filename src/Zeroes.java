@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import main.java.com.udojava.evalex.Expression;
 
 public class Zeroes {
 //TODO: create a class to find zeros and other values using IVT
@@ -66,9 +68,11 @@ public class Zeroes {
 				s = s.substring(0,i) + "9*x" + s.substring(i+2);
 			}
 		}
-		MathEvaluator ME = new MathEvaluator(s);
-		ME.addVariable("x", xval);
-		rV = ME.getValue();
+		BigDecimal result = null;
+		Expression expression = new Expression(s);
+		String xvalue = Double.toString(xval);
+		expression.with("x", xvalue);
+		result = expression.eval();
 		return rV;
 	}
 	
