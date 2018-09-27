@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
@@ -49,6 +48,8 @@ public class GUI {
 	   	m.addVariable("x", ((2.0)));
 	   	//M Adding the ActionListener for the button.
 	   	calculate.addActionListener(new ActionListener() {
+	   		//M Let's do work on this branch for now, everything seems to be working, just need to add integrals.
+	   		//M Some of the syntax is painful, but it all works on MathEvaluator.
 			public void actionPerformed(ActionEvent e) {
 				//M resetting yIndexTracker.
 				yIndexTracker = 0;
