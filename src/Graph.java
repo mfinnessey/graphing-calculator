@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class Graph {
 	//M Adding a new JPanel on which to hold the things.
 	JPanel graphWindow = new JPanel();
-	private String[] colors = {"#FF0000", "#FFFF00", "#008000", "#00FFFF", "#000080",
+	private String[] colors = {"#FF0000", "#FFA500", "#008000", "#00FFFF", "#000080",
 			"#FF00FF", "#800080", "#C0C0C0"};
 	private int colorTracker = 0;
 	public Graph() {

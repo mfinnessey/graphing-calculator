@@ -1,50 +1,56 @@
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+
+import main.java.com.udojava.evalex.Expression;
 
 public class Testing {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		final double step = Math.pow(10, -7);
-		int indexTracker = 0;
-		// final BigDecimal bd = new BigDecimal(Math.pow(10, -8));
-		double [] xValues = new double[200000001];
-		for(int i = (int) (-1 * Math.pow(10,8)); i <= (int) Math.pow(10, 8); i++) {
-			xValues[indexTracker++] = (double) (i * step);
-		}
-		for(int j = 0; j < indexTracker; j++) {
-			xValues[j] = round(xValues[j]);
-			System.out.println(xValues[j]);
-		}
-		
-		
-		
-		// final double step = Math.pow(10, -8);
-		//M Currently issues with precision with this.
-		/* DoubleStream stream = DoubleStream.iterate(-10, d -> d + step);
-		double[] rawArray = stream.limit((long) (20/step)).toArray();
-		//M index at which the filteredArray should be filled.
-		int fillIndex = 0;
-		double [] filteredArray = new double[rawArray.length];
-		for(int i = 0; i < rawArray.length; i++) {
-			System.out.println(rawArray[i]);
-		} /*
-		//M The runtime for this is currently stupid with step = 10^-8
-		/* for(int i = 0; i < rawArray.length; i++) {
-			for(int j = 0; j < filteredArray.length; j++) {
-				if(rawArray[i] == filteredArray[j]) {
-					break;
-				}
-			}
-			filteredArray[fillIndex++] = rawArray[i];
-		}
-		for(int i = 0; i < filteredArray.length; i++) {
-			System.out.println(filteredArray[i]);
-		} */
+	public static void main(String [] args) {
+		double value = plugIn("5x^3-9x^2-8x+5", 9);
+		//K: I figured out the problem: MathEvaluator is seriously broken
+		//K: The above value should be -1, not -193
+		System.out.println(value);
+		evalExFunctionTest();
 	}
-	public static double round(double d) {
-		BigDecimal bd = new BigDecimal(d);
-		bd = bd.setScale(7, RoundingMode.HALF_UP);
-		return bd.doubleValue();
+	
+	public static double plugIn(String s, double xval) {
+		double rV = 0;
+		//K This next bit of code turns any coefficient into a multiplication function so we can plug it into MathEvaluator
+		//K For example, 128x turns into 128*x and 64x^2 turns into 64*x^2
+		//K This current code is very janky and inefficient. I'm gonna try to find a better solution later
+		for (int i = 0; i < s.length() - 1; i++) {
+			if ((s.substring(i,i+2)).compareTo("0x") == 0){
+				s = s.substring(0,i) + "0*x" + s.substring(i+2);
+			}else if ((s.substring(i,i+2)).compareTo("1x") == 0){
+				s = s.substring(0,i) + "1*x" + s.substring(i+2);
+			}else if ((s.substring(i,i+2)).compareTo("2x") == 0){
+				s = s.substring(0,i) + "2*x" + s.substring(i+2);
+			}else if ((s.substring(i,i+2)).compareTo("3x") == 0){
+				s = s.substring(0,i) + "3*x" + s.substring(i+2);
+			}else if ((s.substring(i,i+2)).compareTo("4x") == 0){
+				s = s.substring(0,i) + "4*x" + s.substring(i+2);
+			}else if ((s.substring(i,i+2)).compareTo("5x") == 0){
+				s = s.substring(0,i) + "5*x" + s.substring(i+2);
+			}else if ((s.substring(i,i+2)).compareTo("6x") == 0){
+				s = s.substring(0,i) + "6*x" + s.substring(i+2);
+			}else if ((s.substring(i,i+2)).compareTo("7x") == 0){
+				s = s.substring(0,i) + "7*x" + s.substring(i+2);
+			}else if ((s.substring(i,i+2)).compareTo("8x") == 0){
+				s = s.substring(0,i) + "8*x" + s.substring(i+2);
+			}else if ((s.substring(i,i+2)).compareTo("9x") == 0){
+				s = s.substring(0,i) + "9*x" + s.substring(i+2);
+			}
+			//poop -Mr. O'Haire
+		}
+		BigDecimal result = null;
+		Expression expression = new Expression(s);
+		String xvalue = Double.toString(xval);
+		expression.with("x", xvalue);
+		result = expression.eval();
+		return rV;
+	}
+	
+	public static void evalExFunctionTest() {
+		Expression expression = new Expression("log(x)").with("x", "2");
+		expression.setPrecision(4);
+		System.out.println(expression.eval().doubleValue());
 	}
 }
