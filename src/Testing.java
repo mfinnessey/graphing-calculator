@@ -8,6 +8,7 @@ public class Testing {
 		//K: I figured out the problem: MathEvaluator is seriously broken
 		//K: The above value should be -1, not -193
 		System.out.println(value);
+		evalExFunctionTest();
 	}
 	
 	public static double plugIn(String s, double xval) {
@@ -45,5 +46,11 @@ public class Testing {
 		expression.with("x", xvalue);
 		result = expression.eval();
 		return rV;
+	}
+	
+	public static void evalExFunctionTest() {
+		Expression expression = new Expression("log(x)").with("x", "2");
+		expression.setPrecision(4);
+		System.out.println(expression.eval().doubleValue());
 	}
 }

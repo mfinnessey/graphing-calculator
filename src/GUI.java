@@ -53,15 +53,20 @@ public class GUI {
 				//M resetting yIndexTracker.
 				yIndexTracker = 0;
 				//M Setting the MathEvaluator to the entered equation.
-				//m.setExpression(equation.getText());
-				Expression ex = new Expression(equation.getText());
-				
-				//M This isn't working out either.
-				for(int i = 0; i <= (xValues.length - 1); i++) {
-					ex.with("x", Double.toString(xValues[i]));
-					//m.addVariable("x", xValues[i]);
-					//yValues[yIndexTracker++] = m.getValue();
-					yValues[yIndexTracker++] = ex.eval().doubleValue();
+				if(equation.getText().startsWith("poly")) {
+					Expression ex = new Expression(equation.getText().substring(4));
+					System.out.println(ex.getExpression());
+					for(int i = 0; i <= (xValues.length - 1); i++) {
+						ex.with("x", Double.toString(xValues[i]));
+						yValues[yIndexTracker++] = ex.eval().doubleValue();
+					}
+				}
+				else {
+					m.setExpression(equation.getText());
+					for(int i = 0; i <= (xValues.length - 1); i++) {
+						m.addVariable("x", xValues[i]);
+						yValues[yIndexTracker++] = m.getValue();
+					}
 				}
 				pointsReady = true;
 				yIndexTracker = 0;
@@ -72,10 +77,20 @@ public class GUI {
 				//M Resetting yIndexTracker.
 				yIndexTracker = 0;
 				//M Setting the MathEvaluator to the entered equation.
-				m.setExpression(equation.getText());
-				for(int i = 0; i < (xValues.length - 1); i++) {
-					m.addVariable("x", xValues[i]);
-					yValues[yIndexTracker++] = m.getValue();
+				if(equation.getText().startsWith("poly")) {
+					Expression ex = new Expression(equation.getText().substring(4));
+					System.out.println(ex.getExpression());
+					for(int i = 0; i <= (xValues.length - 1); i++) {
+						ex.with("x", Double.toString(xValues[i]));
+						yValues[yIndexTracker++] = ex.eval().doubleValue();
+					}
+				}
+				else {
+					m.setExpression(equation.getText());
+					for(int i = 0; i <= (xValues.length - 1); i++) {
+						m.addVariable("x", xValues[i]);
+						yValues[yIndexTracker++] = m.getValue();
+					}
 				}
 				yValues = Derivative.findDerivative(xValues, yValues);
 				pointsReady = true;
@@ -88,10 +103,20 @@ public class GUI {
 				//M Resetting yIndexTracker.
 				yIndexTracker = 0;
 				//M Setting the MathEvaluator to the entered equation.
-				m.setExpression(equation.getText());
-				for(int i = 0; i < (xValues.length - 1); i++) {
-					m.addVariable("x", xValues[i]);
-					yValues[yIndexTracker++] = m.getValue();
+				if(equation.getText().startsWith("poly")) {
+					Expression ex = new Expression(equation.getText().substring(4));
+					System.out.println(ex.getExpression());
+					for(int i = 0; i <= (xValues.length - 1); i++) {
+						ex.with("x", Double.toString(xValues[i]));
+						yValues[yIndexTracker++] = ex.eval().doubleValue();
+					}
+				}
+				else {
+					m.setExpression(equation.getText());
+					for(int i = 0; i <= (xValues.length - 1); i++) {
+						m.addVariable("x", xValues[i]);
+						yValues[yIndexTracker++] = m.getValue();
+					}
 				}
 				yValues = Derivative.findDerivative(xValues, yValues);
 				yValues = Derivative.findDerivative(xValues, yValues);
@@ -114,6 +139,12 @@ public class GUI {
 		for(int i = (int) (-1 * Math.pow(10,4)); i <= (int) Math.pow(10, 4); i++) {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
+	}
+	private double [] polynomialCalculator(String polynomial, double [] xValues) {
+		//M A method to calculate the values from polynomials.
+		double [] intermediateValues = new double [20001];
+		
+		return intermediateValues;
 	}
 	
 	private double[] getXValues() {
