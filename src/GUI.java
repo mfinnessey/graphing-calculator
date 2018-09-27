@@ -53,16 +53,15 @@ public class GUI {
 				//M resetting yIndexTracker.
 				yIndexTracker = 0;
 				//M Setting the MathEvaluator to the entered equation.
-				m.setExpression(equation.getText());
+				//m.setExpression(equation.getText());
 				Expression ex = new Expression(equation.getText());
 				
 				//M This isn't working out either.
 				for(int i = 0; i <= (xValues.length - 1); i++) {
 					ex.with("x", Double.toString(xValues[i]));
-					m.addVariable("x", xValues[i]);
-					yValues[yIndexTracker++] = m.getValue();
-					//M FIX
-					yValues[yIndexTracker++] = BigDecimal.(ex.eval());
+					//m.addVariable("x", xValues[i]);
+					//yValues[yIndexTracker++] = m.getValue();
+					yValues[yIndexTracker++] = ex.eval().doubleValue();
 				}
 				pointsReady = true;
 				yIndexTracker = 0;
@@ -161,6 +160,7 @@ public class GUI {
 				graph.draw(gui.getXValues(), gui.getYValues());
 				//M Preventing the method from executing again until the yValues are recalculated.
 				gui.setPointsReady(false);
+				gui.printValues(gui.getXValues(), gui.getYValues());
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
