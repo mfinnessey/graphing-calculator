@@ -42,6 +42,24 @@ public class GUI {
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
+		JFrame integralFrame = new JFrame();
+		JTextField lowerLimit = new JTextField("Enter lower limit here.");
+		JTextField upperLimit = new JTextField("Enter upper limit here.");
+		JButton evaluate = new JButton("Evaluate");
+		integralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		integralFrame.setLocation(0, 250);
+		integralFrame.getContentPane().add(lowerLimit, BorderLayout.WEST);
+		integralFrame.getContentPane().add(upperLimit, BorderLayout.EAST);
+		integralFrame.getContentPane().add(evaluate, BorderLayout.SOUTH);
+		integralFrame.pack();
+		integralFrame.setVisible(true);
+		evaluate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Integral integral = new Integral();
+				double result = integral.findDefiniteIntegral(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
+				System.out.println("Result = " + result);
+			}
+	   	});
 		//M Creating the MathEvaluator with a default equation.
 		MathEvaluator m = new MathEvaluator("x^2");		
 		//M Adding the variable to MathEvaluator with a placeholder value.
@@ -141,7 +159,6 @@ public class GUI {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
 	}
-	
 	private double [] polynomialCalculator(String polynomial, double [] xValues) {
 		//M A method to calculate the values from polynomials.
 		double [] intermediateValues = new double [20001];
