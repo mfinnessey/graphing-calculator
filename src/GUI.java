@@ -29,7 +29,7 @@ public class GUI {
 	public GUI() {
 		//M Creating the various swing components.
 		JFrame frame = new JFrame();
-		JTextField equation = new JTextField("f(x)");
+		JTextField equation = new JTextField("enter function here");
 		JButton calculate = new JButton("Calculate");
 		JButton firstDerivative = new JButton("First Derivative");
 		JButton secondDerivative = new JButton("Second Derivative");
@@ -141,11 +141,46 @@ public class GUI {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
 	}
+	
 	private double [] polynomialCalculator(String polynomial, double [] xValues) {
 		//M A method to calculate the values from polynomials.
 		double [] intermediateValues = new double [20001];
 		
 		return intermediateValues;
+	}
+	
+	private double[] findZeros(String polynomial) {
+		//K returns zeros of the function
+		//K: Problem: if a function touches the x axis but doesn't cross
+		int zeros = 0;
+		for (int i = 0; i < xValues.length; i+=1) {
+			double firstValue = xValues[i];
+			double secondValue = xValues[i+1];
+			if (firstValue < 0 && (secondValue) > 0) {
+				zeros++;
+			}else if (firstValue > 0 && (secondValue) < 0) {
+				zeros++;
+			}else if (firstValue == 0) {
+				zeros++;
+			}
+		}
+		double[] rV = new double[zeros];
+		int index = 0;
+		for (int i = 0; i < xValues.length; i+=1) {
+			double firstValue = xValues[i];
+			double secondValue = xValues[i+1];
+			if (firstValue < 0 && (secondValue) > 0) {
+				rV[index] = i;
+				index++;
+			}else if (firstValue > 0 && (secondValue) < 0) {
+				rV[index] = i;
+				index++;
+			}else if (firstValue == 0) {
+				rV[index] = i;
+				index++;
+			}
+		}
+		return rV;
 	}
 	
 	private double[] getXValues() {
