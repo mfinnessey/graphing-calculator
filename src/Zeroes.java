@@ -1,6 +1,9 @@
 import java.math.BigDecimal;
 import main.java.com.udojava.evalex.Expression;
 
+
+//K: OK so this class is pretty much all outdated now. Goto GUI
+
 public class Zeroes {
 //TODO: create a class to find zeros and other values using IVT
 	/* K: Current idea is to use a for loop and increase i by 0.001 and use IVT to chekc if there's a 0
