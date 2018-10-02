@@ -203,6 +203,13 @@ public class GUI {
 				System.out.println("Local min at: (" + mins[i][0] + "," + mins[i][1] + ")");
 			}
 		}
+		double[][] pois = Zeroes.POI(xValues, yValues);
+		if (mins.length == 0) {
+			System.out.println("No Points of Inflection");
+		}else {
+			for (int i = 0; i < zeros.length; i++) {
+				System.out.println("Point of Inflection at: (" + mins[i][0] + "," + mins[i][1] + ")");
+			}
 	}
 	public static void main(String [] args) {
 		GUI gui = new GUI();
