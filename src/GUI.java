@@ -184,7 +184,7 @@ public class GUI {
 			System.out.println("No Zeroes");
 		}else {
 			for (int i = 0; i < zeros.length; i++) {
-				System.out.println("Zeros: (" + zeros[i][0] + "," + zeros[i][2] + ")");
+				System.out.println("Zero: (" + zeros[i][0] + "," + zeros[i][1] + ")");
 			}
 		}
 	}
