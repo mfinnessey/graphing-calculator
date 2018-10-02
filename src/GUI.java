@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
@@ -43,12 +42,32 @@ public class GUI {
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
+		JFrame integralFrame = new JFrame();
+		JTextField lowerLimit = new JTextField("Enter lower limit here.");
+		JTextField upperLimit = new JTextField("Enter upper limit here.");
+		JButton evaluate = new JButton("Evaluate");
+		integralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		integralFrame.setLocation(0, 250);
+		integralFrame.getContentPane().add(lowerLimit, BorderLayout.WEST);
+		integralFrame.getContentPane().add(upperLimit, BorderLayout.EAST);
+		integralFrame.getContentPane().add(evaluate, BorderLayout.SOUTH);
+		integralFrame.pack();
+		integralFrame.setVisible(true);
+		evaluate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Integral integral = new Integral();
+				double result = integral.findDefiniteIntegral(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
+				System.out.println("Result = " + result);
+			}
+	   	});
 		//M Creating the MathEvaluator with a default equation.
 		MathEvaluator m = new MathEvaluator("x^2");		
 		//M Adding the variable to MathEvaluator with a placeholder value.
 	   	m.addVariable("x", ((2.0)));
 	   	//M Adding the ActionListener for the button.
 	   	calculate.addActionListener(new ActionListener() {
+	   		//M Let's do work on this branch for now, everything seems to be working, just need to add integrals.
+	   		//M Some of the syntax is painful, but it all works on MathEvaluator.
 			public void actionPerformed(ActionEvent e) {
 				//M resetting yIndexTracker.
 				yIndexTracker = 0;
@@ -140,7 +159,6 @@ public class GUI {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
 	}
-	
 	private double [] polynomialCalculator(String polynomial, double [] xValues) {
 		//M A method to calculate the values from polynomials.
 		double [] intermediateValues = new double [20001];
@@ -225,7 +243,12 @@ public class GUI {
 				graph.draw(gui.getXValues(), gui.getYValues());
 				//M Preventing the method from executing again until the yValues are recalculated.
 				gui.setPointsReady(false);
-				gui.printValues(gui.getXValues(), gui.getYValues());
+				/*M This is currently broken with at least trig functions and is crashing the program.
+				 * Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 6
+					at GUI.printValues(GUI.java:213)
+					at GUI.main(GUI.java:238) 
+				 *  gui.printValues(gui.getXValues(), gui.getYValues()); 
+				 */
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
