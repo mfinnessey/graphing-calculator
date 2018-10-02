@@ -187,6 +187,22 @@ public class GUI {
 				System.out.println("Zero: (" + zeros[i][0] + "," + zeros[i][1] + ")");
 			}
 		}
+		double[][] maxes = Zeroes.max(xValues, yValues);
+		if (maxes.length == 0) {
+			System.out.println("No Local Maxes");
+		}else {
+			for (int i = 0; i < zeros.length; i++) {
+				System.out.println("Local max at: (" + maxes[i][0] + "," + maxes[i][1] + ")");
+			}
+		}
+		double[][] mins = Zeroes.min(xValues, yValues);
+		if (mins.length == 0) {
+			System.out.println("No Local Maxes");
+		}else {
+			for (int i = 0; i < zeros.length; i++) {
+				System.out.println("Local min at: (" + mins[i][0] + "," + mins[i][1] + ")");
+			}
+		}
 	}
 	public static void main(String [] args) {
 		GUI gui = new GUI();

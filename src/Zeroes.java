@@ -42,4 +42,89 @@ public class Zeroes {
 		}
 		return rV;
 	}
+	
+	public static double[][] max(double[] xValues, double[] yValues){
+		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
+		int maxes = 0;
+		for (int i = 1; i < xValues.length-1; i++) {
+			double firstValue = derivativeYValues[i-1];
+			double secondValue = derivativeYValues[i+1];
+			if (firstValue > 0 && (secondValue) < 0) {
+				maxes++;
+			}
+		}
+		double[][] rV = new double[maxes][2];
+		//K Creates array with a space for all the zeros
+		int index = 0;
+		for (int i = 1; i < xValues.length-1; i++) {
+			double firstValue = derivativeYValues[i-1];
+			double secondValue = derivativeYValues[i+1];
+			if (firstValue > 0 && (secondValue) < 0) {
+				rV[index][0] = xValues[i];
+				rV[index][1] = yValues[i];
+				index++;
+			}
+		}
+		return rV;
+	}
+	
+	public static double[][] min(double[] xValues, double[] yValues){
+		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
+		int mins = 0;
+		for (int i = 1; i < xValues.length-1; i++) {
+			double firstValue = derivativeYValues[i-1];
+			double secondValue = derivativeYValues[i+1];
+			if (firstValue < 0 && (secondValue) > 0) {
+				mins++;
+			}
+		}
+		double[][] rV = new double[mins][2];
+		//K Creates array with a space for all the zeros
+		int index = 0;
+		for (int i = 1; i < xValues.length-1; i++) {
+			double firstValue = derivativeYValues[i-1];
+			double secondValue = derivativeYValues[i+1];
+			if (firstValue < 0 && (secondValue) > 0) {
+				rV[index][0] = xValues[i];
+				rV[index][1] = yValues[i];
+				index++;
+			}
+		}
+		return rV;
+	}
+
+	public static double[] POI(double[] xValues, double[] yValues){
+		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
+		double[] inflectionYValues = Derivative.findDerivative(xValues, derivativeYValues);
+		int pois = 0;
+		for (int i = 0; i < xValues.length-1; i++) {
+			double firstValue = inflectionYValues[i];
+			double secondValue = inflectionYValues[i+1];
+			if (firstValue < 0 && (secondValue) > 0) {
+				pois++;
+			}else if (firstValue > 0 && (secondValue) < 0) {
+				pois++;
+			}else if (firstValue == 0) {
+				pois++;
+			}
+		}
+		double[] rV = new double[pois];
+		//K Creates array with a space for all the zeros
+		int index = 0;
+		for (int i = 0; i < xValues.length-1; i++) {
+			double firstValue = inflectionYValues[i];
+			double secondValue = inflectionYValues[i+1];
+			if (firstValue < 0 && (secondValue) > 0) {
+				rV[index] = xValues[i];
+				index++;
+			}else if (firstValue > 0 && (secondValue) < 0) {
+				rV[index] = xValues[i];
+				index++;
+			}else if (firstValue == 0) {
+				rV[index] = xValues[i];
+				index++;
+			}
+		}
+		return rV;
+	}
 }
