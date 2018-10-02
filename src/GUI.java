@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import main.java.com.udojava.evalex.Expression;
@@ -46,18 +47,20 @@ public class GUI {
 		JTextField lowerLimit = new JTextField("Enter lower limit here.");
 		JTextField upperLimit = new JTextField("Enter upper limit here.");
 		JButton evaluate = new JButton("Evaluate");
+		JTextArea integralValue = new JTextArea("No Value to Display");
 		integralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		integralFrame.setLocation(0, 250);
 		integralFrame.getContentPane().add(lowerLimit, BorderLayout.WEST);
 		integralFrame.getContentPane().add(upperLimit, BorderLayout.EAST);
-		integralFrame.getContentPane().add(evaluate, BorderLayout.SOUTH);
+		integralFrame.getContentPane().add(evaluate, BorderLayout.CENTER);
+		integralFrame.getContentPane().add(integralValue, BorderLayout.SOUTH);
 		integralFrame.pack();
 		integralFrame.setVisible(true);
 		evaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integral integral = new Integral();
 				double result = integral.findDefiniteIntegral(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
-				System.out.println("Result = " + result);
+				integralValue.setText(String.valueOf(result));
 			}
 	   	});
 		//M Creating the MathEvaluator with a default equation.
