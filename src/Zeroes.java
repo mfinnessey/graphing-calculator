@@ -93,7 +93,7 @@ public class Zeroes {
 		return rV;
 	}
 
-	public static double[] POI(double[] xValues, double[] yValues){
+	public static double[][] POI(double[] xValues, double[] yValues){
 		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
 		double[] inflectionYValues = Derivative.findDerivative(xValues, derivativeYValues);
 		int pois = 0;
@@ -108,20 +108,23 @@ public class Zeroes {
 				pois++;
 			}
 		}
-		double[] rV = new double[pois];
+		double[][] rV = new double[pois][2];
 		//K Creates array with a space for all the zeros
 		int index = 0;
 		for (int i = 0; i < xValues.length-1; i++) {
 			double firstValue = inflectionYValues[i];
 			double secondValue = inflectionYValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
-				rV[index] = xValues[i];
+				rV[index][0] = xValues[i];
+				rV[index][1] = yValues[i];
 				index++;
 			}else if (firstValue > 0 && (secondValue) < 0) {
-				rV[index] = xValues[i];
+				rV[index][0] = xValues[i];
+				rV[index][1] = yValues[i];
 				index++;
 			}else if (firstValue == 0) {
-				rV[index] = xValues[i];
+				rV[index][0] = xValues[i];
+				rV[index][1] = yValues[i];
 				index++;
 			}
 		}
