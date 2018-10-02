@@ -210,6 +210,7 @@ public class GUI {
 			for (int i = 0; i < zeros.length; i++) {
 				System.out.println("Point of Inflection at: (" + mins[i][0] + "," + mins[i][1] + ")");
 			}
+		}
 	}
 	public static void main(String [] args) {
 		GUI gui = new GUI();
