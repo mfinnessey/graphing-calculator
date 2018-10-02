@@ -194,6 +194,7 @@ public class GUI {
 			for (int i = 0; i < zeros.length; i++) {
 				System.out.println("Local max at: (" + maxes[i][0] + "," + maxes[i][1] + ")");
 			}
+			//add a ded zown lol-shoyrya
 		}
 		double[][] mins = Zeroes.min(xValues, yValues);
 		if (mins.length == 0) {
