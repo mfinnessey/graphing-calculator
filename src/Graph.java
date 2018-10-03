@@ -28,6 +28,7 @@ public class Graph {
 		g.clearRect(0, 0, 500, 500);
 		colorTracker = 0;
 	}
+	
 	 public void draw(double [] xValues, double [] yValues) {
 		 //TODO A method to draw the graph.
 	        //Get the Graphics2D object of a JPanel, to draw on
@@ -41,10 +42,12 @@ public class Graph {
         	}
         	//M Changing the colors of lines.
         	g.setColor(Color.decode(colors[colorTracker++]));
-	        for (int i=1; i < xValues.length; i++) {
-	            drawPoint(xValues[i], yValues[i]);  //Your data gets read here
-	        }
+		        for (int i=1; i < xValues.length; i++) {
+		            drawPoint(xValues[i], yValues[i]);  //Your data gets read here
+		        }
 	 }
+	 
+	
 
 	        private void drawPoint(double x, double y) {
 	        	//TODO A method to draw the various lines that make up the graph.
