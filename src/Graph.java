@@ -10,8 +10,10 @@ import javax.swing.JPanel;
 public class Graph {
 	//M Adding a new JPanel on which to hold the things.
 	JPanel graphWindow = new JPanel();
-	private String[] colors = {"#FF0000", "#FFA500", "#008000", "#00FFFF", "#000080",
+	private String [] lineColors = {"#FF0000", "#FFA500", "#008000", "#00FFFF", "#000080",
 			"#FF00FF", "#800080", "#C0C0C0"};
+	private String [] pointColors = {"#67D4C4", "#0099BF", "#FFC0CB", "#7E4A28", "#E9967A",
+			"#5654F7", "#CF161E", "#220E01"};
 	private int colorTracker = 0;
 	public Graph() {
 		JFrame frame = new JFrame();
@@ -41,10 +43,16 @@ public class Graph {
         		colorTracker = 0;
         	}
         	//M Changing the colors of lines.
-        	g.setColor(Color.decode(colors[colorTracker++]));
+        	g.setColor(Color.decode(lineColors[colorTracker++]));
 		        for (int i=1; i < xValues.length; i++) {
 		            drawPoint(xValues[i], yValues[i]);  //Your data gets read here
 		        }
+	 }
+	 
+	 public void draw(double x, double y) {
+		 g = (Graphics2D) graphWindow.getGraphics();
+		 g.setColor(Color.decode(pointColors[colorTracker]));
+		 g.fillOval((int) ((25 * x) + 247), (int) ((25 * -y) + 247), 6, 6);
 	 }
 	 
 	

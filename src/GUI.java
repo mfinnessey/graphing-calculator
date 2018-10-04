@@ -232,6 +232,7 @@ public class GUI {
 		Graph graph = new Graph();
 		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.
 		while(true) {
+			graph.draw(0, 0);
 			//M If the points are ready, then they are graphed.
 			if(gui.getPointsReady() == true) {
 				//M Sending the points to be graphed.
