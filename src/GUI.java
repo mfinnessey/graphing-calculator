@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
@@ -23,6 +24,9 @@ public class GUI {
 	//M We're trying this. IDK if it works. YOLO.
 	private double [] xValues = new double[20001];
 	private double [] yValues = new double [20001];
+	private double [][] maxes;
+	private double [][] mins;
+	private double [][] pois;
 	private boolean pointsReady = false;
 	private boolean clearDesired = false;
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
@@ -186,6 +190,30 @@ public class GUI {
 		//M A method to get clearDesired.
 		return clearDesired;
 	}
+	private int getMaxesLength() {
+		//M A method to get the length of maxes.
+		return maxes.length;
+	}
+	private int getMinsLength() {
+		//M A method to get the length of mins.
+		return mins.length;
+	}
+	private int getPoisLength() {
+		//M A method to get the length of pois.
+		return pois.length;
+	}
+	private double [][] getMaxes(){
+		//M A method to get maxes.
+		return maxes;
+	}
+	private double [][] getMins(){
+		//M A method to get mins.
+		return mins;
+	}
+	private double [][] getPois(){
+		//M A method to get pois.
+		return pois;
+	}
 	private void setPointsReady(boolean status) {
 		//M A method to set pointsReady.
 		pointsReady = status;
@@ -193,6 +221,11 @@ public class GUI {
 	private void setClearDesired(boolean status) {
 		//M A method to set clearDesired.
 		clearDesired = status;
+	}
+	private void findKeyPoints(double [] xValues, double [] yValues) {
+		maxes = Zeroes.max(xValues, yValues);
+		mins = Zeroes.min(xValues, yValues);
+		pois = Zeroes.POI(xValues, yValues);
 	}
 	private void printValues(double [] xValues, double [] yValues) {
 		//M A method to print (x,y) pairs. Used for debugging.
@@ -232,12 +265,22 @@ public class GUI {
 		Graph graph = new Graph();
 		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.
 		while(true) {
-			graph.draw(0, 0);
 			//M If the points are ready, then they are graphed.
 			if(gui.getPointsReady() == true) {
+				//M Calculating the key points, hopefully this leaves enough time.
+				gui.findKeyPoints(gui.getXValues(), gui.getYValues());
 				//M Sending the points to be graphed.
 				graph.draw(gui.getXValues(), gui.getYValues());
 				//M Preventing the method from executing again until the yValues are recalculated.
+				for(int i = 0; i < gui.getMaxesLength(); i++ ) {
+					graph.draw(gui.getMaxes()[i][0], gui.getMaxes()[i][1]);
+				}
+				for(int j = 0; j < gui.getMinsLength(); j++ ) {
+					graph.draw(gui.getMins()[j][0], gui.getMins()[j][1]);
+				}
+				for(int k = 0; k < gui.getPoisLength(); k++ ) {
+					graph.draw(gui.getPois()[k][0], gui.getPois()[k][1]);
+				}
 				gui.setPointsReady(false);
 				/*M This is currently broken with at least trig functions and is crashing the program.
 				 * Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 6
