@@ -130,4 +130,10 @@ public class Zeroes {
 		}
 		return rV;
 	}
+	
+	public static boolean lineCheck(double[] xValues, double[] yValues) {
+		//K Checks if a function is linear
+		//K IF the function is linear, then maxes/mins and pois won't be shown
+		
+	}
 }
