@@ -249,13 +249,13 @@ public class GUI {
 				//M Preventing the method from executing again until the yValues are recalculated.
 				if(Zeroes.lineCheck(gui.getXValues(), gui.getYValues()) == false) {
 					for(int i = 0; i < gui.getMaxesLength(); i++ ) {
-						graph.draw(gui.getMaxes()[i][0], gui.getMaxes()[i][1]);
+						graph.draw(gui.getMaxes()[i][0], gui.getMaxes()[i][1], "#67D4C4");
 					}
 					for(int j = 0; j < gui.getMinsLength(); j++ ) {
-						graph.draw(gui.getMins()[j][0], gui.getMins()[j][1]);
+						graph.draw(gui.getMins()[j][0], gui.getMins()[j][1], "#FFC0CB");
 					}
 					for(int k = 0; k < gui.getPoisLength(); k++ ) {
-						graph.draw(gui.getPois()[k][0], gui.getPois()[k][1]);
+						graph.draw(gui.getPois()[k][0], gui.getPois()[k][1], "#E9967A");
 					}
 				}
 				gui.setPointsReady(false);
