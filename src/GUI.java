@@ -229,6 +229,7 @@ public class GUI {
 	}
 	private void printValues(double [] xValues, double [] yValues) {
 		//M A method to print (x,y) pairs. Used for debugging.
+		double keyYValue = -7.62;
 		for(int i = 0; i < xValues.length; i++) {
 			System.out.println("( " + xValues[i] + " , " + yValues[i]+ " )");
 		}

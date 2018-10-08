@@ -43,6 +43,12 @@ public class Zeroes {
 		return rV;
 	}
 	
+	public static double[][] hole(double [] xValues, double [] yValues){
+		//M Need to make procedural. Can be added later.
+		double [][] holes = new double [2][10];
+		
+		return holes;
+	}
 	public static double[][] max(double[] xValues, double[] yValues){
 		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
 		int maxes = 0;
@@ -136,7 +142,6 @@ public class Zeroes {
 		//K IF the function is linear, then maxes/mins and pois won't be shown
 		double slope1 = (yValues[1] - yValues[0])/(xValues[1] - xValues[0]);
 		double slope2;
-		//M Current issue is that values may be slightly off, looking into lightweight rounding.
 		for(int i = 2; i <= xValues.length - 1; i++) {
 			slope2 = (yValues[i] - yValues[i-1])/(xValues[i] - xValues[i-1]);
 			if((slope2 != slope1) && (Math.abs(slope2 - slope1) > 0.0000001)) {
