@@ -232,40 +232,6 @@ public class GUI {
 		for(int i = 0; i < xValues.length; i++) {
 			System.out.println("( " + xValues[i] + " , " + yValues[i]+ " )");
 		}
-		//K A method to print zero pairs. Used for debugging?
-		double[][] zeros = Zeroes.findZeros(xValues, yValues);
-		if (zeros.length == 0) {
-			System.out.println("No Zeroes");
-		}else {
-			for (int i = 0; i < zeros.length; i++) {
-				System.out.println("Zero: (" + zeros[i][0] + "," + zeros[i][1] + ")");
-			}
-		}
-		double[][] maxes = Zeroes.max(xValues, yValues);
-		if (maxes.length == 0) {
-			System.out.println("No Local Maxes");
-		}else {
-			for (int i = 0; i < zeros.length; i++) {
-				System.out.println("Local max at: (" + maxes[i][0] + "," + maxes[i][1] + ")");
-			}
-			//add a ded zown lol-shoyrya
-		}
-		double[][] mins = Zeroes.min(xValues, yValues);
-		if (mins.length == 0) {
-			System.out.println("No Local Maxes");
-		}else {
-			for (int i = 0; i < zeros.length; i++) {
-				System.out.println("Local min at: (" + mins[i][0] + "," + mins[i][1] + ")");
-			}
-		}
-		double[][] pois = Zeroes.POI(xValues, yValues);
-		if (mins.length == 0) {
-			System.out.println("No Points of Inflection");
-		}else {
-			for (int i = 0; i < zeros.length; i++) {
-				System.out.println("Point of Inflection at: (" + mins[i][0] + "," + mins[i][1] + ")");
-			}
-		}
 	}
 	public static void main(String [] args) {
 		GUI gui = new GUI();
@@ -281,14 +247,16 @@ public class GUI {
 				//M Sending the points to be graphed.
 				graph.draw(gui.getXValues(), gui.getYValues());
 				//M Preventing the method from executing again until the yValues are recalculated.
-				for(int i = 0; i < gui.getMaxesLength(); i++ ) {
-					graph.draw(gui.getMaxes()[i][0], gui.getMaxes()[i][1]);
-				}
-				for(int j = 0; j < gui.getMinsLength(); j++ ) {
-					graph.draw(gui.getMins()[j][0], gui.getMins()[j][1]);
-				}
-				for(int k = 0; k < gui.getPoisLength(); k++ ) {
-					graph.draw(gui.getPois()[k][0], gui.getPois()[k][1]);
+				if(Zeroes.lineCheck(gui.getXValues(), gui.getYValues()) == false) {
+					for(int i = 0; i < gui.getMaxesLength(); i++ ) {
+						graph.draw(gui.getMaxes()[i][0], gui.getMaxes()[i][1]);
+					}
+					for(int j = 0; j < gui.getMinsLength(); j++ ) {
+						graph.draw(gui.getMins()[j][0], gui.getMins()[j][1]);
+					}
+					for(int k = 0; k < gui.getPoisLength(); k++ ) {
+						graph.draw(gui.getPois()[k][0], gui.getPois()[k][1]);
+					}
 				}
 				gui.setPointsReady(false);
 				/*M This is currently broken with at least trig functions and is crashing the program.
