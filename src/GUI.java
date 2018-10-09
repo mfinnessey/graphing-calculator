@@ -50,7 +50,7 @@ public class GUI {
 		JFrame integralFrame = new JFrame();
 		JTextField lowerLimit = new JTextField("Enter lower limit here.");
 		JTextField upperLimit = new JTextField("Enter upper limit here.");
-		JButton evaluate = new JButton("Evaluate");
+		JButton evaluate = new JButton("Evaluate Integral");
 		JTextArea integralValue = new JTextArea("No Value to Display");
 		integralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		integralFrame.setLocation(0, 250);
