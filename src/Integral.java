@@ -1,5 +1,5 @@
 public class Integral {
-	public double findDefiniteIntegral(double lowerLimit, double upperLimit, double [] xValues, double [] yValues) {
+	public String findDefiniteIntegral(double lowerLimit, double upperLimit, double [] xValues, double [] yValues) {
 		//M Variable to store the value of the integral.
 		double integralValue = 0.0;
 		//M Variable to store the step value.
@@ -30,15 +30,20 @@ public class Integral {
 			endIndex = temp;
 		}
 		for(int k = beginIndex; k <= endIndex; k++) {
-			integralValue += (STEP_VALUE * yValues[k]);
+			if(Double.isNaN(yValues[k]) || Double.isInfinite(yValues[k])) {
+				return "Not possible";
+			}
+		}
+		for(int l = beginIndex; l <= endIndex; l++) {
+			integralValue += (STEP_VALUE * yValues[l]);
 		}
 		
 		if(inverted == false) {
-		return integralValue;
+		return String.valueOf(integralValue);
 		}
 		else {
 			//M If the limits of integration are inverted, then the opposite of the uninverted value is returned.
-			return (-1 * integralValue);
+			return String.valueOf(-1 * integralValue);
 		}
 	}
 }

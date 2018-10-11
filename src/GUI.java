@@ -60,11 +60,12 @@ public class GUI {
 		integralFrame.getContentPane().add(integralValue, BorderLayout.SOUTH);
 		integralFrame.pack();
 		integralFrame.setVisible(true);
+		
 		evaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integral integral = new Integral();
-				double result = integral.findDefiniteIntegral(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
-				integralValue.setText(String.valueOf(result));
+				String result = integral.findDefiniteIntegral(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
+				integralValue.setText(result);
 			}
 	   	});
 		//M Creating the MathEvaluator with a default equation.
