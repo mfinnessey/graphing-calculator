@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
@@ -50,7 +49,7 @@ public class GUI {
 		JFrame integralFrame = new JFrame();
 		JTextField lowerLimit = new JTextField("Enter lower limit here.");
 		JTextField upperLimit = new JTextField("Enter upper limit here.");
-		JButton evaluate = new JButton("Evaluate");
+		JButton evaluate = new JButton("Evaluate Integral");
 		JTextArea integralValue = new JTextArea("No Value to Display");
 		integralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		integralFrame.setLocation(0, 250);
@@ -166,12 +165,6 @@ public class GUI {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
 	}
-	private double [] polynomialCalculator(String polynomial, double [] xValues) {
-		//M A method to calculate the values from polynomials.
-		double [] intermediateValues = new double [20001];
-		
-		return intermediateValues;
-	}
 	
 	private double[] getXValues() {
 		//M A method to get the xValues.
@@ -259,12 +252,6 @@ public class GUI {
 					}
 				}
 				gui.setPointsReady(false);
-				/*M This is currently broken with at least trig functions and is crashing the program.
-				 * Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 6
-					at GUI.printValues(GUI.java:213)
-					at GUI.main(GUI.java:238) 
-				 *  gui.printValues(gui.getXValues(), gui.getYValues()); 
-				 */
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
