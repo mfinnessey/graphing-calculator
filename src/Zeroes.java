@@ -56,7 +56,7 @@ public class Zeroes {
 		for(int j = 0; j < xValues.length; j++) {
 			if(Double.isNaN(yValues[j])) {
 				holes[indexTracker][0] = xValues[j];
-				holes[indexTracker][1] = yValues[j];
+				holes[indexTracker][1] = (yValues[j+1] + yValues[j-1])/2;
 			}
 		}
 		return holes;
