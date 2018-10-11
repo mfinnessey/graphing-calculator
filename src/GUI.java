@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
@@ -166,12 +165,6 @@ public class GUI {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
 	}
-	private double [] polynomialCalculator(String polynomial, double [] xValues) {
-		//M A method to calculate the values from polynomials.
-		double [] intermediateValues = new double [20001];
-		
-		return intermediateValues;
-	}
 	
 	private double[] getXValues() {
 		//M A method to get the xValues.
@@ -229,7 +222,6 @@ public class GUI {
 	}
 	private void printValues(double [] xValues, double [] yValues) {
 		//M A method to print (x,y) pairs. Used for debugging.
-		double keyYValue = -7.62;
 		for(int i = 0; i < xValues.length; i++) {
 			System.out.println("( " + xValues[i] + " , " + yValues[i]+ " )");
 		}
@@ -260,12 +252,6 @@ public class GUI {
 					}
 				}
 				gui.setPointsReady(false);
-				/*M This is currently broken with at least trig functions and is crashing the program.
-				 * Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 6
-					at GUI.printValues(GUI.java:213)
-					at GUI.main(GUI.java:238) 
-				 *  gui.printValues(gui.getXValues(), gui.getYValues()); 
-				 */
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
