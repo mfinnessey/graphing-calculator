@@ -45,8 +45,20 @@ public class Zeroes {
 	
 	public static double[][] hole(double [] xValues, double [] yValues){
 		//M Need to make procedural. Can be added later.
-		double [][] holes = new double [2][10];
-		
+		int numberOfHoles = 0;
+		int indexTracker = 0;
+		for(int i = 0; i < xValues.length; i++) {
+			if(Double.isNaN(yValues[i])) {
+				numberOfHoles++;
+			}
+		}
+		double [][] holes = new double [numberOfHoles][2];
+		for(int j = 0; j < xValues.length; j++) {
+			if(Double.isNaN(yValues[j])) {
+				holes[indexTracker][0] = xValues[j];
+				holes[indexTracker][1] = yValues[j];
+			}
+		}
 		return holes;
 	}
 	public static double[][] max(double[] xValues, double[] yValues){
@@ -144,7 +156,6 @@ public class Zeroes {
 		double slope2;
 		for(int i = 4; i <= xValues.length - 3; i++) {
 			slope2 = (yValues[i] - yValues[i-1])/(xValues[i] - xValues[i-1]);
-			System.out.println(Math.abs(slope2-slope1));
 			if((slope2 != slope1) && (Math.abs(slope2 - slope1) > 0.001)) {
 				return false;
 			}
