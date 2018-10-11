@@ -29,6 +29,7 @@ public class GUI {
 	private double [][] holes;
 	private boolean pointsReady = false;
 	private boolean clearDesired = false;
+	private double ftcValue;
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	
 	public GUI() {
