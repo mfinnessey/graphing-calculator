@@ -26,6 +26,7 @@ public class GUI {
 	private double [][] maxes;
 	private double [][] mins;
 	private double [][] pois;
+	private double [][] holes;
 	private boolean pointsReady = false;
 	private boolean clearDesired = false;
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
@@ -195,6 +196,10 @@ public class GUI {
 		//M A method to get the length of pois.
 		return pois.length;
 	}
+	private int getHolesLength() {
+		//M A method to get the length of holes.
+		return holes.length;
+	}
 	private double [][] getMaxes(){
 		//M A method to get maxes.
 		return maxes;
@@ -206,6 +211,10 @@ public class GUI {
 	private double [][] getPois(){
 		//M A method to get pois.
 		return pois;
+	}
+	private double [][] getHoles(){
+		//M a method to get holes.
+		return holes;
 	}
 	private void setPointsReady(boolean status) {
 		//M A method to set pointsReady.
@@ -219,11 +228,20 @@ public class GUI {
 		maxes = Zeroes.max(xValues, yValues);
 		mins = Zeroes.min(xValues, yValues);
 		pois = Zeroes.POI(xValues, yValues);
+		holes = Zeroes.hole(xValues, yValues);
 	}
 	private void printValues(double [] xValues, double [] yValues) {
 		//M A method to print (x,y) pairs. Used for debugging.
 		for(int i = 0; i < xValues.length; i++) {
 			System.out.println("( " + xValues[i] + " , " + yValues[i]+ " )");
+		}
+	}
+	private void printKeyPoint(double [] xValues, double [] yValues, double keyValue) {
+		//TODO A method to print a key point.
+		for(int i = 0; i < xValues.length; i++) {
+			if(xValues[i] == keyValue) {
+				System.out.println("( " + xValues[i] + " , " + yValues[i] + " )");
+			}
 		}
 	}
 	public static void main(String [] args) {
@@ -237,6 +255,9 @@ public class GUI {
 			if(gui.getPointsReady() == true) {
 				//M Calculating the key points, hopefully this leaves enough time.
 				gui.findKeyPoints(gui.getXValues(), gui.getYValues());
+				for(int i = 0; i < gui.getHolesLength(); i++) {
+					graph.draw(gui.getHoles()[i][0], gui.getHoles()[i][1], "#F44F0D");
+				}
 				//M Sending the points to be graphed.
 				graph.draw(gui.getXValues(), gui.getYValues());
 				//M Preventing the method from executing again until the yValues are recalculated.
