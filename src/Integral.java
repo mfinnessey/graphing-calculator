@@ -46,4 +46,22 @@ public class Integral {
 			return String.valueOf(-1 * integralValue);
 		}
 	}
+	public String FTC(double lowerLimit, double upperLimit, double [] xValues, double [] yValues) {
+		//M This is high-key broken right now. 
+		//M We should check in with Mr. Duran when he comes in next, but for now I"m going to assume
+		//M that the constant of integration should be 0.
+		double upperValue = 0;
+		double lowerValue = 0;
+		for(int i = 0; i <= xValues.length - 1; i++) {
+			if(xValues[i] == lowerLimit) {
+				lowerValue = yValues[i];
+			}
+		}
+		for(int j = 0; j <= xValues.length - 1; j++) {
+			if(xValues[j] == upperLimit) {
+				upperValue = yValues[j];
+			}
+		}
+		return Double.toString(upperValue-lowerValue);
+	}
 }

@@ -29,7 +29,6 @@ public class GUI {
 	private double [][] holes;
 	private boolean pointsReady = false;
 	private boolean clearDesired = false;
-	private double ftcValue;
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	
 	public GUI() {
@@ -66,7 +65,11 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				Integral integral = new Integral();
 				String result = integral.findDefiniteIntegral(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
+				String FTC = integral.FTC(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
 				integralValue.setText(result);
+				//M This is broken for now. I don't get how we're supposed to show the FTC when we don't know
+				//M The constant of integration.
+				//integralValue.setText(result + " = " + FTC);
 			}
 	   	});
 		//M Creating the MathEvaluator with a default equation.
@@ -266,12 +269,17 @@ public class GUI {
 				if(Zeroes.lineCheck(gui.getXValues(), gui.getYValues()) == false) {
 					for(int i = 0; i < gui.getMaxesLength(); i++ ) {
 						graph.draw(gui.getMaxes()[i][0], gui.getMaxes()[i][1], "#67D4C4");
+						System.out.println("Drawing max ( " + gui.getMaxes()[i][0] + " , " + gui.getMaxes()[i][1] + " )");
 					}
 					for(int j = 0; j < gui.getMinsLength(); j++ ) {
 						graph.draw(gui.getMins()[j][0], gui.getMins()[j][1], "#FFC0CB");
+						System.out.println("Drawing min ( " + gui.getMins()[j][0] + " , " + gui.getMins()[j][1] + " )");
 					}
 					for(int k = 0; k < gui.getPoisLength(); k++ ) {
+						//M This is drawing erroneous POIs at x = -10 in particular on some rational functions.
+						//M Unfortunately, simply disabling them isn't an option unlike with lines.
 						graph.draw(gui.getPois()[k][0], gui.getPois()[k][1], "#E9967A");
+						System.out.println("Drawing POI ( " + gui.getPois()[k][0] + " , " + gui.getPois()[k][1] + " )");
 					}
 				}
 				gui.setPointsReady(false);
