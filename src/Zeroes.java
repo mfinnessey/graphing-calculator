@@ -141,6 +141,7 @@ public class Zeroes {
 				rV[index][1] = yValues[i];
 				index++;
 			}else if (firstValue == 0) {
+				//M This might be where the issue is with rational functions. I'll do more work on this on Monday.
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;

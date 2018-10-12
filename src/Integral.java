@@ -50,6 +50,8 @@ public class Integral {
 		//M This is high-key broken right now. 
 		//M We should check in with Mr. Duran when he comes in next, but for now I"m going to assume
 		//M that the constant of integration should be 0.
+		//M Fundamentally, the issue is that without f(x) being given, any values calculated are just
+		//M more integrals.
 		double upperValue = 0;
 		double lowerValue = 0;
 		for(int i = 0; i <= xValues.length - 1; i++) {
