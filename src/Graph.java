@@ -27,32 +27,13 @@ public class Graph {
 		//M A method to clear the graph.
 		g.clearRect(0, 0, 500, 500);
 		colorTracker = 0;
+		Graph graph = new Graph();
 	}
 	
 	 public void draw(double [] xValues, double [] yValues) {
 		 //TODO A method to draw the graph.
 	        //Get the Graphics2D object of a JPanel, to draw on
 	        g = (Graphics2D) graphWindow.getGraphics();
-	        //K draws some coordinate lines
-	        for (int i = 0; i < 500; i+=25) {
-	        	g.setColor(Color.lightGray);
-	        	g.drawLine(0, i, 500, i); // X coords
-	        	g.drawLine(i, 500, i, 0); // Y coords
-	        }
-	        //Draw some axes
-	        g.setColor(Color.BLACK);
-	        g.drawLine(250, 500, 250, 0); // The Y axis
-	        g.drawLine(0, 250, 500, 250);  //The X axis
-	        //K Writes coordinate numberline
-	        g.setColor(Color.GRAY);
-	        for(int i = -10; i <=10; i++) {
-	        	g.drawString(Integer.toString(i), 25*(i+10), 250); // X coords
-	        	g.drawString(Integer.toString(i), 250, 500-25*(i+10)); // Y coords
-	        }
-	        
-	        //K I added some aesthetics but now the graph is kinda messed up because the
-	        //K axes keep on going over the lines when I do more than one line in a graph
-	        //K Other than that it works great
 	        
 	        
         	//M Reusing the colors as necessary.
@@ -64,6 +45,29 @@ public class Graph {
 		        for (int i=1; i < xValues.length; i++) {
 		            drawPoint(xValues[i], yValues[i]);  //Your data gets read here
 		        }
+	 }
+	 public void draw() {
+		 g = (Graphics2D) graphWindow.getGraphics();
+		//K draws some coordinate lines
+	    for (int i = 0; i < 500; i+=25) {
+	    	g.setColor(Color.lightGray);
+	        g.drawLine(0, i, 500, i); // X coords
+	        g.drawLine(i, 500, i, 0); // Y coords
+	    }
+	        //Draw some axes
+	    g.setColor(Color.BLACK);
+	    g.drawLine(250, 500, 250, 0); // The Y axis
+	    g.drawLine(0, 250, 500, 250);  //The X axis
+	    //K Writes coordinate numberline
+	    g.setColor(Color.GRAY);
+	    for(int i = -10; i <=10; i++) {
+	    	g.drawString(Integer.toString(i), 25*(i+10), 250); // X coords
+	    	g.drawString(Integer.toString(i), 250, 500-25*(i+10)); // Y coords
+	    }
+	        
+	        //K I added some aesthetics but now the graph is kinda messed up because the
+	        //K axes keep on going over the lines when I do more than one line in a graph
+	        //K Other than that it works great
 	 }
 	 
 	 public void draw(double x, double y, String color) {

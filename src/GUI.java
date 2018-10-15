@@ -283,6 +283,7 @@ public class GUI {
 		while(true) {
 			//M If the points are ready, then they are graphed.
 			if(gui.getPointsReady() == true) {
+				graph.draw();
 				//M Calculating the key points, hopefully this leaves enough time.
 				gui.findKeyPoints(gui.getXValues(), gui.getYValues());
 				for(int i = 0; i < gui.getHolesLength(); i++) {
