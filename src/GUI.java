@@ -309,6 +309,7 @@ public class GUI {
 					}
 				}
 				gui.setPointsReady(false);
+				System.out.println(gui.getXValues()[20000]);
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
