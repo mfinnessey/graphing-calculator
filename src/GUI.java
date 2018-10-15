@@ -60,6 +60,31 @@ public class GUI {
 		integralFrame.getContentPane().add(integralValue, BorderLayout.SOUTH);
 		integralFrame.pack();
 		integralFrame.setVisible(true);
+		JFrame trapezoidalIntegralFrame = new JFrame();
+		JTextField trapezoidalLowerLimit = new JTextField("Enter lower limit here.");
+		JTextField trapezoidalUpperLimit = new JTextField("Enter upper limit here.");
+		JButton trapezoidalEvaluate = new JButton("Evaluate Trapezoidal Integral");
+		JTextArea trapezoidalIntegralValue = new JTextArea("No Value to Display");
+		trapezoidalIntegralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		trapezoidalIntegralFrame.setLocation(0, 450);
+		trapezoidalIntegralFrame.getContentPane().add(trapezoidalLowerLimit, BorderLayout.WEST);
+		trapezoidalIntegralFrame.getContentPane().add(trapezoidalUpperLimit, BorderLayout.EAST);
+		trapezoidalIntegralFrame.getContentPane().add(trapezoidalEvaluate, BorderLayout.CENTER);
+		trapezoidalIntegralFrame.getContentPane().add(trapezoidalIntegralValue, BorderLayout.SOUTH);
+		trapezoidalIntegralFrame.pack();
+		trapezoidalIntegralFrame.setVisible(true);
+		
+		trapezoidalEvaluate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Integral integral = new Integral();
+				String result = integral.findDefiniteIntegralTrapezoid(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
+				String FTC = integral.FTC(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
+				trapezoidalIntegralValue.setText(result);
+				//M This is broken for now. I don't get how we're supposed to show the FTC when we don't know
+				//M The constant of integration.
+				//integralValue.setText(result + " = " + FTC);
+			}
+	   	});
 		
 		evaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
