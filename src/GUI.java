@@ -77,12 +77,8 @@ public class GUI {
 		trapezoidalEvaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integral integral = new Integral();
-				String result = integral.findDefiniteIntegralTrapezoid(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
-				String FTC = integral.FTC(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
+				String result = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, yValues);
 				trapezoidalIntegralValue.setText(result);
-				//M This is broken for now. I don't get how we're supposed to show the FTC when we don't know
-				//M The constant of integration.
-				//integralValue.setText(result + " = " + FTC);
 			}
 	   	});
 		
