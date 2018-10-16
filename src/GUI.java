@@ -110,6 +110,7 @@ public class GUI {
 					System.out.println(ex.getExpression());
 					if (m.getValue() == null) {
 						System.out.println("Syntax error");
+						return;
 					}
 					else{
 						for(int i = 0; i <= (xValues.length - 1); i++) {
@@ -122,6 +123,7 @@ public class GUI {
 					m.setExpression(equation.getText());
 					if (m.getValue() == null) {
 						System.out.println("Syntax error");
+						return;
 					}
 					else{
 						for(int i = 0; i <= (xValues.length - 1); i++) {
@@ -143,6 +145,7 @@ public class GUI {
 					System.out.println(ex.getExpression());
 					if (ex.eval() == null) {
 						System.out.println("Syntax error");
+						return;
 					}
 					else{
 						for(int i = 0; i <= (xValues.length - 1); i++) {
@@ -155,6 +158,7 @@ public class GUI {
 					m.setExpression(equation.getText());
 					if (m.getValue() == null) {
 						System.out.println("Syntax error");
+						return;
 					}
 					else{
 						for(int i = 0; i <= (xValues.length - 1); i++) {
@@ -179,6 +183,7 @@ public class GUI {
 					System.out.println(ex.getExpression());
 					if (ex.eval() == null) {
 						System.out.println("Syntax error");
+						return;
 					}
 					else{
 						for(int i = 0; i <= (xValues.length - 1); i++) {
@@ -191,6 +196,7 @@ public class GUI {
 					m.setExpression(equation.getText());
 					if (m.getValue() == null) {
 						System.out.println("Syntax error");
+						return;
 					}
 					else{
 						for(int i = 0; i <= (xValues.length - 1); i++) {
@@ -338,6 +344,7 @@ public class GUI {
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
+				// System.out.flush();
 				gui.setClearDesired(false);
 			}
 			//M This seems to do something for synchronization, so I'm just going to leave it for now.
