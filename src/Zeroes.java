@@ -115,7 +115,7 @@ public class Zeroes {
 		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
 		double[] inflectionYValues = Derivative.findDerivative(xValues, derivativeYValues);
 		int pois = 0;
-		for (int i = 0; i < xValues.length-1; i++) {
+		for (int i = 1; i < xValues.length-2; i++) {
 			double firstValue = inflectionYValues[i];
 			double secondValue = inflectionYValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
@@ -129,7 +129,7 @@ public class Zeroes {
 		double[][] rV = new double[pois][2];
 		//K Creates array with a space for all the zeros
 		int index = 0;
-		for (int i = 0; i < xValues.length-1; i++) {
+		for (int i = 1; i < xValues.length-2; i++) {
 			double firstValue = inflectionYValues[i];
 			double secondValue = inflectionYValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
