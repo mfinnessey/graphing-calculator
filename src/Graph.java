@@ -26,6 +26,14 @@ public class Graph {
 	private double [] yValues7 = new double [20001];
 	private double [] xValues8 = new double[20001];
 	private double [] yValues8 = new double [20001];
+	private double [][] keyPoints1 = new double [2][50];
+	private double [][] keyPoints2 = new double [2][50];
+	private double [][] keyPoints3 = new double [2][50];
+	private double [][] keyPoints4 = new double [2][50];
+	private double [][] keyPoints5 = new double [2][50];
+	private double [][] keyPoints6 = new double [2][50];
+	private double [][] keyPoints7 = new double [2][50];
+	private double [][] keyPoints8 = new double [2][50];
 	static private int arrayTracker = 1;
 	private String [] lineColors = {"#FF0000", "#FFA500", "#008000", "#00FFFF", "#000080",
 			"#FF00FF", "#800080", "#C0C0C0"};
@@ -41,7 +49,7 @@ public class Graph {
 		frame.setLocation(500, 0);
 		frame.setVisible(true);
 	}
-	private void storePoints(double [] xValues, double [] yValues) {
+	public void storePoints(double [] xValues, double [] yValues) {
 		switch(arrayTracker++) {
 			case 1: 
 				xValues1 = xValues;
@@ -80,6 +88,45 @@ public class Graph {
 				System.exit(0);
 		}
 	}
+	/* public void storeKeyPoints(double[][] ) {
+		switch(arrayTracker++) {
+			case 1: 
+				xValues1 = xValues;
+				yValues1 = yValues;
+				break;
+			case 2: 
+				xValues2 = xValues;
+				yValues2 = yValues;
+				break;
+			case 3: 
+				xValues3 = xValues;
+				yValues3 = yValues;
+				break;
+			case 4: 
+				xValues4 = xValues;
+				yValues4 = yValues;
+				break;
+			case 5: 
+				xValues5 = xValues;
+				yValues5 = yValues;
+				break;
+			case 6: 
+				xValues6 = xValues;
+				yValues6 = yValues;
+				break;
+			case 7: 
+				xValues7 = xValues;
+				yValues7 = yValues;
+				break;
+			case 8: 
+				xValues8 = xValues;
+				yValues8 = yValues;
+				break;
+			default: 
+				System.out.println("Error");
+				System.exit(0);
+		}
+	} */
 	public void clear() {
 		//M A method to clear the graph.
 		g.clearRect(0, 0, 500, 500);

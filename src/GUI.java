@@ -306,6 +306,55 @@ public class GUI {
 			}
 		}
 	}
+	private double [][] unifyKeyPoints(double [][] mins, double [][] maxes, double [][] pois, double [][] holes){
+		//M A method to create a unified array of keyPoints.
+		int length = (mins.length + maxes.length + pois.length + holes.length);
+		int indexTracker = 0;
+		double [][] keyPoints = new double[length + 5][2];
+		for(int i = 0; i < mins.length; i++) {
+			for(int j = 0; j < 2; j++) {
+				keyPoints[i][j] = mins[i][j];
+			}
+			indexTracker += i + 1;
+		}
+		//M CHANGE IF GIVING USER POWER TO SET WINDOW
+		System.out.println(indexTracker);
+		System.out.println(indexTracker);
+		keyPoints[indexTracker++][0] = -15;
+		for(int i = 0; i < maxes.length; i++) {
+			for(int j = 0; j < 2; j++) {
+				keyPoints[i][j] = maxes[i][j];
+			}
+			indexTracker += i + 1;
+		}
+		//M CHANGE IF GIVING USER POWER TO SET WINDOW
+		System.out.println(indexTracker);
+		keyPoints[indexTracker++][0] = -15;
+		for(int i = 0; i < pois.length; i++) {
+			for(int j = 0; j < 2; j++) {
+				keyPoints[i][j] = pois[i][j];
+			}
+			indexTracker += i + 1;
+		}
+		//M CHANGE IF GIVING USER POWER TO SET WINDOW
+		keyPoints[indexTracker++][0] = -15;
+		for(int i = 0; i < holes.length; i++) {
+			for(int j = 0; j < 2; j++) {
+				keyPoints[i][j] = holes[i][j];
+			}
+			indexTracker += i + 1;
+		}
+		//M CHANGE IF GIVING USER POWER TO SET WINDOW
+		System.out.println(indexTracker);
+		keyPoints[indexTracker++][0] = -15;
+		System.out.println();
+		System.out.println("UNIFY KEY POINTS TEST DATA");
+		System.out.println();
+		for(int i = 0; i < keyPoints.length; i++) {
+			System.out.println("( " + keyPoints[i][0] + " , " + keyPoints[i][1] + " )" );
+		}
+		return keyPoints;
+	}
 	public static void main(String [] args) {
 		GUI gui = new GUI();
 		//M Filling xValues with consecutive x-values.
@@ -340,6 +389,7 @@ public class GUI {
 						System.out.println("Drawing POI ( " + gui.getPois()[k][0] + " , " + gui.getPois()[k][1] + " )");
 					}
 				}
+				gui.unifyKeyPoints(gui.getMins(), gui.getMaxes(), gui.getPois(), gui.getHoles());
 				gui.setPointsReady(false);
 				// System.out.println(gui.getXValues()[20000]);
 			}
