@@ -109,7 +109,7 @@ public class GUI {
 					Expression ex = new Expression(equation.getText().substring(4));
 					System.out.println(ex.getExpression());
 					if (m.getValue() == null) {
-						System.out.println("Syntax error");
+						equation.setText("Syntax Error");
 						return;
 					}
 					else{
@@ -122,12 +122,13 @@ public class GUI {
 				else {
 					m.setExpression(equation.getText());
 					if (m.getValue() == null) {
-						System.out.println("Syntax error");
+						equation.setText("Syntax Error");
 						return;
 					}
 					else{
 						for(int i = 0; i <= (xValues.length - 1); i++) {
-						m.addVariable("x", xValues[i]);
+							m.addVariable("x", xValues[i]);
+							yValues[i] = m.getValue();
 						}
 					}
 				}
@@ -144,7 +145,7 @@ public class GUI {
 					Expression ex = new Expression(equation.getText().substring(4));
 					System.out.println(ex.getExpression());
 					if (ex.eval() == null) {
-						System.out.println("Syntax error");
+						equation.setText("Syntax Error");
 						return;
 					}
 					else{
@@ -157,7 +158,7 @@ public class GUI {
 				else {
 					m.setExpression(equation.getText());
 					if (m.getValue() == null) {
-						System.out.println("Syntax error");
+						equation.setText("Syntax Error");
 						return;
 					}
 					else{
@@ -182,7 +183,7 @@ public class GUI {
 					Expression ex = new Expression(equation.getText().substring(4));
 					System.out.println(ex.getExpression());
 					if (ex.eval() == null) {
-						System.out.println("Syntax error");
+						equation.setText("Syntax Error");
 						return;
 					}
 					else{
@@ -195,7 +196,7 @@ public class GUI {
 				else {
 					m.setExpression(equation.getText());
 					if (m.getValue() == null) {
-						System.out.println("Syntax error");
+						equation.setText("Syntax Error");
 						return;
 					}
 					else{
