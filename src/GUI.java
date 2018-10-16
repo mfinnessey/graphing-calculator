@@ -108,16 +108,25 @@ public class GUI {
 				if(equation.getText().startsWith("poly")) {
 					Expression ex = new Expression(equation.getText().substring(4));
 					System.out.println(ex.getExpression());
-					for(int i = 0; i <= (xValues.length - 1); i++) {
-						ex.with("x", Double.toString(xValues[i]));
-						yValues[yIndexTracker++] = ex.eval().doubleValue();
+					if (m.getValue() == null) {
+						System.out.println("Syntax error");
+					}
+					else{
+						for(int i = 0; i <= (xValues.length - 1); i++) {
+							ex.with("x", Double.toString(xValues[i]));
+							yValues[yIndexTracker++] = ex.eval().doubleValue();
+						}
 					}
 				}
 				else {
 					m.setExpression(equation.getText());
-					for(int i = 0; i <= (xValues.length - 1); i++) {
+					if (m.getValue() == null) {
+						System.out.println("Syntax error");
+					}
+					else{
+						for(int i = 0; i <= (xValues.length - 1); i++) {
 						m.addVariable("x", xValues[i]);
-						yValues[yIndexTracker++] = m.getValue();
+						}
 					}
 				}
 				pointsReady = true;
@@ -132,16 +141,26 @@ public class GUI {
 				if(equation.getText().startsWith("poly")) {
 					Expression ex = new Expression(equation.getText().substring(4));
 					System.out.println(ex.getExpression());
-					for(int i = 0; i <= (xValues.length - 1); i++) {
-						ex.with("x", Double.toString(xValues[i]));
-						yValues[yIndexTracker++] = ex.eval().doubleValue();
+					if (ex.eval() == null) {
+						System.out.println("Syntax error");
+					}
+					else{
+						for(int i = 0; i <= (xValues.length - 1); i++) {
+							ex.with("x", Double.toString(xValues[i]));
+							yValues[yIndexTracker++] = ex.eval().doubleValue();
+						}
 					}
 				}
 				else {
 					m.setExpression(equation.getText());
-					for(int i = 0; i <= (xValues.length - 1); i++) {
-						m.addVariable("x", xValues[i]);
-						yValues[yIndexTracker++] = m.getValue();
+					if (m.getValue() == null) {
+						System.out.println("Syntax error");
+					}
+					else{
+						for(int i = 0; i <= (xValues.length - 1); i++) {
+							m.addVariable("x", xValues[i]);
+							yValues[yIndexTracker++] = m.getValue();
+						}
 					}
 				}
 				yValues = Derivative.findDerivative(xValues, yValues);
@@ -158,16 +177,26 @@ public class GUI {
 				if(equation.getText().startsWith("poly")) {
 					Expression ex = new Expression(equation.getText().substring(4));
 					System.out.println(ex.getExpression());
-					for(int i = 0; i <= (xValues.length - 1); i++) {
-						ex.with("x", Double.toString(xValues[i]));
-						yValues[yIndexTracker++] = ex.eval().doubleValue();
+					if (ex.eval() == null) {
+						System.out.println("Syntax error");
+					}
+					else{
+						for(int i = 0; i <= (xValues.length - 1); i++) {
+							ex.with("x", Double.toString(xValues[i]));
+							yValues[yIndexTracker++] = ex.eval().doubleValue();
+						}
 					}
 				}
 				else {
 					m.setExpression(equation.getText());
-					for(int i = 0; i <= (xValues.length - 1); i++) {
-						m.addVariable("x", xValues[i]);
-						yValues[yIndexTracker++] = m.getValue();
+					if (m.getValue() == null) {
+						System.out.println("Syntax error");
+					}
+					else{
+						for(int i = 0; i <= (xValues.length - 1); i++) {
+							m.addVariable("x", xValues[i]);
+							yValues[yIndexTracker++] = m.getValue();
+						}
 					}
 				}
 				yValues = Derivative.findDerivative(xValues, yValues);
@@ -305,7 +334,7 @@ public class GUI {
 					}
 				}
 				gui.setPointsReady(false);
-				System.out.println(gui.getXValues()[20000]);
+				// System.out.println(gui.getXValues()[20000]);
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
