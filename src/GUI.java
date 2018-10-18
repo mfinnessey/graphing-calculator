@@ -360,7 +360,7 @@ public class GUI {
 		while(true) {
 			//M If the points are ready, then they are graphed.
 			if(gui.getPointsReady() == true) {
-				/* graph.draw();
+				graph.draw();
 				//M Calculating the key points, hopefully this leaves enough time.
 				 gui.findKeyPoints(gui.getXValues(), gui.getYValues());
 				for(int i = 0; i < gui.getHolesLength(); i++) {
@@ -384,10 +384,10 @@ public class GUI {
 						graph.draw(gui.getPois()[k][0], gui.getPois()[k][1], "#E9967A");
 						System.out.println("Drawing POI ( " + gui.getPois()[k][0] + " , " + gui.getPois()[k][1] + " )");
 					}
-				} */
-				gui.findKeyPoints(gui.getXValues(), gui.getYValues());
-				graph.drawGraph(gui.getXValues(), gui.getYValues(), gui.unifyKeyPoints(gui.getMins(), gui.getMaxes(), gui.getPois(), gui.getHoles()));
-				gui.setPointsReady(false);
+				}
+				//gui.findKeyPoints(gui.getXValues(), gui.getYValues());
+				//graph.drawGraph(gui.getXValues(), gui.getYValues(), gui.unifyKeyPoints(gui.getMins(), gui.getMaxes(), gui.getPois(), gui.getHoles()));
+				//gui.setPointsReady(false);
 				// System.out.println(gui.getXValues()[20000]);
 			}
 			else if(gui.getClearDesired() == true) {
