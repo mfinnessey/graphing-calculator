@@ -65,8 +65,10 @@ public class GUI {
 		JTextField trapezoidalUpperLimit = new JTextField("Enter upper limit here.");
 		JButton trapezoidalEvaluate = new JButton("Evaluate Trapezoidal Integral");
 		JTextArea trapezoidalIntegralValue = new JTextArea("No Value to Display");
+		JTextField function = new JTextField("Enter f(x)");
 		trapezoidalIntegralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		trapezoidalIntegralFrame.setLocation(0, 450);
+		trapezoidalIntegralFrame.getContentPane().add(function, BorderLayout.NORTH);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalLowerLimit, BorderLayout.WEST);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalUpperLimit, BorderLayout.EAST);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalEvaluate, BorderLayout.CENTER);
@@ -76,9 +78,18 @@ public class GUI {
 		
 		trapezoidalEvaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				double lowerValue;
+				double upperValue;
+				double FTC;
+				MathEvaluator m = new MathEvaluator(function.getText());
+				m.addVariable("x", Double.parseDouble(trapezoidalLowerLimit.getText()));
+				lowerValue = m.getValue();
+				m.addVariable("x", Double.parseDouble(trapezoidalUpperLimit.getText()));
+				upperValue = m.getValue();
+				FTC = upperValue - lowerValue;
 				Integral integral = new Integral();
 				String result = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, yValues);
-				trapezoidalIntegralValue.setText(result);
+				trapezoidalIntegralValue.setText(result + " = FTC: " + String.valueOf(FTC));
 			}
 	   	});
 		
@@ -305,6 +316,14 @@ public class GUI {
 				System.out.println("( " + xValues[i] + " , " + yValues[i] + " )");
 			}
 		}
+	}
+	private double getKeyPoint(double [] xValues, double [] yValues, double keyValue) {
+		for(int i = 0; i < xValues.length; i++) {
+			if(xValues[i] == keyValue) {
+				return yValues[i];
+			}
+		}
+		return 2;
 	}
 	private double [][] unifyKeyPoints(double [][] mins, double [][] maxes, double [][] pois, double [][] holes){
 		//M A method to create a unified array of keyPoints.
