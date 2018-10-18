@@ -309,43 +309,39 @@ public class GUI {
 	private double [][] unifyKeyPoints(double [][] mins, double [][] maxes, double [][] pois, double [][] holes){
 		//M A method to create a unified array of keyPoints.
 		int length = (mins.length + maxes.length + pois.length + holes.length);
+		System.out.println("Length: " + length);
 		int indexTracker = 0;
-		double [][] keyPoints = new double[length + 5][2];
+		double [][] keyPoints = new double[length + 4][2];
 		for(int i = 0; i < mins.length; i++) {
-			for(int j = 0; j < 2; j++) {
-				keyPoints[i][j] = mins[i][j];
-			}
-			indexTracker += i + 1;
+			keyPoints[indexTracker][0] = mins[i][0];
+			keyPoints[indexTracker][0] = mins[i][0];
+			indexTracker++;
 		}
 		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		System.out.println(indexTracker);
-		System.out.println(indexTracker);
+		System.out.println("IT: " + indexTracker);
 		keyPoints[indexTracker++][0] = -15;
 		for(int i = 0; i < maxes.length; i++) {
-			for(int j = 0; j < 2; j++) {
-				keyPoints[i][j] = maxes[i][j];
-			}
-			indexTracker += i + 1;
+			keyPoints[indexTracker][0] = maxes[i][0];
+			keyPoints[indexTracker][0] = maxes[i][0];
+			indexTracker++;
 		}
 		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		System.out.println(indexTracker);
+		System.out.println("IT: " + indexTracker);
 		keyPoints[indexTracker++][0] = -15;
 		for(int i = 0; i < pois.length; i++) {
-			for(int j = 0; j < 2; j++) {
-				keyPoints[i][j] = pois[i][j];
-			}
-			indexTracker += i + 1;
+			keyPoints[indexTracker][0] = pois[i][0];
+			keyPoints[indexTracker][0] = pois[i][0];
+			indexTracker++;
 		}
 		//M CHANGE IF GIVING USER POWER TO SET WINDOW
 		keyPoints[indexTracker++][0] = -15;
 		for(int i = 0; i < holes.length; i++) {
-			for(int j = 0; j < 2; j++) {
-				keyPoints[i][j] = holes[i][j];
-			}
-			indexTracker += i + 1;
+			keyPoints[indexTracker][0] = holes[i][0];
+			keyPoints[indexTracker][0] = holes[i][0];
+			indexTracker++;
 		}
 		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		System.out.println(indexTracker);
+		System.out.println("IT: " + indexTracker);
 		keyPoints[indexTracker++][0] = -15;
 		System.out.println();
 		System.out.println("UNIFY KEY POINTS TEST DATA");
