@@ -126,12 +126,13 @@ public class Graph {
 		g = (Graphics2D) graphWindow.getGraphics();
 		g.clearRect(0, 0, 500, 500);
 		colorTracker = 0;
+		System.out.println("Clearing");
 	}
 	public void drawGraph(double [] xValues, double [] yValues, double [][] unifiedKeyPoints) {
 		storePoints(xValues, yValues);
 		storeKeyPoints(unifiedKeyPoints);
+		clear();
 		if(arrayTracker >= 2) {
-			clear();
 			draw();
 			draw(xValues1, yValues1);
 			for(int i = 0; i < keyPoints1.length; i++) {
@@ -148,7 +149,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 3) {
-			clear();
 			draw();
 			draw(xValues2, yValues2);
 			for(int i = 0; i < keyPoints2.length; i++) {
@@ -165,7 +165,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 4) {
-			clear();
 			draw();
 			draw(xValues3, yValues3);
 			for(int i = 0; i < keyPoints3.length; i++) {
@@ -182,7 +181,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 5) {
-			clear();
 			draw();
 			draw(xValues4, yValues4);
 			for(int i = 0; i < keyPoints4.length; i++) {
@@ -199,7 +197,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 6) {
-			clear();
 			draw();
 			draw(xValues5, yValues5);
 			for(int i = 0; i < keyPoints5.length; i++) {
@@ -216,7 +213,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 7) {
-			clear();
 			draw();
 			draw(xValues6, yValues6);
 			for(int i = 0; i < keyPoints6.length; i++) {
@@ -233,7 +229,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 8) {
-			clear();
 			draw();
 			draw(xValues7, yValues7);
 			for(int i = 0; i < keyPoints7.length; i++) {
