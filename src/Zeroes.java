@@ -43,23 +43,29 @@ public class Zeroes {
 		return rV;
 	}
 	
-	public static double[][] hole(double [] xValues, double [] yValues){
+	public static double[][] hole(double [] xValues, double [] yValues, String expression){
 		//M Need to make procedural. Can be added later.
-		int numberOfHoles = 0;
-		int indexTracker = 0;
-		for(int i = 0; i < xValues.length; i++) {
-			if(Double.isNaN(yValues[i])) {
-				numberOfHoles++;
-			}
+		if ((expression.indexOf("sqrt") > -1) || (expression.indexOf("log") > -1) || (expression.indexOf("ln") > -1) || (expression.indexOf("asin") > -1) || (expression.indexOf("acos") > -1) || (expression.indexOf("atan") > -1)) {
+			double [][] rV = new double [0][2];
+			return rV;
 		}
-		double [][] holes = new double [numberOfHoles][2];
-		for(int j = 0; j < xValues.length; j++) {
-			if(Double.isNaN(yValues[j])) {
-				holes[indexTracker][0] = xValues[j];
-				holes[indexTracker][1] = (yValues[j+1] + yValues[j-1])/2;
+		else {
+			int numberOfHoles = 0;
+			int indexTracker = 0;
+			for(int i = 0; i < xValues.length; i++) {
+				if(Double.isNaN(yValues[i])) {
+					numberOfHoles++;
+				}
 			}
+			double [][] holes = new double [numberOfHoles][2];
+			for(int j = 0; j < xValues.length; j++) {
+				if(Double.isNaN(yValues[j])) {
+					holes[indexTracker][0] = xValues[j];
+					holes[indexTracker][1] = (yValues[j+1] + yValues[j-1])/2;
+				}
+			}
+			return holes;
 		}
-		return holes;
 	}
 	public static double[][] max(double[] xValues, double[] yValues){
 		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);

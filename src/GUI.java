@@ -301,7 +301,7 @@ public class GUI {
 		maxes = Zeroes.max(xValues, yValues);
 		mins = Zeroes.min(xValues, yValues);
 		pois = Zeroes.POI(xValues, yValues);
-		holes = Zeroes.hole(xValues, yValues);
+		holes = Zeroes.hole(xValues, yValues, equation.getText());
 	}
 	private void printValues(double [] xValues, double [] yValues) {
 		//M A method to print (x,y) pairs. Used for debugging.
