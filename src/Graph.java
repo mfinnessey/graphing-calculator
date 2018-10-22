@@ -133,7 +133,10 @@ public class Graph {
 		storeKeyPoints(unifiedKeyPoints);
 		clear();
 		draw();
+		System.out.println("Array Tracker: " + arrayTracker);
 		if(arrayTracker >= 2) {
+			System.out.println("Drawing 1");
+			g.setColor(Color.decode(lineColors[0]));
 			draw(xValues1, yValues1);
 			for(int i = 0; i < keyPoints1.length; i++) {
 				if(keyPoints1[i][0] == -15) {
@@ -149,6 +152,8 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 3) {
+			System.out.println("Drawing 2");
+			g.setColor(Color.decode(lineColors[1]));
 			draw(xValues2, yValues2);
 			for(int i = 0; i < keyPoints2.length; i++) {
 				if(keyPoints2[i][0] == -15) {
@@ -164,6 +169,8 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 4) {
+			System.out.println("Drawing 3");
+			g.setColor(Color.decode(lineColors[2]));
 			draw(xValues3, yValues3);
 			for(int i = 0; i < keyPoints3.length; i++) {
 				if(keyPoints3[i][0] == -15) {
@@ -179,6 +186,8 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 5) {
+			System.out.println("Drawing 4");
+			g.setColor(Color.decode(lineColors[3]));
 			draw(xValues4, yValues4);
 			for(int i = 0; i < keyPoints4.length; i++) {
 				if(keyPoints4[i][0] == -15) {
@@ -194,6 +203,8 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 6) {
+			System.out.println("Drawing 5");
+			g.setColor(Color.decode(lineColors[4]));
 			draw(xValues5, yValues5);
 			for(int i = 0; i < keyPoints5.length; i++) {
 				if(keyPoints5[i][0] == -15) {
@@ -209,6 +220,8 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 7) {
+			System.out.println("Drawing 6");
+			g.setColor(Color.decode(lineColors[5]));
 			draw(xValues6, yValues6);
 			for(int i = 0; i < keyPoints6.length; i++) {
 				if(keyPoints6[i][0] == -15) {
@@ -224,6 +237,8 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 8) {
+			System.out.println("Drawing 7");
+			g.setColor(Color.decode(lineColors[6]));
 			draw(xValues7, yValues7);
 			for(int i = 0; i < keyPoints7.length; i++) {
 				if(keyPoints7[i][0] == -15) {
@@ -239,6 +254,8 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 9) {
+			System.out.println("Drawing 8");
+			g.setColor(Color.decode(lineColors[7]));
 			draw(xValues8, yValues8);
 			for(int i = 0; i < keyPoints8.length; i++) {
 				if(keyPoints8[i][0] == -15) {

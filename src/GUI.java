@@ -347,7 +347,7 @@ public class GUI {
 		System.out.println("UNIFY KEY POINTS TEST DATA");
 		System.out.println();
 		for(int i = 0; i < keyPoints.length; i++) {
-			System.out.println("( " + keyPoints[i][0] + " , " + keyPoints[i][1] + " )" );
+			System.out.println("Key Point: ( " + keyPoints[i][0] + " , " + keyPoints[i][1] + " )" );
 		}
 		return keyPoints;
 	}
