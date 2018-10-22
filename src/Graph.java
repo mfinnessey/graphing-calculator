@@ -132,8 +132,8 @@ public class Graph {
 		storePoints(xValues, yValues);
 		storeKeyPoints(unifiedKeyPoints);
 		clear();
+		draw();
 		if(arrayTracker >= 2) {
-			draw();
 			draw(xValues1, yValues1);
 			for(int i = 0; i < keyPoints1.length; i++) {
 				if(keyPoints1[i][0] == -15) {
@@ -149,7 +149,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 3) {
-			draw();
 			draw(xValues2, yValues2);
 			for(int i = 0; i < keyPoints2.length; i++) {
 				if(keyPoints2[i][0] == -15) {
@@ -165,7 +164,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 4) {
-			draw();
 			draw(xValues3, yValues3);
 			for(int i = 0; i < keyPoints3.length; i++) {
 				if(keyPoints3[i][0] == -15) {
@@ -181,7 +179,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 5) {
-			draw();
 			draw(xValues4, yValues4);
 			for(int i = 0; i < keyPoints4.length; i++) {
 				if(keyPoints4[i][0] == -15) {
@@ -197,7 +194,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 6) {
-			draw();
 			draw(xValues5, yValues5);
 			for(int i = 0; i < keyPoints5.length; i++) {
 				if(keyPoints5[i][0] == -15) {
@@ -213,7 +209,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 7) {
-			draw();
 			draw(xValues6, yValues6);
 			for(int i = 0; i < keyPoints6.length; i++) {
 				if(keyPoints6[i][0] == -15) {
@@ -229,7 +224,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 8) {
-			draw();
 			draw(xValues7, yValues7);
 			for(int i = 0; i < keyPoints7.length; i++) {
 				if(keyPoints7[i][0] == -15) {
@@ -245,7 +239,6 @@ public class Graph {
 			}
 		}
 		if(arrayTracker >= 9) {
-			draw();
 			draw(xValues8, yValues8);
 			for(int i = 0; i < keyPoints8.length; i++) {
 				if(keyPoints8[i][0] == -15) {
