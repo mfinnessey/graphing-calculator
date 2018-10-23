@@ -309,7 +309,7 @@ public class GUI {
 	private double [][] unifyKeyPoints(double [][] mins, double [][] maxes, double [][] pois, double [][] holes){
 		//M A method to create a unified array of keyPoints.
 		int length = (mins.length + maxes.length + pois.length + holes.length);
-		System.out.println("Length: " + length);
+		//System.out.println("Length: " + length);
 		int indexTracker = 0;
 		double [][] keyPoints = new double[length + 4][2];
 		for(int i = 0; i < mins.length; i++) {
@@ -318,7 +318,7 @@ public class GUI {
 			indexTracker++;
 		}
 		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		System.out.println("IT: " + indexTracker);
+		//System.out.println("IT: " + indexTracker);
 		keyPoints[indexTracker++][0] = -15;
 		for(int i = 0; i < maxes.length; i++) {
 			keyPoints[indexTracker][0] = maxes[i][0];
@@ -326,7 +326,7 @@ public class GUI {
 			indexTracker++;
 		}
 		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		System.out.println("IT: " + indexTracker);
+		//System.out.println("IT: " + indexTracker);
 		keyPoints[indexTracker++][0] = -15;
 		for(int i = 0; i < pois.length; i++) {
 			keyPoints[indexTracker][0] = pois[i][0];
@@ -341,14 +341,14 @@ public class GUI {
 			indexTracker++;
 		}
 		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		System.out.println("IT: " + indexTracker);
+		//System.out.println("IT: " + indexTracker);
 		keyPoints[indexTracker++][0] = -15;
-		System.out.println();
+		/* System.out.println();
 		System.out.println("UNIFY KEY POINTS TEST DATA");
 		System.out.println();
 		for(int i = 0; i < keyPoints.length; i++) {
 			System.out.println("Key Point: ( " + keyPoints[i][0] + " , " + keyPoints[i][1] + " )" );
-		}
+		} */
 		return keyPoints;
 	}
 	public static void main(String [] args) {
