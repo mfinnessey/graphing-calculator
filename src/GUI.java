@@ -29,6 +29,7 @@ public class GUI {
 	private double [][] holes;
 	private boolean pointsReady = false;
 	private boolean clearDesired = false;
+	private String equationText = "";
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	
 	public GUI() {
@@ -115,6 +116,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				//M resetting yIndexTracker.
 				yIndexTracker = 0;
+				equationText = equation.getText();
 				//M Setting the MathEvaluator to the entered equation.
 				if(equation.getText().startsWith("poly")) {
 					Expression ex = new Expression(equation.getText().substring(4));
@@ -151,6 +153,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				//M Resetting yIndexTracker.
 				yIndexTracker = 0;
+				equationText = equation.getText();
 				//M Setting the MathEvaluator to the entered equation.
 				if(equation.getText().startsWith("poly")) {
 					Expression ex = new Expression(equation.getText().substring(4));
@@ -189,6 +192,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				//M Resetting yIndexTracker.
 				yIndexTracker = 0;
+				equationText = equation.getText();
 				//M Setting the MathEvaluator to the entered equation.
 				if(equation.getText().startsWith("poly")) {
 					Expression ex = new Expression(equation.getText().substring(4));
@@ -239,7 +243,9 @@ public class GUI {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
 	}
-	
+	private String getEquationText() {
+		return equationText;
+	}
 	private double[] getXValues() {
 		//M A method to get the xValues.
 		return xValues;
@@ -301,7 +307,7 @@ public class GUI {
 		maxes = Zeroes.max(xValues, yValues);
 		mins = Zeroes.min(xValues, yValues);
 		pois = Zeroes.POI(xValues, yValues);
-		holes = Zeroes.hole(xValues, yValues, equation.getText());
+		holes = Zeroes.hole(xValues, yValues, equationText);
 	}
 	private void printValues(double [] xValues, double [] yValues) {
 		//M A method to print (x,y) pairs. Used for debugging.
