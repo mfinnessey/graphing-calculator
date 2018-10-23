@@ -410,10 +410,7 @@ public class GUI {
 						System.out.println("Drawing POI ( " + gui.getPois()[k][0] + " , " + gui.getPois()[k][1] + " )");
 					}
 				}
-				//gui.findKeyPoints(gui.getXValues(), gui.getYValues());
-				//graph.drawGraph(gui.getXValues(), gui.getYValues(), gui.unifyKeyPoints(gui.getMins(), gui.getMaxes(), gui.getPois(), gui.getHoles()));
 				gui.setPointsReady(false);
-				// System.out.println(gui.getXValues()[20000]);
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
