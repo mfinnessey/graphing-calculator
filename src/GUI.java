@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
@@ -30,6 +31,7 @@ public class GUI {
 	private boolean pointsReady = false;
 	private boolean clearDesired = false;
 	private String equationText = "";
+	ArrayList equations = new ArrayList();
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	
 	public GUI() {
@@ -116,7 +118,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				//M resetting yIndexTracker.
 				yIndexTracker = 0;
-				equationText = equation.getText();
+				addEquation(equation.getText());
 				//M Setting the MathEvaluator to the entered equation.
 				if(equation.getText().startsWith("poly")) {
 					Expression ex = new Expression(equation.getText().substring(4));
@@ -153,7 +155,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				//M Resetting yIndexTracker.
 				yIndexTracker = 0;
-				equationText = equation.getText();
+				addEquation(equation.getText());
 				//M Setting the MathEvaluator to the entered equation.
 				if(equation.getText().startsWith("poly")) {
 					Expression ex = new Expression(equation.getText().substring(4));
@@ -192,7 +194,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				//M Resetting yIndexTracker.
 				yIndexTracker = 0;
-				equationText = equation.getText();
+				addEquation(equation.getText());
 				//M Setting the MathEvaluator to the entered equation.
 				if(equation.getText().startsWith("poly")) {
 					Expression ex = new Expression(equation.getText().substring(4));
@@ -242,6 +244,10 @@ public class GUI {
 		for(int i = (int) (-1 * Math.pow(10,4)); i <= (int) Math.pow(10, 4); i++) {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
+	}
+	private void addEquation(String equation) {
+		equations.add(equationText);
+		equationText = equation;
 	}
 	private String getEquationText() {
 		return equationText;
