@@ -268,9 +268,11 @@ public class GUI {
 				for(int i = 0; i < gui.getEquations().size(); i++) {
 					equation = (String) gui.getEquations().get(i);
 					if(equation.startsWith("done")) {
+						equation = equation.substring(4);
 						yValues = gui.getYValues(gui.getXValues(), equation, 2);
 					}
 					else if(equation.startsWith("dtwo")) {
+						equation = equation.substring(4);
 						yValues = gui.getYValues(gui.getXValues(), equation, 1);
 					}
 					else {
