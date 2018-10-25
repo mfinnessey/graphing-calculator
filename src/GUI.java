@@ -68,6 +68,7 @@ public class GUI {
 		
 		trapezoidalEvaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String tempEquation;
 				double lowerValue;
 				double upperValue;
 				double FTC;
@@ -78,7 +79,11 @@ public class GUI {
 				upperValue = m.getValue();
 				FTC = upperValue - lowerValue;
 				Integral integral = new Integral();
-				m.setExpression(equations.get(equationIndexTracker));
+				tempEquation = equations.get(equationIndexTracker);
+				if(tempEquation.startsWith("d")) {
+					tempEquation = tempEquation.substring(4);
+				}
+				m.setExpression(tempEquation);
 				for(int i = 0; i <= (xValues.length -1); i++) {
 					m.addVariable("x", xValues[i]);
 					yValues[i] = m.getValue();
