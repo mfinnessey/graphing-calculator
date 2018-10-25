@@ -29,6 +29,7 @@ public class GUI {
 	private boolean pointsReady = false;
 	private boolean clearDesired = false;
 	private String equationText = "";
+	private int equationIndexTracker = -1;
 	List<String> equations = new ArrayList<String>();
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	
@@ -48,19 +49,7 @@ public class GUI {
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
-		JFrame integralFrame = new JFrame();
-		JTextField lowerLimit = new JTextField("Enter lower limit here.");
-		JTextField upperLimit = new JTextField("Enter upper limit here.");
-		JButton evaluate = new JButton("Evaluate Integral");
-		JTextArea integralValue = new JTextArea("No Value to Display");
-		integralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		integralFrame.setLocation(0, 250);
-		integralFrame.getContentPane().add(lowerLimit, BorderLayout.WEST);
-		integralFrame.getContentPane().add(upperLimit, BorderLayout.EAST);
-		integralFrame.getContentPane().add(evaluate, BorderLayout.CENTER);
-		integralFrame.getContentPane().add(integralValue, BorderLayout.SOUTH);
-		integralFrame.pack();
-		integralFrame.setVisible(true);
+		
 		JFrame trapezoidalIntegralFrame = new JFrame();
 		JTextField trapezoidalLowerLimit = new JTextField("Enter lower limit here.");
 		JTextField trapezoidalUpperLimit = new JTextField("Enter upper limit here.");
@@ -68,7 +57,7 @@ public class GUI {
 		JTextArea trapezoidalIntegralValue = new JTextArea("No Value to Display");
 		JTextField function = new JTextField("Enter f(x)");
 		trapezoidalIntegralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		trapezoidalIntegralFrame.setLocation(0, 450);
+		trapezoidalIntegralFrame.setLocation(0, 250);
 		trapezoidalIntegralFrame.getContentPane().add(function, BorderLayout.NORTH);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalLowerLimit, BorderLayout.WEST);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalUpperLimit, BorderLayout.EAST);
@@ -89,20 +78,13 @@ public class GUI {
 				upperValue = m.getValue();
 				FTC = upperValue - lowerValue;
 				Integral integral = new Integral();
+				m.setExpression(equations.get(equationIndexTracker));
+				for(int i = 0; i <= (xValues.length -1); i++) {
+					m.addVariable("x", xValues[i]);
+					yValues[i] = m.getValue();
+				}
 				String result = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, yValues);
 				trapezoidalIntegralValue.setText(result + " = FTC: " + String.valueOf(FTC));
-			}
-	   	});
-		
-		evaluate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Integral integral = new Integral();
-				String result = integral.findDefiniteIntegral(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
-				String FTC = integral.FTC(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
-				integralValue.setText(result);
-				//M This is broken for now. I don't get how we're supposed to show the FTC when we don't know
-				//M The constant of integration.
-				//integralValue.setText(result + " = " + FTC);
 			}
 	   	});
 	   	//M Adding the ActionListener for the button.
@@ -140,6 +122,7 @@ public class GUI {
 		}
 	}
 	private void addEquation(String equation) {
+		equationIndexTracker++;
 		equations.add(equation);
 		equationText = equation;
 	}
@@ -199,6 +182,7 @@ public class GUI {
 		//M A method to set clearDesired.
 		clearDesired = status;
 		equations.clear();
+		equationIndexTracker = -1;
 	}
 	private void findKeyPoints(double [] xValues, double [] yValues) {
 		maxes = Zeroes.max(xValues, yValues);
