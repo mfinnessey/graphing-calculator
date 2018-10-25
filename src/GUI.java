@@ -198,6 +198,7 @@ public class GUI {
 	private void setClearDesired(boolean status) {
 		//M A method to set clearDesired.
 		clearDesired = status;
+		equations.clear();
 	}
 	private void findKeyPoints(double [] xValues, double [] yValues) {
 		maxes = Zeroes.max(xValues, yValues);
@@ -227,17 +228,15 @@ public class GUI {
 		}
 		return 2;
 	}
-	private List getEquations() {
+	private List<String> getEquations() {
 		return equations;
 	}
 	private double [] getYValues(double [] xValues, String equation, int derivativeNumber) {
 		MathEvaluator m = new MathEvaluator();
-		System.out.println("Equation: " + equation);
 		m.setExpression(equation);
 		double [] yValues = new double[20001];
 		for(int i = 0; i <= (xValues.length - 1); i++) {
 			m.addVariable("x", xValues[i]);
-			System.out.println(String.valueOf("i: " + i + " / xValue: " + xValues[i] + " / value: " + m.getValue()));
 			yValues[i] = m.getValue();
 		}
 		switch(derivativeNumber) {
@@ -267,11 +266,11 @@ public class GUI {
 				graph.draw();
 				for(int i = 0; i < gui.getEquations().size(); i++) {
 					equation = (String) gui.getEquations().get(i);
-					if(equation.startsWith("done")) {
+					if(equation.startsWith("dtwo")) {
 						equation = equation.substring(4);
 						yValues = gui.getYValues(gui.getXValues(), equation, 2);
 					}
-					else if(equation.startsWith("dtwo")) {
+					else if(equation.startsWith("done")) {
 						equation = equation.substring(4);
 						yValues = gui.getYValues(gui.getXValues(), equation, 1);
 					}
@@ -309,7 +308,7 @@ public class GUI {
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
-				// System.out.flush();
+				graph.draw();
 				gui.setClearDesired(false);
 			}
 			//M This seems to do something for synchronization, so I'm just going to leave it for now.

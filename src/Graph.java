@@ -10,12 +10,9 @@ import javax.swing.JPanel;
 public class Graph {
 	//M Adding a new JPanel on which to hold the things.
 	JPanel graphWindow = new JPanel();
-	static private int arrayTracker = 1;
 	static private int colorTracker = 0;
 	private String [] lineColors = {"#FF0000", "#FFA500", "#008000", "#00FFFF", "#000080",
 			"#FF00FF", "#800080", "#C0C0C0"};
-	private String [] pointColors = {"#FFC0CB", "#67D4C4", "#E9967A", "#F44F0D"};
-	private int keyPointsColorTracker = 0;
 	public Graph() {
 		JFrame frame = new JFrame();
 		
@@ -24,7 +21,7 @@ public class Graph {
 		frame.pack();
 		frame.setSize(500, 500);
 		graphWindow.setSize(500, 500);
-		frame.setLocation(500, 0);
+		frame.setLocation(600, 0);
 		frame.setVisible(true);
 	}
 
