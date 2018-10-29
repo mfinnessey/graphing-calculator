@@ -83,15 +83,35 @@ public class GUI {
 				FTC = upperValue - lowerValue;
 				Integral integral = new Integral();
 				tempEquation = equations.get(equationIndexTracker);
-				if(tempEquation.startsWith("d")) {
+				System.out.println("Unprocessed Temp: " + tempEquation);
+				if(tempEquation.startsWith("done")) {
 					tempEquation = tempEquation.substring(4);
+					m.setExpression(tempEquation);
+					for(int i = 0; i <= (xValues.length -1); i++) {
+						m.addVariable("x", xValues[i]);
+						yValues[i] = m.getValue();
+					}
+					yValues = Derivative.findDerivative(xValues, yValues);
+				}
+				else if(tempEquation.startsWith("dtwo")) {
+					tempEquation = tempEquation.substring(4);
+					m.setExpression(tempEquation);
+					for(int i = 0; i <= (xValues.length -1); i++) {
+						m.addVariable("x", xValues[i]);
+						yValues[i] = m.getValue();
+					}
+					yValues = Derivative.findDerivative(xValues, yValues);
+					yValues = Derivative.findDerivative(xValues, yValues);
+				}
+				else {
+					m.setExpression(tempEquation);
+					for(int i = 0; i <= (xValues.length -1); i++) {
+						m.addVariable("x", xValues[i]);
+						yValues[i] = m.getValue();
+					}
 				}
 				System.out.println("Temp Equation: " + tempEquation);
-				m.setExpression(tempEquation);
-				for(int i = 0; i <= (xValues.length -1); i++) {
-					m.addVariable("x", xValues[i]);
-					yValues[i] = m.getValue();
-				}
+				
 				//M Still not working with derivatives.
 				String result = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, yValues);
 				trapezoidalIntegralValue.setText(result + " = FTC: " + String.valueOf(FTC));
