@@ -72,17 +72,21 @@ public class GUI {
 				double lowerValue;
 				double upperValue;
 				double FTC;
+				System.out.println("f(x): " + function.getText());
 				MathEvaluator m = new MathEvaluator(function.getText());
 				m.addVariable("x", Double.parseDouble(trapezoidalLowerLimit.getText()));
 				lowerValue = m.getValue();
+				System.out.println("lowerValue: " + lowerValue);
 				m.addVariable("x", Double.parseDouble(trapezoidalUpperLimit.getText()));
 				upperValue = m.getValue();
+				System.out.println("Upper Value: " + upperValue);
 				FTC = upperValue - lowerValue;
 				Integral integral = new Integral();
 				tempEquation = equations.get(equationIndexTracker);
 				if(tempEquation.startsWith("d")) {
 					tempEquation = tempEquation.substring(4);
 				}
+				System.out.println("Temp Equation: " + tempEquation);
 				m.setExpression(tempEquation);
 				for(int i = 0; i <= (xValues.length -1); i++) {
 					m.addVariable("x", xValues[i]);
