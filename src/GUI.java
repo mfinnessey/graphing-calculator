@@ -92,6 +92,7 @@ public class GUI {
 					m.addVariable("x", xValues[i]);
 					yValues[i] = m.getValue();
 				}
+				//M Still not working with derivatives.
 				String result = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, yValues);
 				trapezoidalIntegralValue.setText(result + " = FTC: " + String.valueOf(FTC));
 			}
