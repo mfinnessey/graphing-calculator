@@ -1,9 +1,46 @@
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.util.concurrent.TimeUnit;
+
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 public class GraphingCalculator {
 //M The new central class.
 	public static void main(String[] args) {
 		//M Where the program runs.
+		JFrame boundsFrame = new JFrame();
+		JTextField lowerX = new JTextField("Lower x-bound");
+		JTextField upperX = new JTextField("Upper x-bound");
+		JTextField lowerY = new JTextField("Lower y-bound");
+		JTextField upperY = new JTextField("Upper y-bound");
+		final JButton set = new JButton("Set Bounds");
+		boundsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		boundsFrame.getContentPane().add(set, BorderLayout.CENTER);
+		boundsFrame.getContentPane().add(lowerX, BorderLayout.NORTH);
+		boundsFrame.getContentPane().add(upperX, BorderLayout.WEST);
+		boundsFrame.getContentPane().add(lowerY, BorderLayout.EAST);
+		boundsFrame.getContentPane().add(upperY, BorderLayout.SOUTH);
+		boundsFrame.pack();
+		boundsFrame.setLocation(0, 500);
+		boundsFrame.setVisible(true);
+		set.setAction(new AbstractAction() {
+			public void actionPerformed(ActionEvent ae) {
+				synchronized (set) {
+					set.notify();
+				}
+			}
+		});
+		synchronized(set) {
+			try {
+			  set.wait();
+			} 
+			catch (InterruptedException ex) {
+				System.out.println("Interrupted");
+			}
+		}
 		GUI gui = new GUI();
 		//M Filling xValues with consecutive x-values.
 		gui.fillXValues();

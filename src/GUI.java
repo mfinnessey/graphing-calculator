@@ -35,21 +35,6 @@ public class GUI {
 	
 	public GUI() {
 		//M Creating the various swing components.
-		JFrame boundsFrame = new JFrame();
-		JTextField lowerX = new JTextField("Lower x-bound");
-		JTextField upperX = new JTextField("Upper x-bound");
-		JTextField lowerY = new JTextField("Lower y-bound");
-		JTextField upperY = new JTextField("Upper y-bound");
-		JButton set = new JButton("Set Bounds");
-		boundsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		boundsFrame.getContentPane().add(set, BorderLayout.CENTER);
-		boundsFrame.getContentPane().add(lowerX, BorderLayout.NORTH);
-		boundsFrame.getContentPane().add(upperX, BorderLayout.WEST);
-		boundsFrame.getContentPane().add(lowerY, BorderLayout.EAST);
-		boundsFrame.getContentPane().add(upperY, BorderLayout.SOUTH);
-		boundsFrame.pack();
-		boundsFrame.setLocation(0, 500);
-		boundsFrame.setVisible(true);
 		
 		
 		
