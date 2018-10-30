@@ -10,36 +10,9 @@ import javax.swing.JPanel;
 public class Graph {
 	//M Adding a new JPanel on which to hold the things.
 	JPanel graphWindow = new JPanel();
-	private double [] xValues1 = new double[20001];
-	private double [] yValues1 = new double [20001];
-	private double [] xValues2 = new double[20001];
-	private double [] yValues2 = new double [20001];
-	private double [] xValues3 = new double[20001];
-	private double [] yValues3 = new double [20001];
-	private double [] xValues4 = new double[20001];
-	private double [] yValues4 = new double [20001];
-	private double [] xValues5 = new double[20001];
-	private double [] yValues5 = new double [20001];
-	private double [] xValues6 = new double[20001];
-	private double [] yValues6 = new double [20001];
-	private double [] xValues7 = new double[20001];
-	private double [] yValues7 = new double [20001];
-	private double [] xValues8 = new double[20001];
-	private double [] yValues8 = new double [20001];
-	private double [][] keyPoints1 = new double [50][2];
-	private double [][] keyPoints2 = new double [50][2];
-	private double [][] keyPoints3 = new double [50][2];
-	private double [][] keyPoints4 = new double [50][2];
-	private double [][] keyPoints5 = new double [50][2];
-	private double [][] keyPoints6 = new double [50][2];
-	private double [][] keyPoints7 = new double [50][2];
-	private double [][] keyPoints8 = new double [50][2];
-	static private int arrayTracker = 1;
 	static private int colorTracker = 0;
 	private String [] lineColors = {"#FF0000", "#FFA500", "#008000", "#00FFFF", "#000080",
 			"#FF00FF", "#800080", "#C0C0C0"};
-	private String [] pointColors = {"#FFC0CB", "#67D4C4", "#E9967A", "#F44F0D"};
-	private int keyPointsColorTracker = 0;
 	public Graph() {
 		JFrame frame = new JFrame();
 		
@@ -48,225 +21,17 @@ public class Graph {
 		frame.pack();
 		frame.setSize(500, 500);
 		graphWindow.setSize(500, 500);
-		frame.setLocation(500, 0);
+		frame.setLocation(600, 0);
 		frame.setVisible(true);
 	}
-	private void storePoints(double [] xValues, double [] yValues) {
-		switch(arrayTracker) {
-			case 1: 
-				xValues1 = xValues;
-				yValues1 = yValues;
-				break;
-			case 2: 
-				xValues2 = xValues;
-				yValues2 = yValues;
-				break;
-			case 3: 
-				xValues3 = xValues;
-				yValues3 = yValues;
-				break;
-			case 4: 
-				xValues4 = xValues;
-				yValues4 = yValues;
-				break;
-			case 5: 
-				xValues5 = xValues;
-				yValues5 = yValues;
-				break;
-			case 6: 
-				xValues6 = xValues;
-				yValues6 = yValues;
-				break;
-			case 7: 
-				xValues7 = xValues;
-				yValues7 = yValues;
-				break;
-			case 8: 
-				xValues8 = xValues;
-				yValues8 = yValues;
-				break;
-			default: 
-				System.out.println("Error");
-				System.exit(0);
-		}
-	}
-	private void storeKeyPoints(double [][] unifiedKeyPoints) {
-		switch(arrayTracker++) {
-			case 1: 
-				keyPoints1 = unifiedKeyPoints;
-				break;
-			case 2: 
-				keyPoints2 = unifiedKeyPoints;
-				break;
-			case 3: 
-				keyPoints3 = unifiedKeyPoints;
-				break;
-			case 4: 
-				keyPoints4 = unifiedKeyPoints;
-				break;
-			case 5: 
-				keyPoints5 = unifiedKeyPoints;
-				break;
-			case 6: 
-				keyPoints6 = unifiedKeyPoints;
-				break;
-			case 7: 
-				keyPoints7 = unifiedKeyPoints;
-				break;
-			case 8: 
-				keyPoints8 = unifiedKeyPoints;
-				break;
-			default: 
-				System.out.println("Error");
-				System.exit(0);
-		}
-	}
+
 	public void clear() {
 		//M A method to clear the graph
 		g = (Graphics2D) graphWindow.getGraphics();
 		g.clearRect(0, 0, 500, 500);
 		colorTracker = 0;
 	}
-	public void drawGraph(double [] xValues, double [] yValues, double [][] unifiedKeyPoints) {
-		storePoints(xValues, yValues);
-		storeKeyPoints(unifiedKeyPoints);
-		if(arrayTracker >= 2) {
-			clear();
-			draw();
-			draw(xValues1, yValues1);
-			for(int i = 0; i < keyPoints1.length; i++) {
-				if(keyPoints1[i][0] == -15) {
-					keyPointsColorTracker++;
-					if(keyPointsColorTracker > 3) {
-						keyPointsColorTracker = 0;
-						break;
-					}
-				}
-				else {
-					draw(keyPoints1[i][1], keyPoints1[i][1], pointColors[keyPointsColorTracker]);
-				}
-			}
-		}
-		if(arrayTracker >= 3) {
-			clear();
-			draw();
-			draw(xValues2, yValues2);
-			for(int i = 0; i < keyPoints2.length; i++) {
-				if(keyPoints2[i][0] == -15) {
-					keyPointsColorTracker++;
-					if(keyPointsColorTracker > 3) {
-						keyPointsColorTracker = 0;
-						break;
-					}
-				}
-				else {
-					draw(keyPoints2[i][1], keyPoints2[i][1], pointColors[keyPointsColorTracker]);
-				}
-			}
-		}
-		if(arrayTracker >= 4) {
-			clear();
-			draw();
-			draw(xValues3, yValues3);
-			for(int i = 0; i < keyPoints3.length; i++) {
-				if(keyPoints3[i][0] == -15) {
-					keyPointsColorTracker++;
-					if(keyPointsColorTracker > 3) {
-						keyPointsColorTracker = 0;
-						break;
-					}
-				}
-				else {
-					draw(keyPoints3[i][1], keyPoints3[i][1], pointColors[keyPointsColorTracker]);
-				}
-			}
-		}
-		if(arrayTracker >= 5) {
-			clear();
-			draw();
-			draw(xValues4, yValues4);
-			for(int i = 0; i < keyPoints4.length; i++) {
-				if(keyPoints4[i][0] == -15) {
-					keyPointsColorTracker++;
-					if(keyPointsColorTracker > 3) {
-						keyPointsColorTracker = 0;
-						break;
-					}
-				}
-				else {
-					draw(keyPoints4[i][1], keyPoints4[i][1], pointColors[keyPointsColorTracker]);
-				}
-			}
-		}
-		if(arrayTracker >= 6) {
-			clear();
-			draw();
-			draw(xValues5, yValues5);
-			for(int i = 0; i < keyPoints5.length; i++) {
-				if(keyPoints5[i][0] == -15) {
-					keyPointsColorTracker++;
-					if(keyPointsColorTracker > 3) {
-						keyPointsColorTracker = 0;
-						break;
-					}
-				}
-				else {
-					draw(keyPoints5[i][1], keyPoints5[i][1], pointColors[keyPointsColorTracker]);
-				}
-			}
-		}
-		if(arrayTracker >= 7) {
-			clear();
-			draw();
-			draw(xValues6, yValues6);
-			for(int i = 0; i < keyPoints6.length; i++) {
-				if(keyPoints6[i][0] == -15) {
-					keyPointsColorTracker++;
-					if(keyPointsColorTracker > 3) {
-						keyPointsColorTracker = 0;
-						break;
-					}
-				}
-				else {
-					draw(keyPoints6[i][1], keyPoints6[i][1], pointColors[keyPointsColorTracker]);
-				}
-			}
-		}
-		if(arrayTracker >= 8) {
-			clear();
-			draw();
-			draw(xValues7, yValues7);
-			for(int i = 0; i < keyPoints7.length; i++) {
-				if(keyPoints7[i][0] == -15) {
-					keyPointsColorTracker++;
-					if(keyPointsColorTracker > 3) {
-						keyPointsColorTracker = 0;
-						break;
-					}
-				}
-				else {
-					draw(keyPoints7[i][1], keyPoints7[i][1], pointColors[keyPointsColorTracker]);
-				}
-			}
-		}
-		if(arrayTracker >= 9) {
-			draw();
-			draw(xValues8, yValues8);
-			for(int i = 0; i < keyPoints8.length; i++) {
-				if(keyPoints8[i][0] == -15) {
-					keyPointsColorTracker++;
-					if(keyPointsColorTracker > 3) {
-						keyPointsColorTracker = 0;
-						break;
-					}
-				}
-				else {
-					draw(keyPoints8[i][1], keyPoints8[i][1], pointColors[keyPointsColorTracker]);
-				}
-			}
-		}
-			
-	}
+	
 	 public void draw(double [] xValues, double [] yValues) {
 		 //TODO A method to draw the graph.
 	        //Get the Graphics2D object of a JPanel, to draw on

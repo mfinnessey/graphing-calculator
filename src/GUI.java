@@ -1,14 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import main.java.com.udojava.evalex.Expression;
 
 
 
@@ -18,7 +18,6 @@ public class GUI {
 	public final static double step = Math.pow(10, -3);
 	//M Tracks where points have been filled in the array.
 	private int xIndexTracker;
-	private int yIndexTracker;
 	//M Store the x and y values respectively.
 	//M We're trying this. IDK if it works. YOLO.
 	private double [] xValues = new double[20001];
@@ -30,6 +29,8 @@ public class GUI {
 	private boolean pointsReady = false;
 	private boolean clearDesired = false;
 	private String equationText = "";
+	private int equationIndexTracker = -1;
+	List<String> equations = new ArrayList<String>();
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	
 	public GUI() {
@@ -48,19 +49,7 @@ public class GUI {
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
-		JFrame integralFrame = new JFrame();
-		JTextField lowerLimit = new JTextField("Enter lower limit here.");
-		JTextField upperLimit = new JTextField("Enter upper limit here.");
-		JButton evaluate = new JButton("Evaluate Integral");
-		JTextArea integralValue = new JTextArea("No Value to Display");
-		integralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		integralFrame.setLocation(0, 250);
-		integralFrame.getContentPane().add(lowerLimit, BorderLayout.WEST);
-		integralFrame.getContentPane().add(upperLimit, BorderLayout.EAST);
-		integralFrame.getContentPane().add(evaluate, BorderLayout.CENTER);
-		integralFrame.getContentPane().add(integralValue, BorderLayout.SOUTH);
-		integralFrame.pack();
-		integralFrame.setVisible(true);
+		
 		JFrame trapezoidalIntegralFrame = new JFrame();
 		JTextField trapezoidalLowerLimit = new JTextField("Enter lower limit here.");
 		JTextField trapezoidalUpperLimit = new JTextField("Enter upper limit here.");
@@ -68,7 +57,7 @@ public class GUI {
 		JTextArea trapezoidalIntegralValue = new JTextArea("No Value to Display");
 		JTextField function = new JTextField("Enter f(x)");
 		trapezoidalIntegralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		trapezoidalIntegralFrame.setLocation(0, 450);
+		trapezoidalIntegralFrame.setLocation(0, 250);
 		trapezoidalIntegralFrame.getContentPane().add(function, BorderLayout.NORTH);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalLowerLimit, BorderLayout.WEST);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalUpperLimit, BorderLayout.EAST);
@@ -79,153 +68,72 @@ public class GUI {
 		
 		trapezoidalEvaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String tempEquation;
 				double lowerValue;
 				double upperValue;
 				double FTC;
+				System.out.println("f(x): " + function.getText());
 				MathEvaluator m = new MathEvaluator(function.getText());
 				m.addVariable("x", Double.parseDouble(trapezoidalLowerLimit.getText()));
 				lowerValue = m.getValue();
+				System.out.println("lowerValue: " + lowerValue);
 				m.addVariable("x", Double.parseDouble(trapezoidalUpperLimit.getText()));
 				upperValue = m.getValue();
+				System.out.println("Upper Value: " + upperValue);
 				FTC = upperValue - lowerValue;
 				Integral integral = new Integral();
+				tempEquation = equations.get(equationIndexTracker);
+				System.out.println("Unprocessed Temp: " + tempEquation);
+				if(tempEquation.startsWith("done")) {
+					tempEquation = tempEquation.substring(4);
+					m.setExpression(tempEquation);
+					for(int i = 0; i <= (xValues.length -1); i++) {
+						m.addVariable("x", xValues[i]);
+						yValues[i] = m.getValue();
+					}
+					yValues = Derivative.findDerivative(xValues, yValues);
+				}
+				else if(tempEquation.startsWith("dtwo")) {
+					tempEquation = tempEquation.substring(4);
+					m.setExpression(tempEquation);
+					for(int i = 0; i <= (xValues.length -1); i++) {
+						m.addVariable("x", xValues[i]);
+						yValues[i] = m.getValue();
+					}
+					yValues = Derivative.findDerivative(xValues, yValues);
+					yValues = Derivative.findDerivative(xValues, yValues);
+				}
+				else {
+					m.setExpression(tempEquation);
+					for(int i = 0; i <= (xValues.length -1); i++) {
+						m.addVariable("x", xValues[i]);
+						yValues[i] = m.getValue();
+					}
+				}
+				System.out.println("Temp Equation: " + tempEquation);
+				
+				//M Still not working with derivatives.
 				String result = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, yValues);
 				trapezoidalIntegralValue.setText(result + " = FTC: " + String.valueOf(FTC));
 			}
 	   	});
-		
-		evaluate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Integral integral = new Integral();
-				String result = integral.findDefiniteIntegral(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
-				String FTC = integral.FTC(Double.parseDouble(lowerLimit.getText()), Double.parseDouble(upperLimit.getText()), xValues, yValues);
-				integralValue.setText(result);
-				//M This is broken for now. I don't get how we're supposed to show the FTC when we don't know
-				//M The constant of integration.
-				//integralValue.setText(result + " = " + FTC);
-			}
-	   	});
-		//M Creating the MathEvaluator with a default equation.
-		MathEvaluator m = new MathEvaluator("x^2");		
-		//M Adding the variable to MathEvaluator with a placeholder value.
-	   	m.addVariable("x", ((2.0)));
 	   	//M Adding the ActionListener for the button.
 	   	calculate.addActionListener(new ActionListener() {
-	   		//M Let's do work on this branch for now, everything seems to be working, just need to add integrals.
-	   		//M Some of the syntax is painful, but it all works on MathEvaluator.
 			public void actionPerformed(ActionEvent e) {
-				//M resetting yIndexTracker.
-				yIndexTracker = 0;
-				equationText = equation.getText();
-				//M Setting the MathEvaluator to the entered equation.
-				if(equation.getText().startsWith("poly")) {
-					Expression ex = new Expression(equation.getText().substring(4));
-					System.out.println(ex.getExpression());
-					if (m.getValue() == null) {
-						equation.setText("Syntax Error");
-						return;
-					}
-					else{
-						for(int i = 0; i <= (xValues.length - 1); i++) {
-							ex.with("x", Double.toString(xValues[i]));
-							yValues[yIndexTracker++] = ex.eval().doubleValue();
-						}
-					}
-				}
-				else {
-					m.setExpression(equation.getText());
-					if (m.getValue() == null) {
-						equation.setText("Syntax Error");
-						return;
-					}
-					else{
-						for(int i = 0; i <= (xValues.length - 1); i++) {
-							m.addVariable("x", xValues[i]);
-							yValues[i] = m.getValue();
-						}
-					}
-				}
+				addEquation(equation.getText());
 				pointsReady = true;
-				yIndexTracker = 0;
 			}
 	   	});
 	   	firstDerivative.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//M Resetting yIndexTracker.
-				yIndexTracker = 0;
-				equationText = equation.getText();
-				//M Setting the MathEvaluator to the entered equation.
-				if(equation.getText().startsWith("poly")) {
-					Expression ex = new Expression(equation.getText().substring(4));
-					System.out.println(ex.getExpression());
-					if (ex.eval() == null) {
-						equation.setText("Syntax Error");
-						return;
-					}
-					else{
-						for(int i = 0; i <= (xValues.length - 1); i++) {
-							ex.with("x", Double.toString(xValues[i]));
-							yValues[yIndexTracker++] = ex.eval().doubleValue();
-						}
-					}
-				}
-				else {
-					m.setExpression(equation.getText());
-					if (m.getValue() == null) {
-						equation.setText("Syntax Error");
-						return;
-					}
-					else{
-						for(int i = 0; i <= (xValues.length - 1); i++) {
-							m.addVariable("x", xValues[i]);
-							yValues[yIndexTracker++] = m.getValue();
-						}
-					}
-				}
-				yValues = Derivative.findDerivative(xValues, yValues);
+				addEquation("done" + equation.getText());
 				pointsReady = true;
-				//M Resetting yIndexTracker.
-				yIndexTracker = 0;
 			}
 	   	});
 		secondDerivative.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//M Resetting yIndexTracker.
-				yIndexTracker = 0;
-				equationText = equation.getText();
-				//M Setting the MathEvaluator to the entered equation.
-				if(equation.getText().startsWith("poly")) {
-					Expression ex = new Expression(equation.getText().substring(4));
-					System.out.println(ex.getExpression());
-					if (ex.eval() == null) {
-						equation.setText("Syntax Error");
-						return;
-					}
-					else{
-						for(int i = 0; i <= (xValues.length - 1); i++) {
-							ex.with("x", Double.toString(xValues[i]));
-							yValues[yIndexTracker++] = ex.eval().doubleValue();
-						}
-					}
-				}
-				else {
-					m.setExpression(equation.getText());
-					if (m.getValue() == null) {
-						equation.setText("Syntax Error");
-						return;
-					}
-					else{
-						for(int i = 0; i <= (xValues.length - 1); i++) {
-							m.addVariable("x", xValues[i]);
-							yValues[yIndexTracker++] = m.getValue();
-						}
-					}
-				}
-				yValues = Derivative.findDerivative(xValues, yValues);
-				yValues = Derivative.findDerivative(xValues, yValues);
+				addEquation("dtwo" + equation.getText());
 				pointsReady = true;
-				//M Resetting yIndexTracker.
-				yIndexTracker = 0;
 			}
 	   	});
 		clear.addActionListener(new ActionListener() {
@@ -243,6 +151,11 @@ public class GUI {
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
 	}
+	private void addEquation(String equation) {
+		equationIndexTracker++;
+		equations.add(equation);
+		equationText = equation;
+	}
 	private String getEquationText() {
 		return equationText;
 	}
@@ -251,10 +164,6 @@ public class GUI {
 		return xValues;
 	}
 	
-	private double[] getYValues() {
-		//M A method to get yValues.
-		return yValues;
-	}
 	private boolean getPointsReady() {
 		//M A method to get pointsReady.
 		return pointsReady;
@@ -302,6 +211,8 @@ public class GUI {
 	private void setClearDesired(boolean status) {
 		//M A method to set clearDesired.
 		clearDesired = status;
+		equations.clear();
+		equationIndexTracker = -1;
 	}
 	private void findKeyPoints(double [] xValues, double [] yValues) {
 		maxes = Zeroes.max(xValues, yValues);
@@ -331,93 +242,87 @@ public class GUI {
 		}
 		return 2;
 	}
-	private double [][] unifyKeyPoints(double [][] mins, double [][] maxes, double [][] pois, double [][] holes){
-		//M A method to create a unified array of keyPoints.
-		int length = (mins.length + maxes.length + pois.length + holes.length);
-		System.out.println("Length: " + length);
-		int indexTracker = 0;
-		double [][] keyPoints = new double[length + 4][2];
-		for(int i = 0; i < mins.length; i++) {
-			keyPoints[indexTracker][0] = mins[i][0];
-			keyPoints[indexTracker][0] = mins[i][0];
-			indexTracker++;
+	private List<String> getEquations() {
+		return equations;
+	}
+	private double [] getYValues(double [] xValues, String equation, int derivativeNumber) {
+		MathEvaluator m = new MathEvaluator();
+		m.setExpression(equation);
+		double [] yValues = new double[20001];
+		for(int i = 0; i <= (xValues.length - 1); i++) {
+			m.addVariable("x", xValues[i]);
+			yValues[i] = m.getValue();
 		}
-		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		System.out.println("IT: " + indexTracker);
-		keyPoints[indexTracker++][0] = -15;
-		for(int i = 0; i < maxes.length; i++) {
-			keyPoints[indexTracker][0] = maxes[i][0];
-			keyPoints[indexTracker][0] = maxes[i][0];
-			indexTracker++;
+		switch(derivativeNumber) {
+			case 1:
+				yValues = Derivative.findDerivative(xValues, yValues);
+				return yValues;
+			case 2:
+				yValues = Derivative.findDerivative(xValues, yValues);
+				yValues = Derivative.findDerivative(xValues, yValues);
+				return yValues;
+			default:
+				return yValues;
 		}
-		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		System.out.println("IT: " + indexTracker);
-		keyPoints[indexTracker++][0] = -15;
-		for(int i = 0; i < pois.length; i++) {
-			keyPoints[indexTracker][0] = pois[i][0];
-			keyPoints[indexTracker][0] = pois[i][0];
-			indexTracker++;
-		}
-		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		keyPoints[indexTracker++][0] = -15;
-		for(int i = 0; i < holes.length; i++) {
-			keyPoints[indexTracker][0] = holes[i][0];
-			keyPoints[indexTracker][0] = holes[i][0];
-			indexTracker++;
-		}
-		//M CHANGE IF GIVING USER POWER TO SET WINDOW
-		System.out.println("IT: " + indexTracker);
-		keyPoints[indexTracker++][0] = -15;
-		System.out.println();
-		System.out.println("UNIFY KEY POINTS TEST DATA");
-		System.out.println();
-		for(int i = 0; i < keyPoints.length; i++) {
-			System.out.println("( " + keyPoints[i][0] + " , " + keyPoints[i][1] + " )" );
-		}
-		return keyPoints;
 	}
 	public static void main(String [] args) {
 		GUI gui = new GUI();
 		//M Filling xValues with consecutive x-values.
 		gui.fillXValues();
 		Graph graph = new Graph();
+		double [] yValues = new double [20001];
+		String equation = "";
 		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.
 		while(true) {
 			//M If the points are ready, then they are graphed.
 			if(gui.getPointsReady() == true) {
+				graph.clear();
 				graph.draw();
-				//M Calculating the key points, hopefully this leaves enough time.
-				 gui.findKeyPoints(gui.getXValues(), gui.getYValues());
-				for(int i = 0; i < gui.getHolesLength(); i++) {
-					graph.draw(gui.getHoles()[i][0], gui.getHoles()[i][1], "#F44F0D");
+				for(int i = 0; i < gui.getEquations().size(); i++) {
+					equation = (String) gui.getEquations().get(i);
+					if(equation.startsWith("dtwo")) {
+						equation = equation.substring(4);
+						yValues = gui.getYValues(gui.getXValues(), equation, 2);
+					}
+					else if(equation.startsWith("done")) {
+						equation = equation.substring(4);
+						yValues = gui.getYValues(gui.getXValues(), equation, 1);
+					}
+					else {
+						//M Need to add syntax handling.
+						yValues = gui.getYValues(gui.getXValues(), equation, 0);
+					}
+					graph.draw(gui.getXValues(), yValues);
+					//M Calculating the key points, hopefully this leaves enough time.
+					gui.findKeyPoints(gui.getXValues(), yValues);
+					for(int j = 0; j < gui.getHolesLength(); j++) {
+						graph.draw(gui.getHoles()[j][0], gui.getHoles()[j][1], "#F44F0D");
+					}
+					//M Preventing the method from executing again until the yValues are recalculated.
+					if(Zeroes.lineCheck(gui.getXValues(), yValues) == false) {
+						for(int k = 0; k < gui.getMaxesLength(); k++ ) {
+							graph.draw(gui.getMaxes()[k][0], gui.getMaxes()[k][1], "#67D4C4");
+							System.out.println("Drawing max ( " + gui.getMaxes()[k][0] + " , " + gui.getMaxes()[k][1] + " )");
+						}
+						for(int l = 0; l < gui.getMinsLength(); l++ ) {
+							graph.draw(gui.getMins()[l][0], gui.getMins()[l][1], "#FFC0CB");
+							System.out.println("Drawing min ( " + gui.getMins()[l][0] + " , " + gui.getMins()[l][1] + " )");
+						}
+						for(int m = 0; m < gui.getPoisLength(); m++ ) {
+							//M This is drawing erroneous POIs at x = -10 in particular on some rational functions.
+							//M Unfortunately, simply disabling them isn't an option unlike with lines.
+							graph.draw(gui.getPois()[m][0], gui.getPois()[m][1], "#E9967A");
+							System.out.println("Drawing POI ( " + gui.getPois()[m][0] + " , " + gui.getPois()[m][1] + " )");
+						}
+					}
+					gui.setPointsReady(false);
 				}
 				//M Sending the points to be graphed.
-				graph.draw(gui.getXValues(), gui.getYValues());
-				//M Preventing the method from executing again until the yValues are recalculated.
-				if(Zeroes.lineCheck(gui.getXValues(), gui.getYValues()) == false) {
-					for(int i = 0; i < gui.getMaxesLength(); i++ ) {
-						graph.draw(gui.getMaxes()[i][0], gui.getMaxes()[i][1], "#67D4C4");
-						System.out.println("Drawing max ( " + gui.getMaxes()[i][0] + " , " + gui.getMaxes()[i][1] + " )");
-					}
-					for(int j = 0; j < gui.getMinsLength(); j++ ) {
-						graph.draw(gui.getMins()[j][0], gui.getMins()[j][1], "#FFC0CB");
-						System.out.println("Drawing min ( " + gui.getMins()[j][0] + " , " + gui.getMins()[j][1] + " )");
-					}
-					for(int k = 0; k < gui.getPoisLength(); k++ ) {
-						//M This is drawing erroneous POIs at x = -10 in particular on some rational functions.
-						//M Unfortunately, simply disabling them isn't an option unlike with lines.
-						graph.draw(gui.getPois()[k][0], gui.getPois()[k][1], "#E9967A");
-						System.out.println("Drawing POI ( " + gui.getPois()[k][0] + " , " + gui.getPois()[k][1] + " )");
-					}
-				}
-				//gui.findKeyPoints(gui.getXValues(), gui.getYValues());
-				//graph.drawGraph(gui.getXValues(), gui.getYValues(), gui.unifyKeyPoints(gui.getMins(), gui.getMaxes(), gui.getPois(), gui.getHoles()));
-				gui.setPointsReady(false);
-				// System.out.println(gui.getXValues()[20000]);
+				
 			}
 			else if(gui.getClearDesired() == true) {
 				graph.clear();
-				// System.out.flush();
+				graph.draw();
 				gui.setClearDesired(false);
 			}
 			//M This seems to do something for synchronization, so I'm just going to leave it for now.
