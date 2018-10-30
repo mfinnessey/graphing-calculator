@@ -21,8 +21,8 @@ public class GUI {
 	private int yIndexTracker;
 	//M Store the x and y values respectively.
 	//M We're trying this. IDK if it works. YOLO.
-	private double [] xValues = new double[20001];
-	private double [] yValues = new double [20001];
+	private double [] xValues;
+	private double [] yValues;
 	private double [][] maxes;
 	private double [][] mins;
 	private double [][] pois;
@@ -47,6 +47,26 @@ public class GUI {
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
+		JFrame windowX = new JFrame();
+		JTextField lowerX = new JTextField("Lower x bound");
+		JTextField upperX = new JTextField("Upper x bound");
+		JButton enterX = new JButton("Enter");
+		windowX.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		windowX.getContentPane().add(lowerX, BorderLayout.WEST);
+		windowX.getContentPane().add(upperX, BorderLayout.EAST);
+		windowX.getContentPane().add(enterX, BorderLayout.CENTER);
+		windowX.pack();
+		windowX.setVisible(true);
+		JFrame windowY = new JFrame();
+		JTextField lowerY = new JTextField("Lower y bound");
+		JTextField upperY = new JTextField("Upper y bound");
+		JButton enterY = new JButton("Enter");
+		windowY.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		windowY.getContentPane().add(lowerY, BorderLayout.WEST);
+		windowY.getContentPane().add(upperY, BorderLayout.EAST);
+		windowY.getContentPane().add(enterY, BorderLayout.CENTER);
+		windowY.pack();
+		windowY.setVisible(true);
 		JFrame integralFrame = new JFrame();
 		JTextField lowerLimit = new JTextField("Enter lower limit here.");
 		JTextField upperLimit = new JTextField("Enter upper limit here.");
@@ -61,6 +81,8 @@ public class GUI {
 		integralFrame.pack();
 		integralFrame.setVisible(true);
 		
+		xValues = new double[Integer.parseInt(upperX.getText())-Integer.parseInt(lowerX.getText())];
+		yValues = new double[Integer.parseInt(upperY.getText())-Integer.parseInt(lowerY.getText())];
 		evaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integral integral = new Integral();
