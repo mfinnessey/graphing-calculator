@@ -43,23 +43,29 @@ public class Zeroes {
 		return rV;
 	}
 	
-	public static double[][] hole(double [] xValues, double [] yValues){
+	public static double[][] hole(double [] xValues, double [] yValues, String expression){
 		//M Need to make procedural. Can be added later.
-		int numberOfHoles = 0;
-		int indexTracker = 0;
-		for(int i = 0; i < xValues.length; i++) {
-			if(Double.isNaN(yValues[i])) {
-				numberOfHoles++;
-			}
+		if ((expression.indexOf("sqrt") > -1) || (expression.indexOf("log") > -1) || (expression.indexOf("ln") > -1) || (expression.indexOf("asin") > -1) || (expression.indexOf("acos") > -1) || (expression.indexOf("atan") > -1)) {
+			double [][] rV = new double [0][2];
+			return rV;
 		}
-		double [][] holes = new double [numberOfHoles][2];
-		for(int j = 0; j < xValues.length; j++) {
-			if(Double.isNaN(yValues[j])) {
-				holes[indexTracker][0] = xValues[j];
-				holes[indexTracker][1] = (yValues[j+1] + yValues[j-1])/2;
+		else {
+			int numberOfHoles = 0;
+			int indexTracker = 0;
+			for(int i = 0; i < xValues.length; i++) {
+				if(Double.isNaN(yValues[i])) {
+					numberOfHoles++;
+				}
 			}
+			double [][] holes = new double [numberOfHoles][2];
+			for(int j = 0; j < xValues.length; j++) {
+				if(Double.isNaN(yValues[j])) {
+					holes[indexTracker][0] = xValues[j];
+					holes[indexTracker][1] = (yValues[j+1] + yValues[j-1])/2;
+				}
+			}
+			return holes;
 		}
-		return holes;
 	}
 	public static double[][] max(double[] xValues, double[] yValues){
 		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
@@ -115,7 +121,7 @@ public class Zeroes {
 		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
 		double[] inflectionYValues = Derivative.findDerivative(xValues, derivativeYValues);
 		int pois = 0;
-		for (int i = 0; i < xValues.length-1; i++) {
+		for (int i = 1; i < xValues.length-2; i++) {
 			double firstValue = inflectionYValues[i];
 			double secondValue = inflectionYValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
@@ -129,7 +135,7 @@ public class Zeroes {
 		double[][] rV = new double[pois][2];
 		//K Creates array with a space for all the zeros
 		int index = 0;
-		for (int i = 0; i < xValues.length-1; i++) {
+		for (int i = 1; i < xValues.length-2; i++) {
 			double firstValue = inflectionYValues[i];
 			double secondValue = inflectionYValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
@@ -141,6 +147,7 @@ public class Zeroes {
 				rV[index][1] = yValues[i];
 				index++;
 			}else if (firstValue == 0) {
+				//M This might be where the issue is with rational functions. I'll do more work on this on Monday.
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
