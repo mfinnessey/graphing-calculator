@@ -54,9 +54,9 @@ public class GUI {
 		frame.setVisible(true);
 		
 		JFrame trapezoidalIntegralFrame = new JFrame();
-		JTextField trapezoidalLowerLimit = new JTextField("Enter lower limit here.");
-		JTextField trapezoidalUpperLimit = new JTextField("Enter upper limit here.");
-		JButton trapezoidalEvaluate = new JButton("Evaluate Trapezoidal Integral");
+		JTextField trapezoidalLowerLimit = new JTextField("Lower Limit");
+		JTextField trapezoidalUpperLimit = new JTextField("Upper Limit");
+		JButton trapezoidalEvaluate = new JButton("Evaluate");
 		JTextArea trapezoidalIntegralValue = new JTextArea("No Value to Display");
 		JTextField function = new JTextField("Enter f(x)");
 		trapezoidalIntegralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,6 +67,7 @@ public class GUI {
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalEvaluate, BorderLayout.CENTER);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalIntegralValue, BorderLayout.SOUTH);
 		trapezoidalIntegralFrame.pack();
+		trapezoidalIntegralFrame.setSize(350, 100);
 		trapezoidalIntegralFrame.setVisible(true);
 		
 		trapezoidalEvaluate.addActionListener(new ActionListener() {

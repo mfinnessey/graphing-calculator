@@ -44,7 +44,7 @@ public class GraphingCalculator {
 		GUI gui = new GUI();
 		//M Filling xValues with consecutive x-values.
 		gui.fillXValues();
-		Graph graph = new Graph();
+		Graph graph = new Graph(Integer.parseInt(lowerX.getText()), Integer.parseInt(upperX.getText()), Integer.parseInt(lowerY.getText()), Integer.parseInt(upperY.getText()));
 		double [] yValues = new double [20001];
 		String equation = "";
 		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.

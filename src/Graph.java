@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.geom.Line2D;
 
 import javax.swing.JFrame;
@@ -13,16 +15,31 @@ public class Graph {
 	static private int colorTracker = 0;
 	private String [] lineColors = {"#FF0000", "#FFA500", "#008000", "#00FFFF", "#000080",
 			"#FF00FF", "#800080", "#C0C0C0"};
-	public Graph() {
+	private int graphRatio = 0;
+	public Graph(int lowerX, int upperX, int lowerY, int upperY) {
 		JFrame frame = new JFrame();
-		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(graphWindow, BorderLayout.CENTER);
 		frame.pack();
-		frame.setSize(500, 500);
-		graphWindow.setSize(500, 500);
+		int width = upperX - lowerX;
+		int height = upperY - lowerY;
+		if(width > 1000 || height > 1000) {
+			System.out.println("Error: range too great");
+			System.exit(0);
+		}
+		else if ((width * 25) > 1000 || (height * 25) > 1000) {
+			graphRatio = 1000/width;
+			if(1000/height < graphRatio) {
+				graphRatio = 1000/height;
+			}
+		}
+		frame.setSize(1000, 1000);
+		graphWindow.setSize(1000, 1000);
 		frame.setLocation(600, 0);
 		frame.setVisible(true);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		System.out.println("Width: " + screenSize.getWidth());
+		System.out.println("Height: " + screenSize.getHeight());
 	}
 
 	public void clear() {
