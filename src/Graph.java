@@ -16,7 +16,15 @@ public class Graph {
 	private String [] lineColors = {"#FF0000", "#FFA500", "#008000", "#00FFFF", "#000080",
 			"#FF00FF", "#800080", "#C0C0C0"};
 	private int graphRatio = 0;
+	private int lowerXLimit;
+	private int upperXLimit;
+	private int lowerYLimit;
+	private int upperYLimit;
 	public Graph(int lowerX, int upperX, int lowerY, int upperY) {
+		lowerXLimit = lowerX;
+		upperXLimit = upperX;
+		lowerYLimit = lowerY;
+		upperYLimit = upperY;
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(graphWindow, BorderLayout.CENTER);
@@ -45,41 +53,45 @@ public class Graph {
 	public void clear() {
 		//M A method to clear the graph
 		g = (Graphics2D) graphWindow.getGraphics();
-		g.clearRect(0, 0, 500, 500);
+		g.clearRect(0, 0, 1000, 1000);
 		colorTracker = 0;
 	}
 	
 	 public void draw(double [] xValues, double [] yValues) {
 		 //TODO A method to draw the graph.
-	        //Get the Graphics2D object of a JPanel, to draw on
-	        g = (Graphics2D) graphWindow.getGraphics();
-        	//M Reusing the colors as necessary.
-	        if(colorTracker > 7) {
-        		colorTracker = 0;
-        	}
-        	//M Changing the colors of lines.
-        	g.setColor(Color.decode(lineColors[colorTracker++]));
-		        for (int i=1; i < xValues.length; i++) {
-		            drawPoint(xValues[i], yValues[i]);  //Your data gets read here
-		        }
+        //Get the Graphics2D object of a JPanel, to draw on
+        g = (Graphics2D) graphWindow.getGraphics();
+    	//M Reusing the colors as necessary.
+        if(colorTracker > 7) {
+    		colorTracker = 0;
+    	}
+    	//M Changing the colors of lines.
+    	g.setColor(Color.decode(lineColors[colorTracker++]));
+        for (int i=1; i < xValues.length; i++) {
+            drawPoint(xValues[i], yValues[i]);  //Your data gets read here
+        }
 	 }
+	 
 	 public void draw() {
 		 g = (Graphics2D) graphWindow.getGraphics();
 		//K draws some coordinate lines
-	    for (int i = 0; i < 500; i+=25) {
+	    for (int i = 0; i < 1000; i+=graphRatio) {
 	    	g.setColor(Color.lightGray);
-	        g.drawLine(0, i, 500, i); // X coords
-	        g.drawLine(i, 500, i, 0); // Y coords
+	        g.drawLine(0, i, 1000, i); // X coords
+	        g.drawLine(i, 1000, i, 0); // Y coords
 	    }
 	        //Draw some axes
 	    g.setColor(Color.BLACK);
-	    g.drawLine(250, 500, 250, 0); // The Y axis
-	    g.drawLine(0, 250, 500, 250);  //The X axis
+	    g.drawLine(500, 1000, 500, 0); // The Y axis
+	    g.drawLine(0, 500, 1000, 500);  //The X axis
 	    //K Writes coordinate numberline
 	    g.setColor(Color.GRAY);
-	    for(int i = -10; i <=10; i++) {
-	    	g.drawString(Integer.toString(i), 25*(i+10), 250); // X coords
-	    	g.drawString(Integer.toString(i), 250, 500-25*(i+10)); // Y coords
+	    //M Un-hard coded through here.
+	    for(int i = lowerXLimit; i <= upperXLimit; i++) {
+	    	g.drawString(Integer.toString(i), graphRatio*(i+10), 500); // X coords
+	    }
+	    for(int j = lowerYLimit; j <= upperYLimit; j++) {
+	    	g.drawString(Integer.toString(j), 500, 1000-graphRatio*(j+10)); // Y coords
 	    }
 	        
 	        //K I added some aesthetics but now the graph is kinda messed up because the
