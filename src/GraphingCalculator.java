@@ -41,6 +41,7 @@ public class GraphingCalculator {
 				System.out.println("Interrupted");
 			}
 		}
+		boundsFrame.setVisible(false);
 		GUI gui = new GUI();
 		//M Filling xValues with consecutive x-values.
 		gui.fillXValues();
@@ -51,6 +52,8 @@ public class GraphingCalculator {
 		while(true) {
 			//M If the points are ready, then they are graphed.
 			if(gui.getPointsReady() == true) {
+				//M Reaching here.
+				System.out.println("Graphing Begun");
 				graph.clear();
 				graph.draw();
 				for(int i = 0; i < gui.getEquations().size(); i++) {
@@ -67,6 +70,8 @@ public class GraphingCalculator {
 						//M Need to add syntax handling.
 						yValues = gui.getYValues(gui.getXValues(), equation, 0);
 					}
+					//M Not Reaching Here.
+					System.out.println("Graphing Values");
 					graph.draw(gui.getXValues(), yValues);
 					//M Calculating the key points, hopefully this leaves enough time.
 					gui.findKeyPoints(gui.getXValues(), yValues);
