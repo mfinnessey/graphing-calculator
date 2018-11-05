@@ -79,7 +79,6 @@ public class Graph {
 	 
 	 public void draw() {
 		 g = (Graphics2D) graphWindow.getGraphics();
-		 System.out.println("DRAW BEGUN");
 		//K draws some coordinate lines
 	    for (int i = 0; i < 900; i+=graphRatio) {
 	    	g.setColor(Color.lightGray);
@@ -94,6 +93,7 @@ public class Graph {
 	    //K Writes coordinate numberline
 	    g.setColor(Color.GRAY);
 	    //M Un-hard coded through here.
+	    //M SCREWED UP YAY
 	    for(int i = lowerXLimit; i <= upperXLimit; i++) {
 	    	g.drawString(Integer.toString(i), graphRatio*(i+10), 450); // X coords
 	    }
