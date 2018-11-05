@@ -46,6 +46,7 @@ public class GraphingCalculator {
 		//M Filling xValues with consecutive x-values.
 		gui.fillXValues();
 		Graph graph = new Graph(Integer.parseInt(lowerX.getText()), Integer.parseInt(upperX.getText()), Integer.parseInt(lowerY.getText()), Integer.parseInt(upperY.getText()));
+		System.out.println("graphRatio: " + graph.getGraphRatio());
 		double [] yValues = new double [20001];
 		String equation = "";
 		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.
@@ -53,10 +54,12 @@ public class GraphingCalculator {
 			//M If the points are ready, then they are graphed.
 			if(gui.getPointsReady() == true) {
 				//M Reaching here.
-				System.out.println("Graphing Begun");
 				graph.clear();
 				graph.draw();
+				System.out.println("MEME");
+				System.out.println(gui.getEquations().size());
 				for(int i = 0; i < gui.getEquations().size(); i++) {
+					System.out.println("TWO");
 					equation = (String) gui.getEquations().get(i);
 					if(equation.startsWith("dtwo")) {
 						equation = equation.substring(4);
@@ -71,7 +74,7 @@ public class GraphingCalculator {
 						yValues = gui.getYValues(gui.getXValues(), equation, 0);
 					}
 					//M Not Reaching Here.
-					System.out.println("Graphing Values");
+					System.out.println("THREE");
 					graph.draw(gui.getXValues(), yValues);
 					//M Calculating the key points, hopefully this leaves enough time.
 					gui.findKeyPoints(gui.getXValues(), yValues);

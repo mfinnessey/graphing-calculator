@@ -35,12 +35,13 @@ public class Graph {
 			System.out.println("Error: range too great");
 			System.exit(0);
 		}
-		else if ((width * 25) > 1000 || (height * 25) > 1000) {
+		else {
 			graphRatio = 1000/width;
 			if(1000/height < graphRatio) {
 				graphRatio = 1000/height;
 			}
 		}
+		
 		frame.setSize(1000, 1000);
 		graphWindow.setSize(1000, 1000);
 		frame.setLocation(600, 0);
@@ -50,6 +51,10 @@ public class Graph {
 		System.out.println("Height: " + screenSize.getHeight());
 	}
 
+	public int getGraphRatio() {
+		return graphRatio;
+	}
+	 
 	public void clear() {
 		//M A method to clear the graph
 		g = (Graphics2D) graphWindow.getGraphics();
@@ -74,17 +79,22 @@ public class Graph {
 	 
 	 public void draw() {
 		 g = (Graphics2D) graphWindow.getGraphics();
+		 System.out.println("DRAW BEGUN");
 		//K draws some coordinate lines
 	    for (int i = 0; i < 1000; i+=graphRatio) {
 	    	g.setColor(Color.lightGray);
 	        g.drawLine(0, i, 1000, i); // X coords
 	        g.drawLine(i, 1000, i, 0); // Y coords
+	        //M Issue is that graphRatio isn't being calculated.
+	        System.out.println("I: " + i);
 	    }
+	    System.out.println("COORDINATES DRAWN");
 	        //Draw some axes
 	    g.setColor(Color.BLACK);
 	    g.drawLine(500, 1000, 500, 0); // The Y axis
 	    g.drawLine(0, 500, 1000, 500);  //The X axis
 	    //K Writes coordinate numberline
+	    System.out.println("AXES DRAWN");
 	    g.setColor(Color.GRAY);
 	    //M Un-hard coded through here.
 	    for(int i = lowerXLimit; i <= upperXLimit; i++) {
@@ -93,7 +103,7 @@ public class Graph {
 	    for(int j = lowerYLimit; j <= upperYLimit; j++) {
 	    	g.drawString(Integer.toString(j), 500, 1000-graphRatio*(j+10)); // Y coords
 	    }
-	        
+	    System.out.println("NUMBERS FINISHED");
 	        //K I added some aesthetics but now the graph is kinda messed up because the
 	        //K axes keep on going over the lines when I do more than one line in a graph
 	        //K Other than that it works great
