@@ -42,10 +42,11 @@ public class GraphingCalculator {
 			}
 		}
 		boundsFrame.setVisible(false);
-		GUI gui = new GUI();
+		
+		Graph graph = new Graph(Integer.parseInt(lowerX.getText()), Integer.parseInt(upperX.getText()), Integer.parseInt(lowerY.getText()), Integer.parseInt(upperY.getText()));
+		GUI gui = new GUI(Integer.parseInt(lowerX.getText()), Integer.parseInt(upperX.getText()));
 		//M Filling xValues with consecutive x-values.
 		gui.fillXValues();
-		Graph graph = new Graph(Integer.parseInt(lowerX.getText()), Integer.parseInt(upperX.getText()), Integer.parseInt(lowerY.getText()), Integer.parseInt(upperY.getText()));
 		System.out.println("graphRatio: " + graph.getGraphRatio());
 		double [] yValues = new double [20001];
 		String equation = "";

@@ -20,8 +20,8 @@ public class GUI {
 	private int xIndexTracker;
 	//M Store the x and y values respectively.
 	//M We're trying this. IDK if it works. YOLO.
-	private double [] xValues = new double[20001];
-	private double [] yValues = new double [20001];
+	List<Double> xValues = new ArrayList<Double>();
+	List<Double> yValues = new ArrayList<Double>();
 	private double [][] maxes;
 	private double [][] mins;
 	private double [][] pois;
@@ -33,7 +33,7 @@ public class GUI {
 	List<String> equations = new ArrayList<String>();
 	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
 	
-	public GUI() {
+	public GUI(int lowerX, int upperX) {
 		//M Creating the various swing components.
 		
 		
@@ -91,27 +91,27 @@ public class GUI {
 				if(tempEquation.startsWith("done")) {
 					tempEquation = tempEquation.substring(4);
 					m.setExpression(tempEquation);
-					for(int i = 0; i <= (xValues.length -1); i++) {
-						m.addVariable("x", xValues[i]);
-						yValues[i] = m.getValue();
+					for(int i = 0; i <= (xValues.size() -1); i++) {
+						m.addVariable("x", xValues.get(i));
+						yValues.set(i, m.getValue());
 					}
 					yValues = Derivative.findDerivative(xValues, yValues);
 				}
 				else if(tempEquation.startsWith("dtwo")) {
 					tempEquation = tempEquation.substring(4);
 					m.setExpression(tempEquation);
-					for(int i = 0; i <= (xValues.length -1); i++) {
-						m.addVariable("x", xValues[i]);
-						yValues[i] = m.getValue();
+					for(int i = 0; i <= (xValues.size() -1); i++) {
+						m.addVariable("x", xValues.get(i));
+						yValues.set(i, m.getValue());
 					}
 					yValues = Derivative.findDerivative(xValues, yValues);
 					yValues = Derivative.findDerivative(xValues, yValues);
 				}
 				else {
 					m.setExpression(tempEquation);
-					for(int i = 0; i <= (xValues.length -1); i++) {
-						m.addVariable("x", xValues[i]);
-						yValues[i] = m.getValue();
+					for(int i = 0; i <= (xValues.size() -1); i++) {
+						m.addVariable("x", xValues.get(i));
+						yValues.set(i, m.getValue());
 					}
 				}
 				System.out.println("Temp Equation: " + tempEquation);
@@ -147,6 +147,7 @@ public class GUI {
 	   	});
 	}
 	public void fillXValues() {
+		//M Need to remove hard-coding.
 		//M A method to fill xValues with consecutive numbers.
 		/*M The index of xValues is tracked separately from the loop to allow arithmetic to be done 
 		 * with the loop counter.*/
@@ -163,7 +164,7 @@ public class GUI {
 	public String getEquationText() {
 		return equationText;
 	}
-	public double[] getXValues() {
+	public List<Double >getXValues() {
 		//M A method to get the xValues.
 		return xValues;
 	}
@@ -249,11 +250,11 @@ public class GUI {
 	public List<String> getEquations() {
 		return equations;
 	}
-	public double [] getYValues(double [] xValues, String equation, int derivativeNumber) {
+	public double [] getYValues(List<Double> xValues, String equation, int derivativeNumber) {
 		MathEvaluator m = new MathEvaluator();
 		m.setExpression(equation);
 		double [] yValues = new double[20001];
-		for(int i = 0; i <= (xValues.length - 1); i++) {
+		for(int i = 0; i <= (xValues.size() - 1); i++) {
 			m.addVariable("x", xValues[i]);
 			yValues[i] = m.getValue();
 		}

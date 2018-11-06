@@ -94,6 +94,8 @@ public class Graph {
 	    g.setColor(Color.GRAY);
 	    //M Un-hard coded through here.
 	    //M SCREWED UP YAY
+	    System.out.println("X: " + lowerXLimit + " - " + upperXLimit);
+	    System.out.println("Y: " + lowerYLimit + " - " + upperYLimit);
 	    for(int i = lowerXLimit; i <= upperXLimit; i++) {
 	    	g.drawString(Integer.toString(i), graphRatio*(i+10), 450); // X coords
 	    }
