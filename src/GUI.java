@@ -22,6 +22,7 @@ public class GUI {
 	//M We're trying this. IDK if it works. YOLO.
 	private double [] xValues = new double[20001];
 	private double [] yValues = new double [20001];
+	private double [][] zeros;
 	private double [][] maxes;
 	private double [][] mins;
 	private double [][] pois;
@@ -172,6 +173,12 @@ public class GUI {
 		//M A method to get clearDesired.
 		return clearDesired;
 	}
+	
+	private int getZerosLength() {
+		//K A method to get the length of zeros.
+		return zeros.length;
+	}
+	
 	private int getMaxesLength() {
 		//M A method to get the length of maxes.
 		return maxes.length;
@@ -188,6 +195,12 @@ public class GUI {
 		//M A method to get the length of holes.
 		return holes.length;
 	}
+	
+	private double[][] getZeros(){
+		//K A method to get zeros.
+		return zeros;
+	}
+	
 	private double [][] getMaxes(){
 		//M A method to get maxes.
 		return maxes;
@@ -215,6 +228,7 @@ public class GUI {
 		equationIndexTracker = -1;
 	}
 	private void findKeyPoints(double [] xValues, double [] yValues) {
+		zeros = Zeroes.findZeros(xValues, yValues);
 		maxes = Zeroes.max(xValues, yValues);
 		mins = Zeroes.min(xValues, yValues);
 		pois = Zeroes.POI(xValues, yValues);
@@ -297,9 +311,14 @@ public class GUI {
 					gui.findKeyPoints(gui.getXValues(), yValues);
 					for(int j = 0; j < gui.getHolesLength(); j++) {
 						graph.draw(gui.getHoles()[j][0], gui.getHoles()[j][1], "#F44F0D");
+						System.out.println("Drawing hole ( " + gui.getHoles()[j][0] + " , " + gui.getHoles()[j][1] + " )");
 					}
 					//M Preventing the method from executing again until the yValues are recalculated.
 					if(Zeroes.lineCheck(gui.getXValues(), yValues) == false) {
+						for(int n = 0; n < gui.getZerosLength(); n++ ) {
+							graph.draw(gui.getZeros()[n][0], gui.getZeros()[n][1], "#67D4C4");
+							System.out.println("Drawing zero ( " + gui.getZeros()[n][0] + " , " + gui.getZeros()[n][1] + " )");
+						}
 						for(int k = 0; k < gui.getMaxesLength(); k++ ) {
 							graph.draw(gui.getMaxes()[k][0], gui.getMaxes()[k][1], "#67D4C4");
 							System.out.println("Drawing max ( " + gui.getMaxes()[k][0] + " , " + gui.getMaxes()[k][1] + " )");
@@ -316,6 +335,7 @@ public class GUI {
 						}
 					}
 					gui.setPointsReady(false);
+					System.out.println();
 				}
 				//M Sending the points to be graphed.
 				
