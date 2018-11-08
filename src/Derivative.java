@@ -6,8 +6,9 @@ public class Derivative {
 		//M A method to calculate the various derivative values from a set of points.
 		List<Double> derivativeYValues = new ArrayList<Double>();
 		//M Currently calculating the derivative on (-10,10). LMK if changes are needed.
-		for(int i = 1; i < (yValues.size()-1); i++) {
+		for(int i = 1; i <= (yValues.size()); i++) {
 			//M Applying the alternate limit definition.
+			System.out.println("I: " + i);
 			derivativeYValues.add((i-1), ((yValues.get(i) - yValues.get(i-1)) / (xValues.get(i) - xValues.get(i-1))));
 		}
 		//M Returning the derivativeYValues.
