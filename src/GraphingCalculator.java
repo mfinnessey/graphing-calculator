@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.AbstractAction;
@@ -48,7 +50,7 @@ public class GraphingCalculator {
 		//M Filling xValues with consecutive x-values.
 		gui.fillXValues();
 		System.out.println("graphRatio: " + graph.getGraphRatio());
-		double [] yValues = new double [20001];
+		List<Double> yValues = new ArrayList<Double>();
 		String equation = "";
 		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.
 		while(true) {

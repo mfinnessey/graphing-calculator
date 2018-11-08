@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.geom.Line2D;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -62,7 +63,7 @@ public class Graph {
 		colorTracker = 0;
 	}
 	
-	 public void draw(double [] xValues, double [] yValues) {
+	 public void draw(List<Double> xValues, List<Double> yValues) {
 		 //TODO A method to draw the graph.
         //Get the Graphics2D object of a JPanel, to draw on
         g = (Graphics2D) graphWindow.getGraphics();
@@ -72,8 +73,8 @@ public class Graph {
     	}
     	//M Changing the colors of lines.
     	g.setColor(Color.decode(lineColors[colorTracker++]));
-        for (int i=1; i < xValues.length; i++) {
-            drawPoint(xValues[i], yValues[i]);  //Your data gets read here
+        for (int i=1; i < xValues.size(); i++) {
+            drawPoint(xValues.get(i), yValues.get(i));  //Your data gets read here
         }
 	 }
 	 

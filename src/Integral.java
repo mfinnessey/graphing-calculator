@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Integral {
 	public String findDefiniteIntegral(double lowerLimit, double upperLimit, double [] xValues, double [] yValues) {
 		//M Variable to store the value of the integral.
@@ -47,7 +49,7 @@ public class Integral {
 		}
 	}
 	
-	public String trapezoidalIntegral(double lowerLimit, double upperLimit, double [] xValues, double [] yValues) {
+	public String trapezoidalIntegral(double lowerLimit, double upperLimit, List<Double> xValues, List<Double> yValues) {
 		//M Variable to store the value of the integral.
 				double integralValue = 0.0;
 				//M Variable to store the step value.
@@ -58,14 +60,14 @@ public class Integral {
 				int temp = -1;
 				boolean inverted = false;
 				//M Finding the beginning and ending indices.
-				for(int i = 0; i < xValues.length; i++) {
-					if(xValues[i] == lowerLimit) {
+				for(int i = 0; i < xValues.size(); i++) {
+					if(xValues.get(i) == lowerLimit) {
 						beginIndex = i;
 						break;
 					}
 				}
-				for(int j = 0; j < xValues.length; j++) {
-					if(xValues[j] == upperLimit) {
+				for(int j = 0; j < xValues.size(); j++) {
+					if(xValues.get(j) == upperLimit) {
 						endIndex = j;
 						break;
 					}
@@ -78,13 +80,13 @@ public class Integral {
 					endIndex = temp;
 				}
 				for(int k = beginIndex; k <= endIndex; k++) {
-					if(Double.isNaN(yValues[k]) || Double.isInfinite(yValues[k])) {
+					if(Double.isNaN(yValues.get(k)) || Double.isInfinite(yValues.get(k))) {
 						return "Not possible";
 					}
 				}
 				for(int l = beginIndex; l < endIndex; l++) {
 					//this is the only line of code I changed
-					integralValue += (STEP_VALUE * (yValues[l]+yValues[l+1]) / 2);
+					integralValue += (STEP_VALUE * (yValues.get(l)+yValues.get(l+1)) / 2);
 				}
 				
 				if(inverted == false) {

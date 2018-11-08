@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -153,7 +152,7 @@ public class GUI {
 		 * with the loop counter.*/
 		xIndexTracker = 0;
 		for(int i = (int) (-1 * Math.pow(10,4)); i <= (int) Math.pow(10, 4); i++) {
-			xValues[xIndexTracker++] = (double) (i * step);
+			xValues.set(xIndexTracker++, (double) (i * step));
 		}
 	}
 	private void addEquation(String equation) {
@@ -219,7 +218,7 @@ public class GUI {
 		equations.clear();
 		equationIndexTracker = -1;
 	}
-	public void findKeyPoints(double [] xValues, double [] yValues) {
+	public void findKeyPoints(List<Double> xValues, List<Double> yValues) {
 		maxes = Zeroes.max(xValues, yValues);
 		mins = Zeroes.min(xValues, yValues);
 		pois = Zeroes.POI(xValues, yValues);
@@ -250,13 +249,13 @@ public class GUI {
 	public List<String> getEquations() {
 		return equations;
 	}
-	public double [] getYValues(List<Double> xValues, String equation, int derivativeNumber) {
+	public List<Double> getYValues(List<Double> xValues, String equation, int derivativeNumber) {
 		MathEvaluator m = new MathEvaluator();
 		m.setExpression(equation);
-		double [] yValues = new double[20001];
+		List<Double> yValues = new ArrayList<Double>();
 		for(int i = 0; i <= (xValues.size() - 1); i++) {
-			m.addVariable("x", xValues[i]);
-			yValues[i] = m.getValue();
+			m.addVariable("x", xValues.get(i));
+			yValues.set(i, m.getValue());
 		}
 		switch(derivativeNumber) {
 			case 1:
