@@ -152,7 +152,7 @@ public class GUI {
 		 * with the loop counter.*/
 		xIndexTracker = 0;
 		for(int i = (int) (-1 * Math.pow(10,4)); i <= (int) Math.pow(10, 4); i++) {
-			xValues.set(xIndexTracker++, (double) (i * step));
+			xValues.add(xIndexTracker++, (double) (i * step));
 		}
 	}
 	private void addEquation(String equation) {
@@ -255,7 +255,7 @@ public class GUI {
 		List<Double> yValues = new ArrayList<Double>();
 		for(int i = 0; i <= (xValues.size() - 1); i++) {
 			m.addVariable("x", xValues.get(i));
-			yValues.set(i, m.getValue());
+			yValues.add(i, m.getValue());
 		}
 		switch(derivativeNumber) {
 			case 1:
