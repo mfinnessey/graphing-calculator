@@ -316,7 +316,7 @@ public class GUI {
 					//M Preventing the method from executing again until the yValues are recalculated.
 					if(Zeroes.lineCheck(gui.getXValues(), yValues) == false) {
 						for(int n = 0; n < gui.getZerosLength(); n++ ) {
-							graph.draw(gui.getZeros()[n][0], gui.getZeros()[n][1], "#67D4C4");
+							graph.draw(gui.getZeros()[n][0], gui.getZeros()[n][1], "#00FF00");
 							System.out.println("Drawing zero ( " + gui.getZeros()[n][0] + " , " + gui.getZeros()[n][1] + " )");
 						}
 						for(int k = 0; k < gui.getMaxesLength(); k++ ) {
@@ -324,13 +324,13 @@ public class GUI {
 							System.out.println("Drawing max ( " + gui.getMaxes()[k][0] + " , " + gui.getMaxes()[k][1] + " )");
 						}
 						for(int l = 0; l < gui.getMinsLength(); l++ ) {
-							graph.draw(gui.getMins()[l][0], gui.getMins()[l][1], "#FFC0CB");
+							graph.draw(gui.getMins()[l][0], gui.getMins()[l][1], "#6600FF");
 							System.out.println("Drawing min ( " + gui.getMins()[l][0] + " , " + gui.getMins()[l][1] + " )");
 						}
 						for(int m = 0; m < gui.getPoisLength(); m++ ) {
 							//M This is drawing erroneous POIs at x = -10 in particular on some rational functions.
 							//M Unfortunately, simply disabling them isn't an option unlike with lines.
-							graph.draw(gui.getPois()[m][0], gui.getPois()[m][1], "#E9967A");
+							graph.draw(gui.getPois()[m][0], gui.getPois()[m][1], "#FFFF00");
 							System.out.println("Drawing POI ( " + gui.getPois()[m][0] + " , " + gui.getPois()[m][1] + " )");
 						}
 					}
