@@ -9,7 +9,7 @@ public class Zeroes {
 		//K: Problem: if a function touches the x axis but doesn't cross
 		//K: Problem2: function has vertical asymptote
 		int zeros = 0;
-		for (int i = 0; i < xValues.length-1; i++) {
+		for (int i = 1; i < xValues.length-1; i++) {
 			double firstValue = yValues[i];
 			double secondValue = yValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
@@ -23,7 +23,7 @@ public class Zeroes {
 		double[][] rV = new double[zeros][2];
 		//K Creates array with a space for all the zeros
 		int index = 0;
-		for (int i = 0; i < xValues.length-1; i++) {
+		for (int i = 1; i < xValues.length-1; i++) {
 			double firstValue = yValues[i];
 			double secondValue = yValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
@@ -70,8 +70,8 @@ public class Zeroes {
 	public static double[][] max(double[] xValues, double[] yValues){
 		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
 		int maxes = 0;
-		for (int i = 1; i < xValues.length-1; i++) {
-			double firstValue = derivativeYValues[i-1];
+		for (int i = 2; i < xValues.length-1; i++) {
+			double firstValue = derivativeYValues[i];
 			double secondValue = derivativeYValues[i+1];
 			if (firstValue > 0 && (secondValue) < 0) {
 				maxes++;
@@ -80,8 +80,8 @@ public class Zeroes {
 		double[][] rV = new double[maxes][2];
 		//K Creates array with a space for all the zeros
 		int index = 0;
-		for (int i = 1; i < xValues.length-1; i++) {
-			double firstValue = derivativeYValues[i-1];
+		for (int i = 2; i < xValues.length-1; i++) {
+			double firstValue = derivativeYValues[i];
 			double secondValue = derivativeYValues[i+1];
 			if (firstValue > 0 && (secondValue) < 0) {
 				rV[index][0] = xValues[i];
@@ -95,8 +95,8 @@ public class Zeroes {
 	public static double[][] min(double[] xValues, double[] yValues){
 		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
 		int mins = 0;
-		for (int i = 1; i < xValues.length-1; i++) {
-			double firstValue = derivativeYValues[i-1];
+		for (int i = 2; i < xValues.length-1; i++) {
+			double firstValue = derivativeYValues[i];
 			double secondValue = derivativeYValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
 				mins++;
@@ -105,8 +105,8 @@ public class Zeroes {
 		double[][] rV = new double[mins][2];
 		//K Creates array with a space for all the zeros
 		int index = 0;
-		for (int i = 1; i < xValues.length-1; i++) {
-			double firstValue = derivativeYValues[i-1];
+		for (int i = 2; i < xValues.length-1; i++) {
+			double firstValue = derivativeYValues[i];
 			double secondValue = derivativeYValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
 				rV[index][0] = xValues[i];
@@ -121,7 +121,7 @@ public class Zeroes {
 		double[] derivativeYValues = Derivative.findDerivative(xValues, yValues);
 		double[] inflectionYValues = Derivative.findDerivative(xValues, derivativeYValues);
 		int pois = 0;
-		for (int i = 1; i < xValues.length-2; i++) {
+		for (int i = 3; i < xValues.length-1; i++) {
 			double firstValue = inflectionYValues[i];
 			double secondValue = inflectionYValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {
@@ -135,7 +135,7 @@ public class Zeroes {
 		double[][] rV = new double[pois][2];
 		//K Creates array with a space for all the zeros
 		int index = 0;
-		for (int i = 1; i < xValues.length-2; i++) {
+		for (int i = 3; i < xValues.length-1; i++) {
 			double firstValue = inflectionYValues[i];
 			double secondValue = inflectionYValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0) {

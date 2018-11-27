@@ -22,6 +22,7 @@ public class GUI {
 	//M We're trying this. IDK if it works. YOLO.
 	private double [] xValues = new double[20001];
 	private double [] yValues = new double [20001];
+	private double [][] zeros;
 	private double [][] maxes;
 	private double [][] mins;
 	private double [][] pois;
@@ -172,6 +173,12 @@ public class GUI {
 		//M A method to get clearDesired.
 		return clearDesired;
 	}
+	
+	private int getZerosLength() {
+		//K A method to get the length of zeros.
+		return zeros.length;
+	}
+	
 	private int getMaxesLength() {
 		//M A method to get the length of maxes.
 		return maxes.length;
@@ -188,6 +195,12 @@ public class GUI {
 		//M A method to get the length of holes.
 		return holes.length;
 	}
+	
+	private double[][] getZeros(){
+		//K A method to get zeros.
+		return zeros;
+	}
+	
 	private double [][] getMaxes(){
 		//M A method to get maxes.
 		return maxes;
@@ -215,6 +228,7 @@ public class GUI {
 		equationIndexTracker = -1;
 	}
 	private void findKeyPoints(double [] xValues, double [] yValues) {
+		zeros = Zeroes.findZeros(xValues, yValues);
 		maxes = Zeroes.max(xValues, yValues);
 		mins = Zeroes.min(xValues, yValues);
 		pois = Zeroes.POI(xValues, yValues);
@@ -297,25 +311,31 @@ public class GUI {
 					gui.findKeyPoints(gui.getXValues(), yValues);
 					for(int j = 0; j < gui.getHolesLength(); j++) {
 						graph.draw(gui.getHoles()[j][0], gui.getHoles()[j][1], "#F44F0D");
+						System.out.println("Drawing hole ( " + gui.getHoles()[j][0] + " , " + gui.getHoles()[j][1] + " )");
 					}
 					//M Preventing the method from executing again until the yValues are recalculated.
 					if(Zeroes.lineCheck(gui.getXValues(), yValues) == false) {
+						for(int n = 0; n < gui.getZerosLength(); n++ ) {
+							graph.draw(gui.getZeros()[n][0], gui.getZeros()[n][1], "#00FF00");
+							System.out.println("Drawing zero ( " + gui.getZeros()[n][0] + " , " + gui.getZeros()[n][1] + " )");
+						}
 						for(int k = 0; k < gui.getMaxesLength(); k++ ) {
 							graph.draw(gui.getMaxes()[k][0], gui.getMaxes()[k][1], "#67D4C4");
 							System.out.println("Drawing max ( " + gui.getMaxes()[k][0] + " , " + gui.getMaxes()[k][1] + " )");
 						}
 						for(int l = 0; l < gui.getMinsLength(); l++ ) {
-							graph.draw(gui.getMins()[l][0], gui.getMins()[l][1], "#FFC0CB");
+							graph.draw(gui.getMins()[l][0], gui.getMins()[l][1], "#6600FF");
 							System.out.println("Drawing min ( " + gui.getMins()[l][0] + " , " + gui.getMins()[l][1] + " )");
 						}
 						for(int m = 0; m < gui.getPoisLength(); m++ ) {
 							//M This is drawing erroneous POIs at x = -10 in particular on some rational functions.
 							//M Unfortunately, simply disabling them isn't an option unlike with lines.
-							graph.draw(gui.getPois()[m][0], gui.getPois()[m][1], "#E9967A");
+							graph.draw(gui.getPois()[m][0], gui.getPois()[m][1], "#FFFF00");
 							System.out.println("Drawing POI ( " + gui.getPois()[m][0] + " , " + gui.getPois()[m][1] + " )");
 						}
 					}
 					gui.setPointsReady(false);
+					System.out.println();
 				}
 				//M Sending the points to be graphed.
 				
