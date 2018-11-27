@@ -1,26 +1,33 @@
+//M Various necessary graphics imports.
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-//M Currently issues with graphing complex polynomial functions, likely an issue with syntax for MathEvaluator.
-//M Added these things to hopefully get some drawings gong.
 public class Graph {
-	//M Adding a new JPanel on which to hold the things.
+	//M Adding a JPanel on which the graphs are drawn.
 	JPanel graphWindow = new JPanel();
+	//M An integer to track which colors from lineColors have already been used.
 	static private int colorTracker = 0;
+	//M An array of hex codes which are processed into various colors for the different graphs.
 	private String [] lineColors = {"#FF0000", "#FFA500", "#008000", "#00FFFF", "#000080",
 			"#FF00FF", "#800080", "#C0C0C0"};
 	public Graph() {
+		//TODO A method to construct a new Graph object.
+		//M Creating the underlying JFrame.
 		JFrame frame = new JFrame();
-		
+		//M Setting the program to close when the JFrame is closed.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//M Adding the JPanel to the JFrame.
 		frame.getContentPane().add(graphWindow, BorderLayout.CENTER);
-		frame.pack();
+		//M Setting the size of the underlying JFrame.
 		frame.setSize(500, 500);
+		//M Setting the size of the graph window.
 		graphWindow.setSize(500, 500);
+		//M Setting the location of the graph window on the screen.
 		frame.setLocation(600, 0);
+		//M Making the graph window visible.
 		frame.setVisible(true);
 	}
 
