@@ -30,8 +30,8 @@ public class GUI {
 	private double [][] mins;
 	private double [][] pois;
 	private double [][] holes;
-	//M Booleans to indicate whether certain functions have been completed.
-	private boolean pointsReady = false;
+	//M Booleans to indicate  when an equation has been entered.
+	private boolean equationReady = false;
 	private boolean clearDesired = false;
 	//M A String to store the text of the currently entered equation.
 	private String equationText = "";
@@ -42,35 +42,59 @@ public class GUI {
 	public GUI() {
 		//M Creating the various swing components.
 		JFrame frame = new JFrame();
+		//M Text field in which the user can enter the equation.
 		JTextField equation = new JTextField("enter function here");
+		//M A button for the user to press when they want to graph a function.
 		JButton calculate = new JButton("Calculate");
+		//M A button for the user to press to take the first derivative of the currently entered equation.
 		JButton firstDerivative = new JButton("First Derivative");
+		//M A button for the user to press to take the second derivative of the currently entered equation.
 		JButton secondDerivative = new JButton("Second Derivative");
+		//M A button for the user to press to clear the graph.
 		JButton clear = new JButton("Clear");
 		
+		//M Setting up the various swing components for the main frame.
+		//M Setting the program to exit when the window is closed.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//M Adding the various buttons to the JFrame.
 		frame.getContentPane().add(calculate, BorderLayout.CENTER);
 		frame.getContentPane().add(firstDerivative, BorderLayout.NORTH);
 		frame.getContentPane().add(secondDerivative, BorderLayout.WEST);
 		frame.getContentPane().add(clear, BorderLayout.EAST);
 		frame.getContentPane().add(equation, BorderLayout.SOUTH);
+		//M Packing the main frame.
 		frame.pack();
+		//M Making the main frame visible.
 		frame.setVisible(true);
 		
+		
+		//M Creating the various swing components for the definite integral frame.
 		JFrame trapezoidalIntegralFrame = new JFrame();
+		//M Text field for the user to enter the lower limit of integration.
 		JTextField trapezoidalLowerLimit = new JTextField("Enter lower limit here.");
+		//M Text field for the user to enter the upper limit of integration.
 		JTextField trapezoidalUpperLimit = new JTextField("Enter upper limit here.");
+		//M Button for the user to click to evaluate the definite integral.
 		JButton trapezoidalEvaluate = new JButton("Evaluate Trapezoidal Integral");
+		//M Text area to display the value of the definite integral.
 		JTextArea trapezoidalIntegralValue = new JTextArea("No Value to Display");
+		//M Text field for the user to enter the function to be integrated.
 		JTextField function = new JTextField("Enter f(x)");
+		
+		//M Setting up the various swing components for the integral frame.
+		//M Setting the program to close when the window is closed.
 		trapezoidalIntegralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//M Setting the location of the frame on screen.
 		trapezoidalIntegralFrame.setLocation(0, 250);
+		//M Adding the various swing components to the JFrame.
 		trapezoidalIntegralFrame.getContentPane().add(function, BorderLayout.NORTH);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalLowerLimit, BorderLayout.WEST);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalUpperLimit, BorderLayout.EAST);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalEvaluate, BorderLayout.CENTER);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalIntegralValue, BorderLayout.SOUTH);
+		//M Packing the definite integral frame.
 		trapezoidalIntegralFrame.pack();
+		//M Making the definite integral frame visible.
 		trapezoidalIntegralFrame.setVisible(true);
 		
 		trapezoidalEvaluate.addActionListener(new ActionListener() {
@@ -128,19 +152,19 @@ public class GUI {
 	   	calculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addEquation(equation.getText());
-				pointsReady = true;
+				equationReady = true;
 			}
 	   	});
 	   	firstDerivative.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addEquation("done" + equation.getText());
-				pointsReady = true;
+				equationReady = true;
 			}
 	   	});
 		secondDerivative.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addEquation("dtwo" + equation.getText());
-				pointsReady = true;
+				equationReady = true;
 			}
 	   	});
 		clear.addActionListener(new ActionListener() {
@@ -171,9 +195,9 @@ public class GUI {
 		return xValues;
 	}
 	
-	private boolean getPointsReady() {
+	private boolean getEquationReady() {
 		//M A method to get pointsReady.
-		return pointsReady;
+		return equationReady;
 	}
 	private boolean getClearDesired() {
 		//M A method to get clearDesired.
@@ -223,9 +247,9 @@ public class GUI {
 		//M a method to get holes.
 		return holes;
 	}
-	private void setPointsReady(boolean status) {
-		//M A method to set pointsReady.
-		pointsReady = status;
+	private void setEquationReady(boolean status) {
+		//M A method to set equationReady.
+		equationReady = status;
 	}
 	private void setClearDesired(boolean status) {
 		//M A method to set clearDesired.
@@ -295,7 +319,7 @@ public class GUI {
 		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.
 		while(true) {
 			//M If the points are ready, then they are graphed.
-			if(gui.getPointsReady() == true) {
+			if(gui.getEquationReady() == true) {
 				graph.clear();
 				graph.draw();
 				for(int i = 0; i < gui.getEquations().size(); i++) {
@@ -340,7 +364,7 @@ public class GUI {
 							System.out.println("Drawing POI ( " + gui.getPois()[m][0] + " , " + gui.getPois()[m][1] + " )");
 						}
 					}
-					gui.setPointsReady(false);
+					gui.setEquationReady(false);
 					System.out.println();
 				}
 				//M Sending the points to be graphed.
