@@ -97,24 +97,30 @@ public class GUI {
 		//M Making the definite integral frame visible.
 		trapezoidalIntegralFrame.setVisible(true);
 		
+		//M Adding listeners to the buttons so that they work.
 		trapezoidalEvaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//M A string to store the f'(x) equation from equations.
 				String tempEquation;
+				//M doubles to store the calculated f(b) and f(a) values.
 				double lowerValue;
 				double upperValue;
+				//M A double to store f(b)-f(a)
 				double FTC;
-				System.out.println("f(x): " + function.getText());
+				//M Creating a MathEvaluator to calculate the various arithmetic from the functions.
+				//M Setting the MathEvaluator's equation to the user-entered f(x)
 				MathEvaluator m = new MathEvaluator(function.getText());
+				//M Calculating f(a)
 				m.addVariable("x", Double.parseDouble(trapezoidalLowerLimit.getText()));
+				//M Storing f(a)
 				lowerValue = m.getValue();
-				System.out.println("lowerValue: " + lowerValue);
+				//M Calculating f(b)
 				m.addVariable("x", Double.parseDouble(trapezoidalUpperLimit.getText()));
+				//M Storing f(b)
 				upperValue = m.getValue();
-				System.out.println("Upper Value: " + upperValue);
 				FTC = upperValue - lowerValue;
 				Integral integral = new Integral();
 				tempEquation = equations.get(equationIndexTracker);
-				System.out.println("Unprocessed Temp: " + tempEquation);
 				if(tempEquation.startsWith("done")) {
 					tempEquation = tempEquation.substring(4);
 					m.setExpression(tempEquation);
@@ -141,9 +147,7 @@ public class GUI {
 						yValues[i] = m.getValue();
 					}
 				}
-				System.out.println("Temp Equation: " + tempEquation);
 				
-				//M Still not working with derivatives.
 				String result = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, yValues);
 				trapezoidalIntegralValue.setText(result + " = FTC: " + String.valueOf(FTC));
 			}
