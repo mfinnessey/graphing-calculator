@@ -1,10 +1,14 @@
-import java.awt.BorderLayout;
+
+//M Various necessary listener imports.
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//Various necessary list imports.
 import java.util.ArrayList;
 import java.util.List;
+//M A timing import.
 import java.util.concurrent.TimeUnit;
-
+//M Various necessary graphics imports.
+import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -13,27 +17,28 @@ import javax.swing.JTextField;
 
 
 public class GUI {
-	// TODO a class to model a graphing calculator
-	//M minimum positive value of the double used to increase by.
+	//M The value by which the stored values are incremented, 0.001.
 	public final static double step = Math.pow(10, -3);
-	//M Tracks where points have been filled in the array.
+	//M Tracks where points have been filled in the xValues array.
 	private int xIndexTracker;
-	//M Store the x and y values respectively.
-	//M We're trying this. IDK if it works. YOLO.
+	//M Arrays to store the x and y values respectively.
 	private double [] xValues = new double[20001];
 	private double [] yValues = new double [20001];
+	//M Arrays to store the various kinds of key points. Their size is determined later.
 	private double [][] zeros;
 	private double [][] maxes;
 	private double [][] mins;
 	private double [][] pois;
 	private double [][] holes;
+	//M Booleans to indicate whether certain functions have been completed.
 	private boolean pointsReady = false;
 	private boolean clearDesired = false;
+	//M A String to store the text of the currently entered equation.
 	private String equationText = "";
+	//M An integer to track the length of equations.
 	private int equationIndexTracker = -1;
+	//M A List to store the text of all entered (or calculated) equations.
 	List<String> equations = new ArrayList<String>();
-	//M Weird and messed up constructor. It works for now, if we can clean it up later, we might want to.
-	
 	public GUI() {
 		//M Creating the various swing components.
 		JFrame frame = new JFrame();
@@ -42,6 +47,7 @@ public class GUI {
 		JButton firstDerivative = new JButton("First Derivative");
 		JButton secondDerivative = new JButton("Second Derivative");
 		JButton clear = new JButton("Clear");
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(calculate, BorderLayout.CENTER);
 		frame.getContentPane().add(firstDerivative, BorderLayout.NORTH);
