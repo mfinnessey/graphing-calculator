@@ -211,20 +211,20 @@ public class GUI {
 	}
 	private void fillXValues() {
 		//TODO A method to fill xValues with consecutive numbers.
-		/*M The index of xValues is tracked separately from the loop to allow arithmetic to be done 
-		 * with the loop counter.*/
+		//M An integer to track where xValues has been filled to.
 		xIndexTracker = 0;
+		//M iterating through the range of numbers that xValues will be filled with (made to fit in an integer range).
 		for(int i = (int) (-1 * Math.pow(10,4)); i <= (int) Math.pow(10, 4); i++) {
+			//M Setting the next value in xValues to the given value, downsized by step to its proper value.
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
 	}
 	private void addEquation(String equation) {
+		//TODO A method to add an equation to equations.
+		//M Incrementing equationIndexTracker, which tracks where the List has been filled to.
 		equationIndexTracker++;
+		//M Adding the equation to equations.
 		equations.add(equation);
-		equationText = equation;
-	}
-	private String getEquationText() {
-		return equationText;
 	}
 	private double[] getXValues() {
 		//M A method to get the xValues.
