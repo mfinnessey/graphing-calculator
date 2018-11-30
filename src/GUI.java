@@ -227,73 +227,77 @@ public class GUI {
 		equations.add(equation);
 	}
 	private double[] getXValues() {
-		//M A method to get the xValues.
+		//TODO A method to get xValues.
 		return xValues;
 	}
 	
 	private boolean getNewEquationReady() {
-		//M A method to get pointsReady.
+		//TODO A method to get pointsReady.
 		return newEquationReady;
 	}
 	private boolean getClearDesired() {
-		//M A method to get clearDesired.
+		//TODO A method to get clearDesired.
 		return clearDesired;
 	}
 	
 	private int getZerosLength() {
-		//K A method to get the length of zeros.
+		//TODO A method to get the length of zeros.
 		return zeros.length;
 	}
 	
 	private int getMaxesLength() {
-		//M A method to get the length of maxes.
+		//TODO A method to get the length of maxes.
 		return maxes.length;
 	}
 	private int getMinsLength() {
-		//M A method to get the length of mins.
+		//TODO A method to get the length of mins.
 		return mins.length;
 	}
 	private int getPoisLength() {
-		//M A method to get the length of pois.
+		//TODO A method to get the length of pois.
 		return pois.length;
 	}
 	private int getHolesLength() {
-		//M A method to get the length of holes.
+		//TODO A method to get the length of holes.
 		return holes.length;
 	}
 	
 	private double[][] getZeros(){
-		//K A method to get zeros.
+		//TODO A method to get zeros.
 		return zeros;
 	}
 	
 	private double [][] getMaxes(){
-		//M A method to get maxes.
+		//TODO method to get maxes.
 		return maxes;
 	}
 	private double [][] getMins(){
-		//M A method to get mins.
+		//TODO A method to get mins.
 		return mins;
 	}
 	private double [][] getPois(){
-		//M A method to get pois.
+		//TODO A method to get pois.
 		return pois;
 	}
 	private double [][] getHoles(){
-		//M a method to get holes.
+		//TODO a method to get holes.
 		return holes;
 	}
 	private void setNewEquationReady(boolean status) {
-		//M A method to set equationReady.
+		//TODO A method to set equationReady.
 		newEquationReady = status;
 	}
 	private void setClearDesired(boolean status) {
-		//M A method to set clearDesired.
+		//TODO A method to set clearDesired.
+		//M Setting clearDesired.
 		clearDesired = status;
+		//M Clearing equations so that they are not re-graphed.
 		equations.clear();
+		//M Resetting equationIndexTracker so it begins at the start of the cleared list.
 		equationIndexTracker = -1;
 	}
 	private void findKeyPoints(double [] xValues, double [] yValues) {
+		//TODO A method to find the key points of a function.
 		zeros = Zeroes.findZeros(xValues, yValues);
 		maxes = Zeroes.max(xValues, yValues);
 		mins = Zeroes.min(xValues, yValues);
