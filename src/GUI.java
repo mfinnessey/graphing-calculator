@@ -30,8 +30,8 @@ public class GUI {
 	private double [][] mins;
 	private double [][] pois;
 	private double [][] holes;
-	//M Booleans to indicate  when an equation has been entered.
-	private boolean equationReady = false;
+	//M Booleans to indicate  when a new equation is ready to graph.
+	private boolean newEquationReady = false;
 	private boolean clearDesired = false;
 	//M A String to store the text of the currently entered equation.
 	private String equationText = "";
@@ -174,33 +174,43 @@ public class GUI {
 				trapezoidalIntegralValue.setText(result + " = FTC: " + String.valueOf(FTC));
 			}
 	   	});
-	   	//M Adding the ActionListener for the button.
+	   	//M Adding the ActionListener for the calculate button.
 	   	calculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//M Storing the user-entered equation.
 				addEquation(equation.getText());
-				equationReady = true;
+				//M Setting that a new equation is ready to be graphed.
+				newEquationReady = true;
 			}
 	   	});
+	   	//M Adding the ActionListener for the firstDerivative button.
 	   	firstDerivative.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//M Storing the first derivative of the user-entered equation.
 				addEquation("done" + equation.getText());
-				equationReady = true;
+				//M Setting that a new equation is ready to be graphed.
+				newEquationReady = true;
 			}
 	   	});
+	   	//M Adding the ActionListener for the secondDerivative button.
 		secondDerivative.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//M Storing the second derivative of the user-entered equation.
 				addEquation("dtwo" + equation.getText());
-				equationReady = true;
+				//M Setting that a new equation is ready to be graphed.
+				newEquationReady = true;
 			}
 	   	});
+		//M Adding the ActionListener for the clear button.
 		clear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//M Setting that the user wants to clear the graph.
 				clearDesired = true;
 			}
 	   	});
 	}
 	private void fillXValues() {
-		//M A method to fill xValues with consecutive numbers.
+		//TODO A method to fill xValues with consecutive numbers.
 		/*M The index of xValues is tracked separately from the loop to allow arithmetic to be done 
 		 * with the loop counter.*/
 		xIndexTracker = 0;
@@ -221,9 +231,9 @@ public class GUI {
 		return xValues;
 	}
 	
-	private boolean getEquationReady() {
+	private boolean getNewEquationReady() {
 		//M A method to get pointsReady.
-		return equationReady;
+		return newEquationReady;
 	}
 	private boolean getClearDesired() {
 		//M A method to get clearDesired.
@@ -273,9 +283,9 @@ public class GUI {
 		//M a method to get holes.
 		return holes;
 	}
-	private void setEquationReady(boolean status) {
+	private void setNewEquationReady(boolean status) {
 		//M A method to set equationReady.
-		equationReady = status;
+		newEquationReady = status;
 	}
 	private void setClearDesired(boolean status) {
 		//M A method to set clearDesired.
@@ -345,7 +355,7 @@ public class GUI {
 		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.
 		while(true) {
 			//M If the points are ready, then they are graphed.
-			if(gui.getEquationReady() == true) {
+			if(gui.getNewEquationReady() == true) {
 				graph.clear();
 				graph.draw();
 				for(int i = 0; i < gui.getEquations().size(); i++) {
@@ -390,7 +400,7 @@ public class GUI {
 							System.out.println("Drawing POI ( " + gui.getPois()[m][0] + " , " + gui.getPois()[m][1] + " )");
 						}
 					}
-					gui.setEquationReady(false);
+					gui.setNewEquationReady(false);
 					System.out.println();
 				}
 				//M Sending the points to be graphed.
