@@ -298,12 +298,14 @@ public class GUI {
 	}
 	private void findKeyPoints(double [] xValues, double [] yValues) {
 		//TODO A method to find the key points of a function.
+		//M Passing the calculated x and y values on to the various methods contained in other classes and storing the results in arrays.
 		zeros = Zeroes.findZeros(xValues, yValues);
 		maxes = Zeroes.max(xValues, yValues);
 		mins = Zeroes.min(xValues, yValues);
 		pois = Zeroes.POI(xValues, yValues);
 		holes = Zeroes.hole(xValues, yValues, equationText);
 	}
+	//M Will likely remove these methods before the final product, leavin gin now for debugging.
 	private void printValues(double [] xValues, double [] yValues) {
 		//M A method to print (x,y) pairs. Used for debugging.
 		for(int i = 0; i < xValues.length; i++) {
@@ -327,28 +329,41 @@ public class GUI {
 		return 2;
 	}
 	private List<String> getEquations() {
+		//TODO A method to get equations.
 		return equations;
 	}
 	private double [] getYValues(double [] xValues, String equation, int derivativeNumber) {
+		//TODO A method to calculate and get yValues.
+		//M Creating a MathEvaluator to calculate the y values from the x values and the equation.
 		MathEvaluator m = new MathEvaluator();
+		//M Setting the mathEvaluator's expression to the given function.
 		m.setExpression(equation);
+		//M Creating an array to store the y values temporarily.
 		double [] yValues = new double[20001];
+		//M Iterating through the x values
 		for(int i = 0; i <= (xValues.length - 1); i++) {
+			//M Adding each value to MathEvaluator.
 			m.addVariable("x", xValues[i]);
+			//M Calculating the resulting y value and storing it.
 			yValues[i] = m.getValue();
 		}
+		//M If the values need to have derivatives taken (derivativeNumber is calculated beforehand).
 		switch(derivativeNumber) {
+			//M If it's the first derivative, then the derivative is taken once.
 			case 1:
 				yValues = Derivative.findDerivative(xValues, yValues);
 				return yValues;
+			//M If it's the second derivative, then the derivative is taken twice.
 			case 2:
 				yValues = Derivative.findDerivative(xValues, yValues);
 				yValues = Derivative.findDerivative(xValues, yValues);
 				return yValues;
+			//M Otherwise, the already calculated values are returned.
 			default:
 				return yValues;
 		}
 	}
+	
 	public static void main(String [] args) {
 		GUI gui = new GUI();
 		//M Filling xValues with consecutive x-values.
