@@ -1,4 +1,3 @@
-
 //M Various necessary listener imports.
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-
 
 public class GUI {
 	//M The value by which the stored values are incremented, 0.001.
@@ -66,7 +63,6 @@ public class GUI {
 		frame.pack();
 		//M Making the main frame visible.
 		frame.setVisible(true);
-		
 		
 		//M Creating the various swing components for the definite integral frame.
 		JFrame trapezoidalIntegralFrame = new JFrame();
@@ -305,27 +301,37 @@ public class GUI {
 		pois = Zeroes.POI(xValues, yValues);
 		holes = Zeroes.hole(xValues, yValues, equationText);
 	}
-	//M Will likely remove these methods before the final product, leavin gin now for debugging.
+	//M Will likely remove these methods before the final product, leaving in now for debugging.
 	private void printValues(double [] xValues, double [] yValues) {
 		//M A method to print (x,y) pairs. Used for debugging.
+		//M Iterating through the values.
 		for(int i = 0; i < xValues.length; i++) {
+			//M Printing each value.
 			System.out.println("( " + xValues[i] + " , " + yValues[i]+ " )");
 		}
 	}
 	private void printKeyPoint(double [] xValues, double [] yValues, double keyValue) {
 		//TODO A method to print a key point.
+		//M Iterating through the values.
 		for(int i = 0; i < xValues.length; i++) {
+			//M Checking if the value matches the desired y value.
 			if(xValues[i] == keyValue) {
+				//M If the value matches, then its (x,y) pair is printed.
 				System.out.println("( " + xValues[i] + " , " + yValues[i] + " )");
 			}
 		}
 	}
 	private double getKeyPoint(double [] xValues, double [] yValues, double keyValue) {
+		//TODO A method to get the y value of a given x value.
+		//M Iterating through the values.
 		for(int i = 0; i < xValues.length; i++) {
+			//M Checking if the x value is the appropriate one.
 			if(xValues[i] == keyValue) {
+				//M Returning the desired x value's y value.
 				return yValues[i];
 			}
 		}
+		//M A return case if the x value is not found in the values given.
 		return 2;
 	}
 	private List<String> getEquations() {
@@ -365,75 +371,104 @@ public class GUI {
 	}
 	
 	public static void main(String [] args) {
+		//M Creating a GUI object to access its methods and present its interface to the user.
 		GUI gui = new GUI();
 		//M Filling xValues with consecutive x-values.
 		gui.fillXValues();
+		//M Creating a graph object to display on the screen with the graphs.
 		Graph graph = new Graph();
+		//M Creating an array to store yValues.
 		double [] yValues = new double [20001];
+		//M Creating a STring to store the equation text.
 		String equation = "";
-		//M Infinite loop (AKA I have no idea how to synchronize) to continuously graph the updated yValues.
+		//M Infinite loop to continuously graph the updated yValues.
 		while(true) {
-			//M If the points are ready, then they are graphed.
+			//M If the equation is ready, then its points are calculated and graphed.
 			if(gui.getNewEquationReady() == true) {
+				//M Clearing the graph so that the grid-lines always are on the bottom layer.
 				graph.clear();
+				//M Drawing the axes, numbers, and grid-lines.
 				graph.draw();
+				//M Iterating through the list of equations.
 				for(int i = 0; i < gui.getEquations().size(); i++) {
+					//M Setting the current equation to the current equation in the list.
 					equation = (String) gui.getEquations().get(i);
+					//M Calculating the values of the equation.
+					//M Checking for derivative indicators.
 					if(equation.startsWith("dtwo")) {
+						//M Removing the derivative indicator.
 						equation = equation.substring(4);
+						//M Getting the y values of the equation.
 						yValues = gui.getYValues(gui.getXValues(), equation, 2);
 					}
 					else if(equation.startsWith("done")) {
+						//M Removing the derivative indicator.
 						equation = equation.substring(4);
+						//M Getting the y values of the equation.
 						yValues = gui.getYValues(gui.getXValues(), equation, 1);
 					}
 					else {
-						//M Need to add syntax handling.
+						//M Getting the values of the equation.
 						yValues = gui.getYValues(gui.getXValues(), equation, 0);
 					}
+					//M Drawing the points calculated from the equation.
 					graph.draw(gui.getXValues(), yValues);
-					//M Calculating the key points, hopefully this leaves enough time.
+					//M Calculating the key points for the equation.
 					gui.findKeyPoints(gui.getXValues(), yValues);
+					//M Iterating through the holes in the graph.
 					for(int j = 0; j < gui.getHolesLength(); j++) {
+						//M Drawing each hole.
 						graph.draw(gui.getHoles()[j][0], gui.getHoles()[j][1], "#F44F0D");
 						System.out.println("Drawing hole ( " + gui.getHoles()[j][0] + " , " + gui.getHoles()[j][1] + " )");
 					}
-					//M Preventing the method from executing again until the yValues are recalculated.
+					//M Preventing mins, maxes, and pois from being drawn on lines (becomes a slight issue with the limit definition at lower precision).
 					if(Zeroes.lineCheck(gui.getXValues(), yValues) == false) {
+						//M Iterating through the zeroes of the graph.
 						for(int n = 0; n < gui.getZerosLength(); n++ ) {
+							//M Drawing each zero.
 							graph.draw(gui.getZeros()[n][0], gui.getZeros()[n][1], "#00FF00");
 							System.out.println("Drawing zero ( " + gui.getZeros()[n][0] + " , " + gui.getZeros()[n][1] + " )");
 						}
+						//M Iterating through the maxes of the graph.
 						for(int k = 0; k < gui.getMaxesLength(); k++ ) {
+							//M Drawing each max.
 							graph.draw(gui.getMaxes()[k][0], gui.getMaxes()[k][1], "#67D4C4");
 							System.out.println("Drawing max ( " + gui.getMaxes()[k][0] + " , " + gui.getMaxes()[k][1] + " )");
 						}
+						//M Iterating through the mins of the graph.
 						for(int l = 0; l < gui.getMinsLength(); l++ ) {
+							//M Drawing each min.
 							graph.draw(gui.getMins()[l][0], gui.getMins()[l][1], "#6600FF");
 							System.out.println("Drawing min ( " + gui.getMins()[l][0] + " , " + gui.getMins()[l][1] + " )");
 						}
+						//M Iterating through the points of inflection of the graph.
 						for(int m = 0; m < gui.getPoisLength(); m++ ) {
-							//M This is drawing erroneous POIs at x = -10 in particular on some rational functions.
-							//M Unfortunately, simply disabling them isn't an option unlike with lines.
+							//M Drawing each point of inflection.
 							graph.draw(gui.getPois()[m][0], gui.getPois()[m][1], "#FFFF00");
 							System.out.println("Drawing POI ( " + gui.getPois()[m][0] + " , " + gui.getPois()[m][1] + " )");
 						}
 					}
-					gui.setNewEquationReady(false);
-					System.out.println();
+				//M Preventing the drawing from repeating again until a new equation is ready (i. e. entered by the user).
+				gui.setNewEquationReady(false);
+				System.out.println();
 				}
-				//M Sending the points to be graphed.
-				
 			}
+			//M Clearing the graph if the user desires it.
 			else if(gui.getClearDesired() == true) {
+				//M Clearing the graph.
 				graph.clear();
+				//M Redrawing the axes, grid-lines, and numbers.
 				graph.draw();
+				//M Setting that the user has not yet requested to clear the graph again.
 				gui.setClearDesired(false);
 			}
-			//M This seems to do something for synchronization, so I'm just going to leave it for now.
+			//M This waiting aids in synchronization of the various methods (which take time to calculate internally).
 			else {
+				//M Trying to wait.
 				try {
+					//M Waiting for a second.
 					TimeUnit.SECONDS.sleep(1);
+					//M If the waiting fails, a stack trace is printed.
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
