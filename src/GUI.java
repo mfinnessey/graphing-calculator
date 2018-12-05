@@ -15,12 +15,12 @@ import javax.swing.JTextField;
 
 public class GUI {
 	//M The value by which the stored values are incremented, 0.001.
-	public final static double step = Math.pow(10, -3);
+	public final static double step = Math.pow(10, -4);
 	//M Tracks where points have been filled in the xValues array.
 	private int xIndexTracker;
 	//M Arrays to store the x and y values respectively.
-	private double [] xValues = new double[20001];
-	private double [] yValues = new double [20001];
+	private double [] xValues = new double[200001];
+	private double [] yValues = new double [200001];
 	//M Arrays to store the various kinds of key points. Their size is determined later.
 	private double [][] zeros;
 	private double [][] maxes;
@@ -210,7 +210,7 @@ public class GUI {
 		//M An integer to track where xValues has been filled to.
 		xIndexTracker = 0;
 		//M iterating through the range of numbers that xValues will be filled with (made to fit in an integer range).
-		for(int i = (int) (-1 * Math.pow(10,4)); i <= (int) Math.pow(10, 4); i++) {
+		for(int i = (int) (-1 * Math.pow(10,5)); i <= (int) Math.pow(10, 5); i++) {
 			//M Setting the next value in xValues to the given value, downsized by step to its proper value.
 			xValues[xIndexTracker++] = (double) (i * step);
 		}
@@ -345,7 +345,7 @@ public class GUI {
 		//M Setting the mathEvaluator's expression to the given function.
 		m.setExpression(equation);
 		//M Creating an array to store the y values temporarily.
-		double [] yValues = new double[20001];
+		double [] yValues = new double[200001];
 		//M Iterating through the x values
 		for(int i = 0; i <= (xValues.length - 1); i++) {
 			//M Adding each value to MathEvaluator.
