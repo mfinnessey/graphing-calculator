@@ -13,7 +13,7 @@ public class Zeroes {
 		for (int i = 1; i < xValues.length-1; i++) {
 			double firstValue = yValues[i];
 			double secondValue = yValues[i+1];
-			if (firstValue < 0 && (secondValue) > 0) {
+			if (firstValue < 0 && (secondValue) > 0 && yValues[i] < 0.1 && yValues[i] > -0.1) {
 				zeros++;
 			}else if (firstValue > 0 && (secondValue) < 0) {
 				zeros++;
@@ -28,11 +28,11 @@ public class Zeroes {
 		for (int i = 1; i < xValues.length-1; i++) {
 			double firstValue = yValues[i];
 			double secondValue = yValues[i+1];
-			if (firstValue < 0 && (secondValue) > 0) {
+			if (firstValue < 0 && (secondValue) > 0 && yValues[i] < 0.1 && yValues[i] > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
-			}else if (firstValue > 0 && (secondValue) < 0) {
+			}else if (firstValue > 0 && (secondValue) < 0 && yValues[i] < 0.1 && yValues[i] > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
@@ -77,7 +77,7 @@ public class Zeroes {
 		for (int i = 2; i < xValues.length-1; i++) {
 			double firstValue = derivativeYValues[i];
 			double secondValue = derivativeYValues[i+1];
-			if (firstValue > 0 && (secondValue) < 0) {
+			if (firstValue > 0 && (secondValue) < 0 && firstValue < 0.1 && firstValue > -0.1) {
 				maxes++;
 			}
 		}
@@ -87,7 +87,7 @@ public class Zeroes {
 		for (int i = 2; i < xValues.length-1; i++) {
 			double firstValue = derivativeYValues[i];
 			double secondValue = derivativeYValues[i+1];
-			if (firstValue > 0 && (secondValue) < 0) {
+			if (firstValue > 0 && (secondValue) < 0 && firstValue < 0.1 && firstValue > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
@@ -102,7 +102,7 @@ public class Zeroes {
 		for (int i = 2; i < xValues.length-1; i++) {
 			double firstValue = derivativeYValues[i];
 			double secondValue = derivativeYValues[i+1];
-			if (firstValue < 0 && (secondValue) > 0) {
+			if (firstValue < 0 && (secondValue) > 0 && firstValue < 0.1 && firstValue > -0.1) {
 				mins++;
 			}
 		}
@@ -112,7 +112,7 @@ public class Zeroes {
 		for (int i = 2; i < xValues.length-1; i++) {
 			double firstValue = derivativeYValues[i];
 			double secondValue = derivativeYValues[i+1];
-			if (firstValue < 0 && (secondValue) > 0) {
+			if (firstValue < 0 && (secondValue) > 0 && firstValue < 0.1 && firstValue > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
@@ -129,9 +129,9 @@ public class Zeroes {
 		for (int i = 3; i < xValues.length-1; i++) {
 			double firstValue = inflectionYValues[i];
 			double secondValue = inflectionYValues[i+1];
-			if (firstValue < 0 && (secondValue) > 0) {
+			if (firstValue < 0 && (secondValue) > 0 && firstValue < 0.1 && firstValue > -0.1) {
 				pois++;
-			}else if (firstValue > 0 && (secondValue) < 0) {
+			}else if (firstValue > 0 && (secondValue) < 0 && firstValue < 0.1 && firstValue > -0.1) {
 				pois++;
 			}else if (firstValue == 0) {
 				pois++;
@@ -143,11 +143,11 @@ public class Zeroes {
 		for (int i = 3; i < xValues.length-1; i++) {
 			double firstValue = inflectionYValues[i];
 			double secondValue = inflectionYValues[i+1];
-			if (firstValue < 0 && (secondValue) > 0) {
+			if (firstValue < 0 && (secondValue) > 0 && firstValue < 0.1 && firstValue > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
-			}else if (firstValue > 0 && (secondValue) < 0) {
+			}else if (firstValue > 0 && (secondValue) < 0 && firstValue < 0.1 && firstValue > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
@@ -169,7 +169,7 @@ public class Zeroes {
 		double slope2;
 		for(int i = 4; i <= xValues.length - 3; i++) {
 			slope2 = (yValues[i] - yValues[i-1])/(xValues[i] - xValues[i-1]);
-			if((slope2 != slope1) && (Math.abs(slope2 - slope1) > 0.001)) {
+			if((slope2 != slope1) && (Math.abs(slope2 - slope1) > 0.0001)) {
 				return false;
 			}
 		}
