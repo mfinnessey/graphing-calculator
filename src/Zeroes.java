@@ -165,14 +165,20 @@ public class Zeroes {
 		//K Checks if a function is linear
 		//K IF the function is linear, then maxes/mins and pois won't be shown
 		//K This is because w/o this then the calculator would mark a min/max/POI at every point on a line
+		System.out.println("lineCheck running");
 		double slope1 = (yValues[3] - yValues[2])/(xValues[3] - xValues[2]);
 		double slope2;
 		for(int i = 4; i <= xValues.length - 3; i++) {
 			slope2 = (yValues[i] - yValues[i-1])/(xValues[i] - xValues[i-1]);
 			if((slope2 != slope1) && (Math.abs(slope2 - slope1) > 0.0001)) {
+				System.out.println("Slope 1: " + slope1 + " Slope 2: " + slope2);
+				System.out.println("I: " + i);
+				//M lineCheck is returning false because it's only running on the first equation (the original) in some cases
+				//M Oddly enough, it's only tracing points everywhere for the second derivative though which is off.
 				return false;
 			}
 		}
+		System.out.println("Line Confirmed");
 		return true;
 	}
 }
