@@ -381,6 +381,7 @@ public class GUI {
 		double [] yValues = new double [20001];
 		//M Creating a STring to store the equation text.
 		String equation = "";
+		String rawEquation = "";
 		//M Infinite loop to continuously graph the updated yValues.
 		while(true) {
 			//M If the equation is ready, then its points are calculated and graphed.
@@ -395,6 +396,7 @@ public class GUI {
 					equation = (String) gui.getEquations().get(i);
 					//M Calculating the values of the equation.
 					//M Checking for derivative indicators.
+					rawEquation = equation;
 					if(equation.startsWith("dtwo")) {
 						//M Removing the derivative indicator.
 						equation = equation.substring(4);
@@ -422,8 +424,7 @@ public class GUI {
 						System.out.println("Drawing hole ( " + gui.getHoles()[j][0] + " , " + gui.getHoles()[j][1] + " )");
 					}
 					//M Preventing mins, maxes, and pois from being drawn on lines (becomes a slight issue with the limit definition at lower precision).
-					if(Zeroes.lineCheck(gui.getXValues(), yValues) == false) {
-						System.out.println("Line Check: " + Zeroes.lineCheck(gui.getXValues(), yValues));
+					if(Zeroes.lineCheck(gui.getXValues(), yValues, rawEquation) == false) {
 						//M Iterating through the zeroes of the graph.
 						for(int n = 0; n < gui.getZerosLength(); n++ ) {
 							//M Drawing each zero.

@@ -161,11 +161,11 @@ public class Zeroes {
 		return rV;
 	}
 	
-	public static boolean lineCheck(double[] xValues, double[] yValues) {
+	public static boolean lineCheck(double[] xValues, double[] yValues, String equation) {
 		//K Checks if a function is linear
 		//K IF the function is linear, then maxes/mins and pois won't be shown
 		//K This is because w/o this then the calculator would mark a min/max/POI at every point on a line
-		System.out.println("lineCheck running");
+		System.out.println("lineCheck running on: " + equation);
 		double slope1 = (yValues[3] - yValues[2])/(xValues[3] - xValues[2]);
 		double slope2;
 		for(int i = 4; i <= xValues.length - 3; i++) {
