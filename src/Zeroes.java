@@ -14,8 +14,10 @@ public class Zeroes {
 			double firstValue = yValues[i];
 			double secondValue = yValues[i+1];
 			if (firstValue < 0 && (secondValue) > 0 && yValues[i] < 0.1 && yValues[i] > -0.1) {
+				//K: Previously, the findZeros function was returning zeros that were not actually zeros
+				//K: The y value sometimes returned in the thousands, which is why the last two parameters are there
 				zeros++;
-			}else if (firstValue > 0 && (secondValue) < 0) {
+			}else if (firstValue > 0 && (secondValue) < 0 && yValues[i] < 0.1 && yValues[i] > -0.1) {
 				zeros++;
 			}else if (firstValue == 0) {
 				zeros++;
@@ -165,20 +167,20 @@ public class Zeroes {
 		//K Checks if a function is linear
 		//K IF the function is linear, then maxes/mins and pois won't be shown
 		//K This is because w/o this then the calculator would mark a min/max/POI at every point on a line
-		System.out.println("lineCheck running on: " + equation);
+		//System.out.println("lineCheck running on: " + equation);
 		double slope1 = (yValues[3] - yValues[2])/(xValues[3] - xValues[2]);
 		double slope2;
 		for(int i = 4; i <= xValues.length - 3; i++) {
 			slope2 = (yValues[i] - yValues[i-1])/(xValues[i] - xValues[i-1]);
-			if((slope2 != slope1) && (Math.abs(slope2 - slope1) > 0.0001)) {
-				System.out.println("Slope 1: " + slope1 + " Slope 2: " + slope2);
-				System.out.println("I: " + i);
+			if((slope2 != slope1) && (Math.abs(slope2 - slope1) > 0.1)) {
+				//System.out.println("Slope 1: " + slope1 + " Slope 2: " + slope2);
+				//System.out.println("I: " + i);
 				//M lineCheck is returning false because it's only running on the first equation (the original) in some cases
 				//M Oddly enough, it's only tracing points everywhere for the second derivative though which is off.
 				return false;
 			}
 		}
-		System.out.println("Line Confirmed");
+		//System.out.println("Line Confirmed");
 		return true;
 	}
 }

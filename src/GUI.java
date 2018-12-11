@@ -429,25 +429,25 @@ public class GUI {
 						for(int n = 0; n < gui.getZerosLength(); n++ ) {
 							//M Drawing each zero.
 							graph.draw(gui.getZeros()[n][0], gui.getZeros()[n][1], "#00FF00");
-							//System.out.println("Drawing zero ( " + gui.getZeros()[n][0] + " , " + gui.getZeros()[n][1] + " )");
+							System.out.println("Drawing zero ( " + gui.getZeros()[n][0] + " , " + gui.getZeros()[n][1] + " )");
 						}
 						//M Iterating through the maxes of the graph.
 						for(int k = 0; k < gui.getMaxesLength(); k++ ) {
 							//M Drawing each max.
 							graph.draw(gui.getMaxes()[k][0], gui.getMaxes()[k][1], "#67D4C4");
-							//System.out.println("Drawing max ( " + gui.getMaxes()[k][0] + " , " + gui.getMaxes()[k][1] + " )");
+							System.out.println("Drawing max ( " + gui.getMaxes()[k][0] + " , " + gui.getMaxes()[k][1] + " )");
 						}
 						//M Iterating through the mins of the graph.
 						for(int l = 0; l < gui.getMinsLength(); l++ ) {
 							//M Drawing each min.
 							graph.draw(gui.getMins()[l][0], gui.getMins()[l][1], "#6600FF");
-							//System.out.println("Drawing min ( " + gui.getMins()[l][0] + " , " + gui.getMins()[l][1] + " )");
+							System.out.println("Drawing min ( " + gui.getMins()[l][0] + " , " + gui.getMins()[l][1] + " )");
 						}
 						//M Iterating through the points of inflection of the graph.
 						for(int m = 0; m < gui.getPoisLength(); m++ ) {
 							//M Drawing each point of inflection.
 							graph.draw(gui.getPois()[m][0], gui.getPois()[m][1], "#FFFF00");
-							//System.out.println("Drawing POI ( " + gui.getPois()[m][0] + " , " + gui.getPois()[m][1] + " )");
+							System.out.println("Drawing POI ( " + gui.getPois()[m][0] + " , " + gui.getPois()[m][1] + " )");
 						}
 					}
 				//M Preventing the drawing from repeating again until a new equation is ready (i. e. entered by the user).
