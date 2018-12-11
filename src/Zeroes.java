@@ -53,7 +53,8 @@ public class Zeroes {
 		if ((expression.indexOf("sqrt") > -1) || (expression.indexOf("log") > -1) || (expression.indexOf("ln") > -1) || (expression.indexOf("asin") > -1) || (expression.indexOf("acos") > -1) || (expression.indexOf("atan") > -1)) {
 			double [][] rV = new double [0][2];
 			return rV;
-		} //K: If the function has a limited domain, then holes will return 0 holes
+		}
+		//K: If the function has a limited domain, then holes will return 0 holes
 		else {
 			int numberOfHoles = 0;
 			int indexTracker = 0;

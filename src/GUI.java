@@ -292,7 +292,7 @@ public class GUI {
 		//M Resetting equationIndexTracker so it begins at the start of the cleared list.
 		equationIndexTracker = -1;
 	}
-	private void findKeyPoints(double [] xValues, double [] yValues) {
+	private void findKeyPoints(double [] xValues, double [] yValues, String equationText) {
 		//TODO A method to find the key points of a function.
 		//M Passing the calculated x and y values on to the various methods contained in other classes and storing the results in arrays.
 		zeros = Zeroes.findZeros(xValues, yValues);
@@ -416,7 +416,7 @@ public class GUI {
 					//M Drawing the points calculated from the equation.
 					graph.draw(gui.getXValues(), yValues);
 					//M Calculating the key points for the equation.
-					gui.findKeyPoints(gui.getXValues(), yValues);
+					gui.findKeyPoints(gui.getXValues(), yValues, equation);
 					//M Iterating through the holes in the graph.
 					for(int j = 0; j < gui.getHolesLength(); j++) {
 						//M Drawing each hole.
