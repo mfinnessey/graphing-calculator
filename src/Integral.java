@@ -51,7 +51,7 @@ public class Integral {
 		//M Variable to store the value of the integral.
 				double integralValue = 0.0;
 				//M Variable to store the step value.
-				final double STEP_VALUE = 0.001;
+				final double STEP_VALUE = 0.0001;
 				//M Variables to store the beginning and ending indices where the limits of integration occur.
 				int beginIndex = -1;
 				int endIndex = -1;
