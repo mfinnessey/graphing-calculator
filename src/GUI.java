@@ -33,8 +33,6 @@ public class GUI {
 	private boolean clearDesired = false;
 	//M Boolean to track whether the current function is a derivative of an user-entered function.
 	private boolean isDerivative = false;
-	//M An integer to track the length of equations.
-	private int equationIndexTracker = -1;
 	//M A List to store the text of all entered (or calculated) equations.
 	List<String> equations = new ArrayList<String>();
 	public GUI() {
@@ -75,9 +73,7 @@ public class GUI {
 		//M Button for the user to click to evaluate the definite integral.
 		JButton trapezoidalEvaluate = new JButton("Evaluate Integral");
 		//M Text area to display the value of the definite integral.
-		JTextArea trapezoidalIntegralValue = new JTextArea("No Value to Display");
-		//M Text field for the user to enter the function to be integrated.
-		//JTextField function = new JTextField("Enter f(x)");
+		JTextField trapezoidalIntegralValue = new JTextField("No Value to Display");
 		
 		//M Setting up the various swing components for the integral frame.
 		//M Setting the program to close when the window is closed.
@@ -135,80 +131,44 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				//M A string to store the f'(x) equation from equations.
 				String tempEquation;
-				/*
-				//M doubles to store the calculated f(b) and f(a) values.
-				double lowerValue;
-				double upperValue;
-				//M A double to store f(b)-f(a)
-				double FTC;
-				//M Creating a MathEvaluator to calculate the various arithmetic from the functions.
-				//M Setting the MathEvaluator's equation to the user-entered f(x)
-				*/
+				double [] derivativeYValues = new double[200001];
 				MathEvaluator m = new MathEvaluator(equation.getText());
-				/*
-				//M Calculating f(a) from the user-entered a value.
-				//m.addVariable("x", Double.parseDouble(trapezoidalLowerLimit.getText()));
-				//M Storing f(a)
-				lowerValue = m.getValue();
-				//M Calculating f(b) from the user-entered b value.
-				m.addVariable("x", Double.parseDouble(trapezoidalUpperLimit.getText()));
-				//M Storing f(b)
-				upperValue = m.getValue();
-				//M Calculating and storing f(b) - f(a).
-				FTC = upperValue - lowerValue;
-				//M Creating a new Integral class, which is used for its methods later.
-				 */
 				Integral integral = new Integral();
-				//M Getting the f'(x) equation that the user has previously graphed.
-				tempEquation = equations.get(equationIndexTracker);
+				//M Getting the f(x) equation that the user has previously graphed.
+				tempEquation = equation.getText();
 				//M Storing the values from the temporary equation after processing it.
-				if(tempEquation.startsWith("done")) {
-					//M Trimming off the initial first derivative indicator.
-					tempEquation = tempEquation.substring(4);
-					//M Setting the MathEvaluator's expression to the processed equation.
-					m.setExpression(tempEquation);
-					//M Calculating all of the y values of the equation.
-					for(int i = 0; i <= (xValues.length -1); i++) {
-						//M Adding each x value.
-						m.addVariable("x", xValues[i]);
-						//M Calculating each resulting y value.
-						yValues[i] = m.getValue();
-					}
-					//M Taking the derivative of these values (as the values calculated were for f(x), not f'(x).).
-					yValues = Derivative.findDerivative(xValues, yValues);
+				//M Setting MathEvaluator's expression to the equation.
+				m.setExpression(tempEquation);
+				//M Calculating all of the y values of the equation.
+				for(int i = 0; i <= (xValues.length -1); i++) {
+					//M Adding each x value.
+					m.addVariable("x", xValues[i]);
+					//M Calculating each y value.
+					yValues[i] = m.getValue();
 				}
-				else if(tempEquation.startsWith("dtwo")) {
-					//M Trimming off the initial second derivative indicator.
-					tempEquation = tempEquation.substring(4);
-					//M Setting the MathEvaluator's expression to the processed equation.
-					m.setExpression(tempEquation);
-					//M Calculating all of the y values of the equation.
-					for(int i = 0; i <= (xValues.length -1); i++) {
-						//M Adding each x value.
-						m.addVariable("x", xValues[i]);
-						//M Calculating each resulting y value.
-						yValues[i] = m.getValue();
-					}
-					//M Taking the derivative of these values twice (as the values calculated were for f(x), not f"(x)).
-					yValues = Derivative.findDerivative(xValues, yValues);
-					yValues = Derivative.findDerivative(xValues, yValues);
-				}
-				//M Otherwise, the equation is simply already considered processed.
-				else {
-					//M Setting MathEvaluator's expression to the equation.
-					m.setExpression(tempEquation);
-					//M Calculating all of the y values of the equation.
-					for(int i = 0; i <= (xValues.length -1); i++) {
-						//M Adding each x value.
-						m.addVariable("x", xValues[i]);
-						//M Calculating each y value.
-						yValues[i] = m.getValue();
-					}
-				}
+				//M Calculating the derivative yValues.
+				derivativeYValues = Derivative.findDerivative(xValues, yValues);
 				//M Storing the result of the integral, with all of the previously calculated arguments passed off to the Integral object.
-				String result = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, yValues);
+				String integrationResult = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, derivativeYValues);
 				//M Setting the display text to the integral.
-				trapezoidalIntegralValue.setText(result);
+				double upperValue = 0;
+				double lowerValue = 0; 
+				for(int i = 0; i < xValues.length; i++) {
+					//M Checking if the x value is the appropriate one.
+					if(xValues[i] == Double.parseDouble(trapezoidalUpperLimit.getText())) {
+						//M Returning the desired x value's y value.
+						upperValue = yValues[i];
+					}
+				}
+				for(int j = 0; j < xValues.length; j++) {
+					//M Checking if the x value is the appropriate one.
+					if(xValues[j] == Double.parseDouble(trapezoidalLowerLimit.getText())) {
+						//M Returning the desired x value's y value.
+						lowerValue = yValues[j];
+					}
+				}
+				String ftcResult = String.valueOf(upperValue - lowerValue);
+				trapezoidalIntegralValue.setText("Integration: " + integrationResult + " FTC: " + ftcResult);
 			}
 	   	});
 	   	//M Adding the ActionListener for the calculate button.
@@ -258,8 +218,6 @@ public class GUI {
 	}
 	private void addEquation(String equation) {
 		//TODO A method to add an equation to equations.
-		//M Incrementing equationIndexTracker, which tracks where the List has been filled to.
-		equationIndexTracker++;
 		//M Adding the equation to equations.
 		equations.add(equation);
 	}
@@ -338,8 +296,6 @@ public class GUI {
 		clearDesired = status;
 		//M Clearing equations so that they are not re-graphed.
 		equations.clear();
-		//M Resetting equationIndexTracker so it begins at the start of the cleared list.
-		equationIndexTracker = -1;
 	}
 	private void findKeyPoints(double [] xValues, double [] yValues, String equationText) {
 		//TODO A method to find the key points of a function.
