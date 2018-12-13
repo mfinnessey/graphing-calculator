@@ -119,8 +119,10 @@ public class GUI {
 				String result = Double.toString(m.getValue());
 				//K Rounding down to 3 decimal places
 				for (int j = 0; j < result.length(); j++) {
-					if ((result.substring(j, j + 1)).compareTo(".") == 0 && (result.length() - j) > 4) {
-						result = result.substring(0,j+4);
+					if ((result.substring(j, j + 1)).compareTo(".") == 0 && (result.length() - j) > 5 && result.substring(result.length() - 3,result.length()-1).compareTo("E-") != 0) {
+						result = result.substring(0,j+5);
+					}else if(result.substring(result.length() - 3,result.length()-1).compareTo("E-") == 0) {
+						result = "0.0";
 					}
 				}
 				fxValue.setText(result);

@@ -38,8 +38,10 @@ public class Zeroes {
 				String s = String.valueOf(rV[index][1]);
 				//K Rounding down to 3 decimal places
 				for (int j = 0; j < s.length(); j++) {
-					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 4) {
-						s = s.substring(0,j+4);
+					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 5 && s.substring(s.length() - 3,s.length()-1).compareTo("E-") != 0) {
+						s = s.substring(0,j+5);
+					}else if(s.substring(s.length() - 3,s.length()-1).compareTo("E-") == 0) {
+						s = "0.0";
 					}
 				}
 				
@@ -53,8 +55,10 @@ public class Zeroes {
 				String s = String.valueOf(rV[index][1]);
 				//K Rounding down to 3 decimal places
 				for (int j = 0; j < s.length(); j++) {
-					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 4) {
-						s = s.substring(0,j+4);
+					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 5 && s.substring(s.length() - 3,s.length()-1).compareTo("E-") != 0) {
+						s = s.substring(0,j+5);
+					}else if(s.substring(s.length() - 3,s.length()-1).compareTo("E-") == 0) {
+						s = "0.0";
 					}
 				}
 				
@@ -68,8 +72,10 @@ public class Zeroes {
 				String s = String.valueOf(rV[index][1]);
 				//K Rounding down to 3 decimal places
 				for (int j = 0; j < s.length(); j++) {
-					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 4) {
-						s = s.substring(0,j+4);
+					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 5 && s.substring(s.length() - 3,s.length()-1).compareTo("E-") != 0) {
+						s = s.substring(0,j+5);
+					}else if(s.substring(s.length() - 3,s.length()-1).compareTo("E-") == 0) {
+						s = "0.0";
 					}
 				}
 				
@@ -131,8 +137,10 @@ public class Zeroes {
 				String s = String.valueOf(rV[index][1]);
 				//K Rounding down to 3 decimal places
 				for (int j = 0; j < s.length(); j++) {
-					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 4) {
-						s = s.substring(0,j+4);
+					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 5 && s.substring(s.length() - 3,s.length()-1).compareTo("E-") != 0) {
+						s = s.substring(0,j+5);
+					}else if(s.substring(s.length() - 3,s.length()-1).compareTo("E-") == 0) {
+						s = "0.0";
 					}
 				}
 				
@@ -167,8 +175,10 @@ public class Zeroes {
 				String s = String.valueOf(rV[index][1]);
 				//K Rounding down to 3 decimal places
 				for (int j = 0; j < s.length(); j++) {
-					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 4) {
-						s = s.substring(0,j+4);
+					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 5 && s.substring(s.length() - 3,s.length()-1).compareTo("E-") != 0) {
+						s = s.substring(0,j+5);
+					}else if(s.substring(s.length() - 3,s.length()-1).compareTo("E-") == 0) {
+						s = "0.0";
 					}
 				}
 				
@@ -209,8 +219,10 @@ public class Zeroes {
 				String s = String.valueOf(rV[index][1]);
 				//K Rounding down to 3 decimal places
 				for (int j = 0; j < s.length(); j++) {
-					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 4) {
-						s = s.substring(0,j+4);
+					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 5 && s.substring(s.length() - 3,s.length()-1).compareTo("E-") != 0) {
+						s = s.substring(0,j+5);
+					}else if(s.substring(s.length() - 3,s.length()-1).compareTo("E-") == 0) {
+						s = "0.0";
 					}
 				}
 				
@@ -224,8 +236,10 @@ public class Zeroes {
 				String s = String.valueOf(rV[index][1]);
 				//K Rounding down to 3 decimal places
 				for (int j = 0; j < s.length(); j++) {
-					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 4) {
-						s = s.substring(0,j+4);
+					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 5 && s.substring(s.length() - 3,s.length()-1).compareTo("E-") != 0) {
+						s = s.substring(0,j+5);
+					}else if(s.substring(s.length() - 3,s.length()-1).compareTo("E-") == 0) {
+						s = "0.0";
 					}
 				}
 				
@@ -240,8 +254,10 @@ public class Zeroes {
 				String s = String.valueOf(rV[index][1]);
 				//K Rounding down to 3 decimal places
 				for (int j = 0; j < s.length(); j++) {
-					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 4) {
-						s = s.substring(0,j+4);
+					if ((s.substring(j, j + 1)).compareTo(".") == 0 && (s.length() - j) > 5 && s.substring(s.length() - 3,s.length()-1).compareTo("E-") != 0) {
+						s = s.substring(0,j+5);
+					}else if(s.substring(s.length() - 3,s.length()-1).compareTo("E-") == 0) {
+						s = "0.0";
 					}
 				}
 				
