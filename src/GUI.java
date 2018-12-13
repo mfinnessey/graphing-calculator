@@ -53,6 +53,7 @@ public class GUI {
 		//M Setting up the various swing components for the main frame.
 		//M Setting the program to exit when the window is closed.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocation(600, 100);
 		//M Adding the various buttons to the JFrame.
 		frame.getContentPane().add(calculate, BorderLayout.CENTER);
 		frame.getContentPane().add(firstDerivative, BorderLayout.NORTH);
@@ -81,7 +82,7 @@ public class GUI {
 		//M Setting the program to close when the window is closed.
 		trapezoidalIntegralFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//M Setting the location of the frame on screen.
-		trapezoidalIntegralFrame.setLocation(0, 250);
+		trapezoidalIntegralFrame.setLocation(600, 300);
 		//M Adding the various swing components to the JFrame.
 		//trapezoidalIntegralFrame.getContentPane().add(function, BorderLayout.NORTH);
 		trapezoidalIntegralFrame.getContentPane().add(trapezoidalLowerLimit, BorderLayout.WEST);
@@ -101,7 +102,7 @@ public class GUI {
 		
 		yValueFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//M Setting the location of the frame on screen.
-		yValueFrame.setLocation(0, 150);
+		yValueFrame.setLocation(600, 205);
 		yValueFrame.getContentPane().add(enterX, BorderLayout.NORTH);
 		yValueFrame.getContentPane().add(evaluatefx, BorderLayout.CENTER);
 		yValueFrame.getContentPane().add(fxValue, BorderLayout.SOUTH);
