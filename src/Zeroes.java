@@ -34,14 +34,50 @@ public class Zeroes {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
+				
+				//K Converting the zero into a string
+				String s = String.valueOf(rV[index][1]);
+				//K Rounding down to 3 decimal places
+				for (int j = 0; j < s.length(); j++) {
+					if ((s.substring(j, j + 1)).compareTo(".") == 0) {
+						s = s.substring(0,j+4);
+					}
+				}
+				
+				rV[index][1] = Double.parseDouble(s);
+				
 			}else if (firstValue > 0 && (secondValue) < 0 && yValues[i] < 0.1 && yValues[i] > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
+				
+				//K Converting the zero into a string
+				String s = String.valueOf(rV[index][1]);
+				//K Rounding down to 3 decimal places
+				for (int j = 0; j < s.length(); j++) {
+					if ((s.substring(j, j + 1)).compareTo(".") == 0) {
+						s = s.substring(0,j+4);
+					}
+				}
+				
+				rV[index][1] = Double.parseDouble(s);
+				
 			}else if (firstValue == 0) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
+				
+				//K Converting the zero into a string
+				String s = String.valueOf(rV[index][1]);
+				//K Rounding down to 3 decimal places
+				for (int j = 0; j < s.length(); j++) {
+					if ((s.substring(j, j + 1)).compareTo(".") == 0) {
+						s = s.substring(0,j+4);
+					}
+				}
+				
+				rV[index][1] = Double.parseDouble(s);
+				
 			}
 			//K: Stores the coordinate points for every zero value
 		}
@@ -94,6 +130,18 @@ public class Zeroes {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
+
+				//K Converting the zero into a string
+				String s = String.valueOf(rV[index][1]);
+				//K Rounding down to 3 decimal places
+				for (int j = 0; j < s.length(); j++) {
+					if ((s.substring(j, j + 1)).compareTo(".") == 0) {
+						s = s.substring(0,j+4);
+					}
+				}
+				
+				rV[index][1] = Double.parseDouble(s);
+				
 			}
 		}
 		return rV;
@@ -119,6 +167,18 @@ public class Zeroes {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
+
+				//K Converting the zero into a string
+				String s = String.valueOf(rV[index][1]);
+				//K Rounding down to 3 decimal places
+				for (int j = 0; j < s.length(); j++) {
+					if ((s.substring(j, j + 1)).compareTo(".") == 0) {
+						s = s.substring(0,j+4);
+					}
+				}
+				
+				rV[index][1] = Double.parseDouble(s);
+				
 			}
 		}
 		return rV;
@@ -150,15 +210,51 @@ public class Zeroes {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
+
+				//K Converting the zero into a string
+				String s = String.valueOf(rV[index][1]);
+				//K Rounding down to 3 decimal places
+				for (int j = 0; j < s.length(); j++) {
+					if ((s.substring(j, j + 1)).compareTo(".") == 0) {
+						s = s.substring(0,j+4);
+					}
+				}
+				
+				rV[index][1] = Double.parseDouble(s);
+				
 			}else if (firstValue > 0 && (secondValue) < 0 && firstValue < 0.1 && firstValue > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
+
+				//K Converting the zero into a string
+				String s = String.valueOf(rV[index][1]);
+				//K Rounding down to 3 decimal places
+				for (int j = 0; j < s.length(); j++) {
+					if ((s.substring(j, j + 1)).compareTo(".") == 0) {
+						s = s.substring(0,j+4);
+					}
+				}
+				
+				rV[index][1] = Double.parseDouble(s);
+				
 			}else if (firstValue == 0) {
 				//M This might be where the issue is with rational functions. I'll do more work on this on Monday.
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
 				index++;
+
+				//K Converting the zero into a string
+				String s = String.valueOf(rV[index][1]);
+				//K Rounding down to 3 decimal places
+				for (int j = 0; j < s.length(); j++) {
+					if ((s.substring(j, j + 1)).compareTo(".") == 0) {
+						s = s.substring(0,j+4);
+					}
+				}
+				
+				rV[index][1] = Double.parseDouble(s);
+				
 			}
 		}
 		return rV;

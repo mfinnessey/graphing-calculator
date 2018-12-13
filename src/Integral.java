@@ -86,15 +86,21 @@ public class Integral {
 					//this is the only line of code I changed
 					integralValue += (STEP_VALUE * (yValues[l]+yValues[l+1]) / 2);
 				}
-				
-				
+				//K Converting integralValue into a string
+				String s = String.valueOf(integralValue);
+				//K Rounding down to 3 decimal places
+				for (int i = 0; i < s.length(); i++) {
+					if ((s.substring(i, i + 1)).compareTo(".") == 0) {
+						s = s.substring(0,i+4);
+					}
+				}
 				
 				if(inverted == false) {
-				return String.valueOf(integralValue);
+				return s;
 				}
 				else {
 					//M If the limits of integration are inverted, then the opposite of the uninverted value is returned.
-					return String.valueOf(-1 * integralValue);
+					return s;
 				}
 	}
 	
