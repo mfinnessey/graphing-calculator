@@ -33,7 +33,6 @@ public class Zeroes {
 			if (firstValue < 0 && (secondValue) > 0 && yValues[i] < 0.1 && yValues[i] > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
-				index++;
 				
 				//K Converting the zero into a string
 				String s = String.valueOf(rV[index][1]);
@@ -45,11 +44,10 @@ public class Zeroes {
 				}
 				
 				rV[index][1] = Double.parseDouble(s);
-				
+				index++;
 			}else if (firstValue > 0 && (secondValue) < 0 && yValues[i] < 0.1 && yValues[i] > -0.1) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];
-				index++;
 				
 				//K Converting the zero into a string
 				String s = String.valueOf(rV[index][1]);
@@ -61,7 +59,7 @@ public class Zeroes {
 				}
 				
 				rV[index][1] = Double.parseDouble(s);
-				
+				index++;
 			}else if (firstValue == 0) {
 				rV[index][0] = xValues[i];
 				rV[index][1] = yValues[i];

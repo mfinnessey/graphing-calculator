@@ -31,7 +31,7 @@ public class Graph {
 		frame.setVisible(true);
 		
 		g = (Graphics2D) graphWindow.getGraphics();
-		g.drawString("Graphing Calculator by Mike Finnessey and Kevin Hui",95,170);
+		g.drawString("Graphing Calculator by Mike Finnessey and Kevin Hui",92,170);
 		g.drawString("Made for Mr. Duran's Calculus BC project",130,190);
 		g.drawString("Your graph will be drawn here!",155,210);
 		g.drawString("Link to GitHub repository:",170,230);
