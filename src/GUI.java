@@ -1,6 +1,9 @@
 //M Various necessary listener imports.
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//M A math import for rounding.
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 //Various necessary list imports.
 import java.util.ArrayList;
 import java.util.List;
@@ -167,7 +170,10 @@ public class GUI {
 						lowerValue = yValues[j];
 					}
 				}
-				String ftcResult = String.valueOf(upperValue - lowerValue);
+				double ftc = upperValue - lowerValue;
+				BigDecimal rounding = new BigDecimal(ftc);
+				rounding = rounding.setScale(4,RoundingMode.HALF_UP);
+				String ftcResult = String.valueOf(rounding);
 				trapezoidalIntegralValue.setText("Integration: " + integrationResult + " FTC: " + ftcResult);
 			}
 	   	});
@@ -220,6 +226,12 @@ public class GUI {
 		//TODO A method to add an equation to equations.
 		//M Adding the equation to equations.
 		equations.add(equation);
+	}
+	private double roundDisplayValue(double value) {
+		BigDecimal rounding = new BigDecimal(value);
+		rounding = rounding.setScale(4, RoundingMode.HALF_UP);
+		value = rounding.doubleValue();
+		return value;
 	}
 	private double[] getXValues() {
 		//TODO A method to get xValues.
@@ -430,7 +442,7 @@ public class GUI {
 					for(int j = 0; j < gui.getHolesLength(); j++) {
 						//M Drawing each hole.
 						graph.draw(gui.getHoles()[j][0], gui.getHoles()[j][1], "#F44F0D");
-						System.out.println("Drawing hole ( " + gui.getHoles()[j][0] + " , " + gui.getHoles()[j][1] + " )");
+						System.out.println("Drawing hole ( " + gui.roundDisplayValue(gui.getHoles()[j][0]) + " , " + gui.roundDisplayValue(gui.getHoles()[j][1]) + " )");
 					}
 					//M Preventing mins, maxes, and pois from being drawn on lines (becomes a slight issue with the limit definition at lower precision).
 					if(Zeroes.lineCheck(gui.getXValues(), yValues, rawEquation) == false && gui.getIsDerivative() == false) {
@@ -438,25 +450,25 @@ public class GUI {
 						for(int n = 0; n < gui.getZerosLength(); n++ ) {
 							//M Drawing each zero.
 							graph.draw(gui.getZeros()[n][0], gui.getZeros()[n][1], "#00FF00");
-							System.out.println("Drawing zero ( " + gui.getZeros()[n][0] + " , " + gui.getZeros()[n][1] + " )");
+							System.out.println("Drawing zero ( " + gui.roundDisplayValue(gui.getZeros()[n][0]) + " , " + gui.roundDisplayValue(gui.getZeros()[n][1]) + " )");
 						}
 						//M Iterating through the maxes of the graph.
 						for(int k = 0; k < gui.getMaxesLength(); k++ ) {
 							//M Drawing each max.
 							graph.draw(gui.getMaxes()[k][0], gui.getMaxes()[k][1], "#67D4C4");
-							System.out.println("Drawing max ( " + gui.getMaxes()[k][0] + " , " + gui.getMaxes()[k][1] + " )");
+							System.out.println("Drawing max ( " + gui.roundDisplayValue(gui.getMaxes()[k][0]) + " , " + gui.roundDisplayValue(gui.getMaxes()[k][1]) + " )");
 						}
 						//M Iterating through the mins of the graph.
 						for(int l = 0; l < gui.getMinsLength(); l++ ) {
 							//M Drawing each min.
 							graph.draw(gui.getMins()[l][0], gui.getMins()[l][1], "#6600FF");
-							System.out.println("Drawing min ( " + gui.getMins()[l][0] + " , " + gui.getMins()[l][1] + " )");
+							System.out.println("Drawing min ( " + gui.roundDisplayValue(gui.getMins()[l][0]) + " , " + gui.roundDisplayValue(gui.getMins()[l][1]) + " )");
 						}
 						//M Iterating through the points of inflection of the graph.
 						for(int m = 0; m < gui.getPoisLength(); m++ ) {
 							//M Drawing each point of inflection.
 							graph.draw(gui.getPois()[m][0], gui.getPois()[m][1], "#FFFF00");
-							System.out.println("Drawing POI ( " + gui.getPois()[m][0] + " , " + gui.getPois()[m][1] + " )");
+							System.out.println("Drawing POI ( " + gui.roundDisplayValue(gui.getPois()[m][0]) + " , " + gui.roundDisplayValue(gui.getPois()[m][1]) + " )");
 						}
 					}
 				//M Preventing the drawing from repeating again until a new equation is ready (i. e. entered by the user).
