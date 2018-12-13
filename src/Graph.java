@@ -26,7 +26,7 @@ public class Graph {
 		//M Setting the size of the graph window.
 		graphWindow.setSize(500, 500);
 		//M Setting the location of the graph window on the screen.
-		frame.setLocation(115, 30);
+		frame.setLocation(100, 30);
 		//M Making the graph window visible.
 		frame.setVisible(true);
 		
