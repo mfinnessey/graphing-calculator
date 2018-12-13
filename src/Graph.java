@@ -26,9 +26,16 @@ public class Graph {
 		//M Setting the size of the graph window.
 		graphWindow.setSize(500, 500);
 		//M Setting the location of the graph window on the screen.
-		frame.setLocation(600, 0);
+		frame.setLocation(115, 30);
 		//M Making the graph window visible.
 		frame.setVisible(true);
+		
+		g = (Graphics2D) graphWindow.getGraphics();
+		g.drawString("Graphing Calculator by Mike Finnessey and Kevin Hui",95,170);
+		g.drawString("Made for Mr. Duran's Calculus BC project",130,190);
+		g.drawString("Your graph will be drawn here!",155,210);
+		g.drawString("Link to GitHub repository:",170,230);
+		g.drawString("https://github.com/mrfinnessey/psychic-guacamole",105,250);
 	}
 
 	public void clear() {
