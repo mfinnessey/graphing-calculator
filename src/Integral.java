@@ -90,7 +90,7 @@ public class Integral {
 				String s = String.valueOf(integralValue);
 				//K Rounding down to 3 decimal places
 				for (int i = 0; i < s.length(); i++) {
-					if ((s.substring(i, i + 1)).compareTo(".") == 0) {
+					if ((s.substring(i, i + 1)).compareTo(".") == 0 && (s.length() - i) > 4) {
 						s = s.substring(0,i+4);
 					}
 				}

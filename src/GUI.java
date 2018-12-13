@@ -116,6 +116,12 @@ public class GUI {
 				m.addVariable("x", Double.parseDouble(enterX.getText()));
 				//M Storing result
 				String result = Double.toString(m.getValue());
+				//K Rounding down to 3 decimal places
+				for (int j = 0; j < result.length(); j++) {
+					if ((result.substring(j, j + 1)).compareTo(".") == 0 && (result.length() - j) > 4) {
+						result = result.substring(0,j+4);
+					}
+				}
 				fxValue.setText(result);
 			}
 	   	});
