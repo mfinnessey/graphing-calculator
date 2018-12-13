@@ -87,6 +87,8 @@ public class Integral {
 					integralValue += (STEP_VALUE * (yValues[l]+yValues[l+1]) / 2);
 				}
 				
+				
+				
 				if(inverted == false) {
 				return String.valueOf(integralValue);
 				}

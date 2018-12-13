@@ -71,7 +71,7 @@ public class GUI {
 		//M Text field for the user to enter the upper limit of integration.
 		JTextField trapezoidalUpperLimit = new JTextField("Enter upper limit here.");
 		//M Button for the user to click to evaluate the definite integral.
-		JButton trapezoidalEvaluate = new JButton("Evaluate Trapezoidal Integral");
+		JButton trapezoidalEvaluate = new JButton("Evaluate Integral");
 		//M Text area to display the value of the definite integral.
 		JTextArea trapezoidalIntegralValue = new JTextArea("No Value to Display");
 		//M Text field for the user to enter the function to be integrated.
@@ -94,28 +94,21 @@ public class GUI {
 		trapezoidalIntegralFrame.setVisible(true);
 		
 		//M Creating the various swing components for the definite integral frame.
-				JFrame yValueFrame = new JFrame();
-				//
-				JTextField enterX = new JTextField("Enter x value here.");
-				//
-				JButton evaluatefx = new JButton("Evaluate f(x) at x");
-				//
-				JTextArea fxValue = new JTextArea("No Value to Display");
-				//
-				
-				//
-				yValueFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				//M Setting the location of the frame on screen.
-				yValueFrame.setLocation(0, 100);
-				//
-				yValueFrame.getContentPane().add(enterX, BorderLayout.NORTH);
-				yValueFrame.getContentPane().add(evaluatefx, BorderLayout.CENTER);
-				yValueFrame.getContentPane().add(fxValue, BorderLayout.SOUTH);
-				//
-				yValueFrame.pack();
-				//
-				yValueFrame.setVisible(true);
-				
+		JFrame yValueFrame = new JFrame();
+		JTextField enterX = new JTextField("Enter x value here.");
+		JButton evaluatefx = new JButton("Evaluate f(x) at x");
+		JTextArea fxValue = new JTextArea("No Value to Display");
+		
+		yValueFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//M Setting the location of the frame on screen.
+		yValueFrame.setLocation(0, 150);
+		yValueFrame.getContentPane().add(enterX, BorderLayout.NORTH);
+		yValueFrame.getContentPane().add(evaluatefx, BorderLayout.CENTER);
+		yValueFrame.getContentPane().add(fxValue, BorderLayout.SOUTH);
+		yValueFrame.pack();
+		yValueFrame.setVisible(true);
+
+		//K: Adding listener to evaluate f(x)
 		evaluatefx.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MathEvaluator m = new MathEvaluator(equation.getText());
@@ -130,22 +123,22 @@ public class GUI {
 		//M Adding listeners to the buttons so that they work.
 		trapezoidalEvaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
 				//M A string to store the f'(x) equation from equations.
 				String tempEquation;
+				/*
 				//M doubles to store the calculated f(b) and f(a) values.
 				double lowerValue;
 				double upperValue;
 				//M A double to store f(b)-f(a)
 				double FTC;
-				*/
 				//M Creating a MathEvaluator to calculate the various arithmetic from the functions.
 				//M Setting the MathEvaluator's equation to the user-entered f(x)
-				//MathEvaluator m = new MathEvaluator(function.getText());
+				*/
+				MathEvaluator m = new MathEvaluator(equation.getText());
+				/*
 				//M Calculating f(a) from the user-entered a value.
 				//m.addVariable("x", Double.parseDouble(trapezoidalLowerLimit.getText()));
 				//M Storing f(a)
-				/*
 				lowerValue = m.getValue();
 				//M Calculating f(b) from the user-entered b value.
 				m.addVariable("x", Double.parseDouble(trapezoidalUpperLimit.getText()));
@@ -153,11 +146,10 @@ public class GUI {
 				upperValue = m.getValue();
 				//M Calculating and storing f(b) - f(a).
 				FTC = upperValue - lowerValue;
-				*/
 				//M Creating a new Integral class, which is used for its methods later.
+				 */
 				Integral integral = new Integral();
 				//M Getting the f'(x) equation that the user has previously graphed.
-				/*
 				tempEquation = equations.get(equationIndexTracker);
 				//M Storing the values from the temporary equation after processing it.
 				if(tempEquation.startsWith("done")) {
@@ -203,10 +195,9 @@ public class GUI {
 						yValues[i] = m.getValue();
 					}
 				}
-				*/
 				//M Storing the result of the integral, with all of the previously calculated arguments passed off to the Integral object.
 				String result = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, yValues);
-				//M Setting the display text to the two values calculated by the FTC and the limit definition of the integral.
+				//M Setting the display text to the integral.
 				trapezoidalIntegralValue.setText(result);
 			}
 	   	});
