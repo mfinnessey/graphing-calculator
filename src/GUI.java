@@ -27,11 +27,12 @@ public class GUI {
 	private double [][] mins;
 	private double [][] pois;
 	private double [][] holes;
-	//M Booleans to indicate  when a new equation is ready to graph.
+	//M Boolean to indicate  when a new equation is ready to graph.
 	private boolean newEquationReady = false;
+	//M Boolean to indicate whether the user has requested to clear the graph.
 	private boolean clearDesired = false;
-	//M A String to store the text of the currently entered equation.
-	private String equationText = "";
+	//M Boolean to track whether the current function is a derivative of an user-entered function.
+	private boolean isDerivative = false;
 	//M An integer to track the length of equations.
 	private int equationIndexTracker = -1;
 	//M A List to store the text of all entered (or calculated) equations.
@@ -319,6 +320,14 @@ public class GUI {
 		//TODO a method to get holes.
 		return holes;
 	}
+	private boolean getIsDerivative() {
+		//TODO a method to get isDerivative.
+		return isDerivative;
+	}
+	private void setIsDerivative(boolean value) {
+		//TODO a method to set isDerivative.
+		isDerivative = value;
+	}
 	private void setNewEquationReady(boolean status) {
 		//TODO A method to set equationReady.
 		newEquationReady = status;
@@ -438,12 +447,16 @@ public class GUI {
 					//M Checking for derivative indicators.
 					rawEquation = equation;
 					if(equation.startsWith("dtwo")) {
+						//M Indicating that the equation is a derivative.
+						gui.setIsDerivative(true);
 						//M Removing the derivative indicator.
 						equation = equation.substring(4);
 						//M Getting the y values of the equation.
 						yValues = gui.getYValues(gui.getXValues(), equation, 2);
 					}
 					else if(equation.startsWith("done")) {
+						//M Indicating that the equation is a derivative.
+						gui.setIsDerivative(true);
 						//M Removing the derivative indicator.
 						equation = equation.substring(4);
 						//M Getting the y values of the equation.
@@ -464,7 +477,7 @@ public class GUI {
 						System.out.println("Drawing hole ( " + gui.getHoles()[j][0] + " , " + gui.getHoles()[j][1] + " )");
 					}
 					//M Preventing mins, maxes, and pois from being drawn on lines (becomes a slight issue with the limit definition at lower precision).
-					if(Zeroes.lineCheck(gui.getXValues(), yValues, rawEquation) == false) {
+					if(Zeroes.lineCheck(gui.getXValues(), yValues, rawEquation) == false && gui.getIsDerivative() == false) {
 						//M Iterating through the zeroes of the graph.
 						for(int n = 0; n < gui.getZerosLength(); n++ ) {
 							//M Drawing each zero.
@@ -493,6 +506,7 @@ public class GUI {
 				//M Preventing the drawing from repeating again until a new equation is ready (i. e. entered by the user).
 				gui.setNewEquationReady(false);
 				System.out.println();
+				gui.setIsDerivative(false);
 				}
 			}
 			//M Clearing the graph if the user desires it.
