@@ -328,39 +328,6 @@ public class GUI {
 		pois = KeyPoints.POI(xValues, yValues);
 		holes = KeyPoints.hole(xValues, yValues, equationText);
 	}
-	//M Will likely remove these methods before the final product, leaving in now for debugging.
-	private void printValues(double [] xValues, double [] yValues) {
-		//M A method to print (x,y) pairs. Used for debugging.
-		//M Iterating through the values.
-		for(int i = 0; i < xValues.length; i++) {
-			//M Printing each value.
-			System.out.println("( " + xValues[i] + " , " + yValues[i]+ " )");
-		}
-	}
-	private void printKeyPoint(double [] xValues, double [] yValues, double keyValue) {
-		//TODO A method to print a key point.
-		//M Iterating through the values.
-		for(int i = 0; i < xValues.length; i++) {
-			//M Checking if the value matches the desired y value.
-			if(xValues[i] == keyValue) {
-				//M If the value matches, then its (x,y) pair is printed.
-				System.out.println("( " + xValues[i] + " , " + yValues[i] + " )");
-			}
-		}
-	}
-	private double getKeyPoint(double [] xValues, double [] yValues, double keyValue) {
-		//TODO A method to get the y value of a given x value.
-		//M Iterating through the values.
-		for(int i = 0; i < xValues.length; i++) {
-			//M Checking if the x value is the appropriate one.
-			if(xValues[i] == keyValue) {
-				//M Returning the desired x value's y value.
-				return yValues[i];
-			}
-		}
-		//M A return case if the x value is not found in the values given.
-		return 2;
-	}
 	private List<String> getEquations() {
 		//TODO A method to get equations.
 		return equations;
