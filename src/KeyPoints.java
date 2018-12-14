@@ -1,4 +1,4 @@
-public class Zeroes {
+public class KeyPoints {
 //TODO: create a class to find zeros and other values using IVT
 	//K: rV = returnValue
 	/* K: Current idea is to use a for loop and increase i by 0.001 and use IVT to chekc if there's a 0
