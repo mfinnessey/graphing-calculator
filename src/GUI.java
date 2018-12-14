@@ -233,9 +233,14 @@ public class GUI {
 		equations.add(equation);
 	}
 	private double roundDisplayValue(double value) {
+		//TODO A method to round a value to 4 decimal places for display purposes.
+		//M A BigDecimal to  round each value.
 		BigDecimal rounding = new BigDecimal(value);
+		//M Rounding the value to 4 places.
 		rounding = rounding.setScale(4, RoundingMode.HALF_UP);
+		//M Converting the BigDecimal back to a double.
 		value = rounding.doubleValue();
+		//M Returning the rounded value.
 		return value;
 	}
 	private double[] getXValues() {
@@ -447,38 +452,46 @@ public class GUI {
 					for(int j = 0; j < gui.getHolesLength(); j++) {
 						//M Drawing each hole.
 						graph.draw(gui.getHoles()[j][0], gui.getHoles()[j][1], "#F44F0D");
+						//M Printing the rounded values.
 						System.out.println("Drawing hole ( " + gui.roundDisplayValue(gui.getHoles()[j][0]) + " , " + gui.roundDisplayValue(gui.getHoles()[j][1]) + " )");
 					}
 					//M Preventing mins, maxes, and pois from being drawn on lines (becomes a slight issue with the limit definition at lower precision).
+					//M Also preventing the same from running on derivative functions as precision is lost each time the derivative is taken, leading to some inaccurate points.
 					if(Zeroes.lineCheck(gui.getXValues(), yValues, rawEquation) == false && gui.getIsDerivative() == false) {
 						//M Iterating through the zeroes of the graph.
 						for(int n = 0; n < gui.getZerosLength(); n++ ) {
 							//M Drawing each zero.
 							graph.draw(gui.getZeros()[n][0], gui.getZeros()[n][1], "#00FF00");
+							//M Printing the rounded values.
 							System.out.println("Drawing zero ( " + gui.roundDisplayValue(gui.getZeros()[n][0]) + " , " + gui.roundDisplayValue(gui.getZeros()[n][1]) + " )");
 						}
 						//M Iterating through the maxes of the graph.
 						for(int k = 0; k < gui.getMaxesLength(); k++ ) {
 							//M Drawing each max.
 							graph.draw(gui.getMaxes()[k][0], gui.getMaxes()[k][1], "#67D4C4");
+							//M Printing the rounded values.
 							System.out.println("Drawing max ( " + gui.roundDisplayValue(gui.getMaxes()[k][0]) + " , " + gui.roundDisplayValue(gui.getMaxes()[k][1]) + " )");
 						}
 						//M Iterating through the mins of the graph.
 						for(int l = 0; l < gui.getMinsLength(); l++ ) {
 							//M Drawing each min.
 							graph.draw(gui.getMins()[l][0], gui.getMins()[l][1], "#6600FF");
+							//M Printing the rounded values.
 							System.out.println("Drawing min ( " + gui.roundDisplayValue(gui.getMins()[l][0]) + " , " + gui.roundDisplayValue(gui.getMins()[l][1]) + " )");
 						}
 						//M Iterating through the points of inflection of the graph.
 						for(int m = 0; m < gui.getPoisLength(); m++ ) {
 							//M Drawing each point of inflection.
 							graph.draw(gui.getPois()[m][0], gui.getPois()[m][1], "#FFFF00");
+							//M Printing the rounded values.
 							System.out.println("Drawing POI ( " + gui.roundDisplayValue(gui.getPois()[m][0]) + " , " + gui.roundDisplayValue(gui.getPois()[m][1]) + " )");
 						}
 					}
 				//M Preventing the drawing from repeating again until a new equation is ready (i. e. entered by the user).
 				gui.setNewEquationReady(false);
+				//M Printing out a blank line for esthetic purposes.
 				System.out.println();
+				//M Resetting isDerivative.
 				gui.setIsDerivative(false);
 				}
 			}
