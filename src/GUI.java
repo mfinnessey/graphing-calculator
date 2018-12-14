@@ -132,17 +132,15 @@ public class GUI {
 		//M Adding listeners to the buttons so that they work.
 		trapezoidalEvaluate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//M A string to store the f'(x) equation from equations.
-				String tempEquation;
+				//M An array to store the derivative y values.
 				double [] derivativeYValues = new double[200001];
+				//M A MathEvaluator to evaluate all of the need arithmetic.
 				MathEvaluator m = new MathEvaluator(equation.getText());
+				//M An integral class to access the integration method to integrate the f'(x) values.
 				Integral integral = new Integral();
-				//M Getting the f(x) equation that the user has previously graphed.
-				tempEquation = equation.getText();
-				//M Storing the values from the temporary equation after processing it.
-				//M Setting MathEvaluator's expression to the equation.
-				m.setExpression(tempEquation);
-				//M Calculating all of the y values of the equation.
+				//M Setting MathEvaluator's expression to the equation [f(x)].
+				m.setExpression(equation.getText());
+				//M Calculating all of the y values of f(x).
 				for(int i = 0; i <= (xValues.length -1); i++) {
 					//M Adding each x value.
 					m.addVariable("x", xValues[i]);
@@ -151,29 +149,36 @@ public class GUI {
 				}
 				//M Calculating the derivative yValues.
 				derivativeYValues = Derivative.findDerivative(xValues, yValues);
-				//M Storing the result of the integral, with all of the previously calculated arguments passed off to the Integral object.
+				//M Storing the result of the integration of the f'(x) values, with all of the previously calculated arguments passed off to the Integral object to calculate this value.
 				String integrationResult = integral.trapezoidalIntegral(Double.parseDouble(trapezoidalLowerLimit.getText()), Double.parseDouble(trapezoidalUpperLimit.getText()), xValues, derivativeYValues);
-				//M Setting the display text to the integral.
+				//M doubles to store the upper and lower y values of f(x) for FTC.
 				double upperValue = 0;
 				double lowerValue = 0; 
+				//M Finding f(b)
 				for(int i = 0; i < xValues.length; i++) {
 					//M Checking if the x value is the appropriate one.
 					if(xValues[i] == Double.parseDouble(trapezoidalUpperLimit.getText())) {
-						//M Returning the desired x value's y value.
+						//M Storing the desired x value's y value.
 						upperValue = yValues[i];
 					}
 				}
+				//M Finding f(a)
 				for(int j = 0; j < xValues.length; j++) {
 					//M Checking if the x value is the appropriate one.
 					if(xValues[j] == Double.parseDouble(trapezoidalLowerLimit.getText())) {
-						//M Returning the desired x value's y value.
+						//M Storing the desired x value's y value.
 						lowerValue = yValues[j];
 					}
 				}
+				//M A double to store the result of f(b) - f(a).
 				double ftc = upperValue - lowerValue;
+				//M Creating a BigDecimal to round ftc.
 				BigDecimal rounding = new BigDecimal(ftc);
+				//M Rounding ftc to 4 decimal places.
 				rounding = rounding.setScale(4,RoundingMode.HALF_UP);
+				//M Converting ftc to a string.
 				String ftcResult = String.valueOf(rounding);
+				//M Displaying the two values.
 				trapezoidalIntegralValue.setText("Integration: " + integrationResult + " FTC: " + ftcResult);
 			}
 	   	});

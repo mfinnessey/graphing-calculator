@@ -102,6 +102,7 @@ public class Integral {
 				}
 				else {
 					//M If the limits of integration are inverted, then the opposite of the uninverted value is returned.
+					s = "-" + s;
 					return s;
 				}
 	}
