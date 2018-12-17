@@ -9,7 +9,7 @@ import java.lang.Double;
  * <pre>
  * Sample:
  * MathEvaluator m = new MathEvaluator("-5-6/(-2) + sqr(15+x)");
- * m.addVariable("x", 15.1d);
+ * m.addVariable("x", 15.1d); 
  * System.out.println( m.getValue() );
  * </pre>
  * @version 1.1
