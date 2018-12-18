@@ -12,12 +12,12 @@ public class Integral {
 		//M Boolean to store whether the limits of integration are inverted (i.e. b < a).
 		boolean inverted = false;
 		//M Finding the beginning index.
-		System.out.println("Lower limit: " + lowerLimit);
-		for(int i = 0; i < xValues.length; i++) {
+		System.out.println("Upper Limit: " + upperLimit);
+		for(int j = 0; j < xValues.length; j++) {
 			//M Checking if the x value is the correct one.
-			if(xValues[i] == lowerLimit) {
-				//M Storing the beginning index.
-				beginIndex = i;
+			if(xValues[j] == lowerLimit) {
+				//M Storing the ending index.
+				beginIndex = j;
 				//M Breaking out of the for loop.
 				break;
 			}
@@ -43,8 +43,6 @@ public class Integral {
 		}
 		//M Checking if the function is continuous between the limits of integration.
 		for(int k = beginIndex; k <= endIndex; k++) {
-			System.out.println("begin: " + beginIndex);
-			System.out.println("end: " + endIndex);
 			//M Discontinuities are represented as not a number or infinite by Java.
 			if(Double.isNaN(yValues[k]) || Double.isInfinite(yValues[k])) {
 				//M Returning to end program execution with an appropriate error message.
@@ -52,7 +50,7 @@ public class Integral {
 			}
 		}
 		//M Iterating through the y values to add up the area under the curve via trapezoidal sums.
-		for(int l = beginIndex; l < endIndex; l++) {
+		for(int l = beginIndex; l <= endIndex; l++) {
 			//Adding the value of each trapezoidal sum to the integral's value.
 			integralValue += (STEP_VALUE * (yValues[l]+yValues[l+1]) / 2);
 		}

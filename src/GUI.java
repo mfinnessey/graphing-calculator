@@ -346,6 +346,9 @@ public class GUI {
 		for(int i = 0; i <= (xValues.length - 1); i++) {
 			//M Adding each value to MathEvaluator.
 			m.addVariable("x", xValues[i]);
+			if(xValues[i] == 7.332) {
+				System.out.println("INDEX: " + i);
+			}
 			//M Calculating the resulting y value and storing it.
 			yValues[i] = m.getValue();
 		}
