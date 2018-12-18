@@ -235,12 +235,14 @@ public class GUI {
 	private double roundDisplayValue(double value) {
 		//TODO A method to round a value to 4 decimal places for display purposes.
 		//M A BigDecimal to  round each value.
-		BigDecimal rounding = new BigDecimal(value);
-		//M Rounding the value to 4 places.
-		rounding = rounding.setScale(4, RoundingMode.HALF_UP);
-		//M Converting the BigDecimal back to a double.
-		value = rounding.doubleValue();
-		//M Returning the rounded value.
+		if(!Double.isNaN(value) || !Double.isInfinite(value)) {
+			BigDecimal rounding = new BigDecimal(value);
+			//M Rounding the value to 4 places.
+			rounding = rounding.setScale(4, RoundingMode.HALF_UP);
+			//M Converting the BigDecimal back to a double.
+			value = rounding.doubleValue();
+			//M Returning the rounded value.
+		}
 		return value;
 	}
 	private double[] getXValues() {
@@ -416,11 +418,14 @@ public class GUI {
 					//M Calculating the key points for the equation.
 					gui.findKeyPoints(gui.getXValues(), yValues, equation);
 					//M Iterating through the holes in the graph.
-					for(int j = 0; j < gui.getHolesLength(); j++) {
-						//M Drawing each hole.
-						graph.draw(gui.getHoles()[j][0], gui.getHoles()[j][1], "#F44F0D");
-						//M Printing the rounded values.
-						System.out.println("Drawing hole ( " + gui.roundDisplayValue(gui.getHoles()[j][0]) + " , " + gui.roundDisplayValue(gui.getHoles()[j][1]) + " )");
+					
+					if(gui.getIsDerivative() == false) {
+							for(int j = 0; j < gui.getHolesLength(); j++) {
+							//M Drawing each hole.
+							graph.draw(gui.getHoles()[j][0], gui.getHoles()[j][1], "#F44F0D");
+							//M Printing the rounded values.
+							System.out.println("Drawing hole ( " + gui.getHoles()[j][0] + " , " + gui.getHoles()[j][1] + " )");
+							}
 					}
 					//M Preventing mins, maxes, and pois from being drawn on lines (becomes a slight issue with the limit definition at lower precision).
 					//M Also preventing the same from running on derivative functions as precision is lost each time the derivative is taken, leading to some inaccurate points.
