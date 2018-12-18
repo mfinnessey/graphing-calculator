@@ -12,6 +12,7 @@ public class Integral {
 		//M Boolean to store whether the limits of integration are inverted (i.e. b < a).
 		boolean inverted = false;
 		//M Finding the beginning index.
+		System.out.println("Lower limit: " + lowerLimit);
 		for(int i = 0; i < xValues.length; i++) {
 			//M Checking if the x value is the correct one.
 			if(xValues[i] == lowerLimit) {
@@ -42,6 +43,8 @@ public class Integral {
 		}
 		//M Checking if the function is continuous between the limits of integration.
 		for(int k = beginIndex; k <= endIndex; k++) {
+			System.out.println("begin: " + beginIndex);
+			System.out.println("end: " + endIndex);
 			//M Discontinuities are represented as not a number or infinite by Java.
 			if(Double.isNaN(yValues[k]) || Double.isInfinite(yValues[k])) {
 				//M Returning to end program execution with an appropriate error message.

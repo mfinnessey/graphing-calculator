@@ -429,7 +429,7 @@ public class GUI {
 					}
 					//M Preventing mins, maxes, and pois from being drawn on lines (becomes a slight issue with the limit definition at lower precision).
 					//M Also preventing the same from running on derivative functions as precision is lost each time the derivative is taken, leading to some inaccurate points.
-					if(KeyPoints.lineCheck(gui.getXValues(), yValues, rawEquation) == false && gui.getIsDerivative() == false) {
+					if(gui.getIsDerivative() == false) {
 						//M Iterating through the zeroes of the graph.
 						for(int n = 0; n < gui.getZerosLength(); n++ ) {
 							//M Drawing each zero.
